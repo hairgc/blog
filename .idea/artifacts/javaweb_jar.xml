@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="javaweb:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/javaweb_jar</output-path>
+    <root id="archive" name="javaweb.jar" />
+  </artifact>
+</component>
