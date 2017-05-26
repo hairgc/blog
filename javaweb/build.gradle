@@ -14,13 +14,18 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDir("src/main/resources")
+            srcDir("src/main/java/com/github/mahui53541/blog/mapping")
+        }
+    }
+}
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    compile 'org.slf4j:slf4j-api:1.7.21',
-            'org.apache.logging.log4j:log4j-core:2.6.2',
-            'org.apache.logging.log4j:log4j-slf4j-impl:2.6.2',
-            'org.apache.logging.log4j:log4j-api:2.6.2',
+    compile 'org.slf4j:slf4j-log4j12:1.7.25',
             'org.springframework:spring-context:4.3.5.RELEASE',
             'org.springframework:spring-context-support:4.3.5.RELEASE',
             'org.springframework:spring-beans:4.3.5.RELEASE',
@@ -34,6 +39,7 @@ dependencies {
             'org.springframework:spring-tx:4.3.5.RELEASE',
             'org.mybatis:mybatis:3.4.1',
             'org.mybatis:mybatis-spring:1.3.1',
+            'com.github.pagehelper:pagehelper:5.0.1',
             'mysql:mysql-connector-java:5.1.41',
             'com.mchange:c3p0:0.9.5.2',
             'com.mchange:mchange-commons-java:0.2.11',
