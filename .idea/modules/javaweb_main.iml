@@ -12,11 +12,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/../../javaweb/src/main/webapp" relative="/" />
         </webroots>
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/../../javaweb/src/main/resources" />
-          <root url="file://$MODULE_DIR$/../../javaweb/src/main/java" />
-          <root url="file://$MODULE_DIR$/../../javaweb/src/main/java/com/github/mahui53541/blog/mapper" />
-        </sourceRoots>
       </configuration>
     </facet>
   </component>

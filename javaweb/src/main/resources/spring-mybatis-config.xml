@@ -11,14 +11,14 @@
                         http://www.springframework.org/schema/context
                         http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-    <!-- mybatis:scan会扫描com.github.mahui53541.atm.dao包里的所有接口当作Spring的bean配置，之后可以进行依赖注入-->
-    <mybatis:scan base-package="com.github.mahui53541.atm.dao"/>
+    <!-- mybatis:scan会扫描com.github.mahui53541.blog.mapper包里的所有接口当作Spring的bean配置，之后可以进行依赖注入-->
+    <mybatis:scan base-package="com.github.mahui53541.blog.mapper"/>
 
     <!-- 配置c3p0数据源 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"/>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.github.mahui53541.atm.dao" />
+        <property name="basePackage" value="com.github.mahui53541.blog.mapper" />
     </bean>
 
     <bean id="vendorProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
@@ -41,7 +41,8 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="databaseIdProvider" ref="databaseIdProvider" />
-        <property name="mapperLocations" value="classpath*:/com/github/mahui53541/blog/mapping/**/*.xml" />
+        <property name="typeAliasesPackage" value="com.github.mahui53541.blog.domain" />
+        <property name="mapperLocations" value="classpath:*Mapper.xml" />
         <property name="plugins">
             <list>
                 <bean class="com.github.pagehelper.PageInterceptor">

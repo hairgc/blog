@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,19 +21,33 @@ public class UserController {
 	
 	@RequestMapping(value = "/queryAll", method = RequestMethod.GET)
 	@ResponseBody
-	public Map<String,Object> getPosts(int id) throws Exception{
-		//int totalRecords=postService.selectCount();
-		//int startRow=PageUtil.calcStartRow(pageIndex,pageSize);
+	public Map<String,Object> getPosts() throws Exception{
 		User user=userService.selectByPrimaryKey(1);
-		//List<Post> list = postService.selectByPage(startRow,pageSize);
-		//int totalPages=PageUtil.calcPages(totalRecords, pageSize);
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(user!=null){
-			
-			map.put("userName", user.getNickName());
-			map.put("totalPages", user.getGender());
-		}
-		
+		map.put("user",user);
 		return map;
     }
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> add() throws Exception{
+		User user=new User();
+		user.setId(19);
+		user.setGender("男");
+		user.setNickName("huih");
+		user.setStatus((byte)0);
+		user.setOpenId("asxcas1234");
+		user.setDisabledTime(new Date());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user",userService.updateByPrimaryKeySelective(user));
+		map.put("id",user.getId());
+		return map;
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> delete() throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("user",userService.deleteByPrimaryKey(19));
+		return map;
+	}
 }

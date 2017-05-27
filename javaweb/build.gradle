@@ -71,5 +71,5 @@ gretty {
     debugSuspend = true   // default
     httpsEnabled = true
     httpsPort = 443
-    httpEnabled = false
+    httpEnabled = true
 }

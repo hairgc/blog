@@ -20,11 +20,8 @@ public class User implements Serializable{
 	//主键id
 	private Integer id;
 
-    //中文昵称
+    //昵称
     private String nickName;
-
-    //登录时的账号
-    private String userName;
 
     //头像链接
     private String figureUrl;
@@ -40,7 +37,7 @@ public class User implements Serializable{
 
     //禁言到期
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
-    private Date disableDtime;
+    private Date disabledTime;
 
     //用户拥有的文章
     private List<Post> posts;
@@ -62,14 +59,6 @@ public class User implements Serializable{
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getFigureUrl() {
@@ -104,12 +93,13 @@ public class User implements Serializable{
 		this.status = status;
 	}
 
-	public Date getDisableDtime() {
-		return disableDtime;
+
+	public Date getDisabledTime() {
+		return disabledTime;
 	}
 
-	public void setDisableDtime(Date disableDtime) {
-		this.disableDtime = disableDtime;
+	public void setDisabledTime(Date disabledTime) {
+		this.disabledTime = disabledTime;
 	}
 
 	public List<Post> getPosts() {
