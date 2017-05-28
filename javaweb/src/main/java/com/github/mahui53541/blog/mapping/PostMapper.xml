@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.mahui53541.blog.mapper.PostMapper">
+    <resultMap id="BaseResultMap" type="com.github.mahui53541.blog.domain.Post">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="post_time" jdbcType="TIMESTAMP" property="postTime" />
+        <result column="post_type" jdbcType="TINYINT" property="postType" />
+        <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
+        <result column="read_times" jdbcType="INTEGER" property="readTimes" />
+        <result column="enable_comment" jdbcType="BIT" property="enableComment" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+    </resultMap>
+    <resultMap id="ResultMapWithContent" type="com.github.mahui53541.blog.domain.Post" extends="BaseResultMap">
+        <result column="post_content" property="postContent" jdbcType="LONGVARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        title,post_time, post_content,post_type, last_modify_time, read_times, status,enable_comment
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
+        select * from post where id = #{id}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" databaseId="mysql">
+        delete from post where id = #{id}
+    </delete>
+
+    <insert id="insertSelective" parameterType="Post" useGeneratedKeys="true" keyProperty="id" databaseId="mysql">
+        insert into post
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title!= null">
+                title,
+            </if>
+            <if test="postTime!= null">
+                post_time,
+            </if>
+            <if test="postType!= null">
+                post_type,
+            </if>
+            <if test="lastModifyTime!=null">
+                last_modify_time,
+            </if>
+            <if test="readTimes!=null">
+                read_times,
+            </if>
+            <if test="status!=null">
+                status,
+            </if>
+            <if test="enableComment != null">
+                enable_comment,
+            </if>
+            <if test="user!=null">
+                open_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title!= null">
+                #{title},
+            </if>
+            <if test="postTime!= null">
+                #{postTime},
+            </if>
+            <if test="postType!= null">
+                #{postType},
+            </if>
+            <if test="lastModifyTime!=null">
+                #{lastModifyTime},
+            </if>
+            <if test="readTimes!=null">
+                #{readTimes},
+            </if>
+            <if test="status!=null">
+                #{status},
+            </if>
+            <if test="enableComment != null">
+                #{enableComment},
+            </if>
+            <if test="user!=null">
+                #{user.openId},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="Post">
+        update post
+        <set>
+            <if test="title!= null">
+                title=#{title},
+            </if>
+            <if test="postTime!= null">
+                post_time=#{postTime},
+            </if>
+            <if test="postType!= null">
+                post_type=#{postType},
+            </if>
+            <if test="lastModifyTime!=null">
+                last_modify_time=#{lastModifyTime},
+            </if>
+            <if test="readTimes!=null">
+                read_times=#{readTimes},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            <if test="enableComment != null">
+                enable_comment=#{enableComment},
+            </if>
+            <if test="user!=null">
+                open_id=#{user.openId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
