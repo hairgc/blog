@@ -4,11 +4,12 @@
     <resultMap id="BaseResultMap" type="com.github.mahui53541.blog.domain.Permission">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="desc" jdbcType="TINYINT" property="desc" />
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,code, desc
+        id,code, name,desc
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
@@ -25,6 +26,9 @@
             <if test="code!= null">
                 code,
             </if>
+            <if test="name!= null">
+                name,
+            </if>
             <if test="desc!= null">
                 desc,
             </if>
@@ -33,17 +37,23 @@
             <if test="code!= null">
                 code,
             </if>
+            <if test="name!= null">
+                name,
+            </if>
             <if test="desc!= null">
                 desc,
             </if>
         </trim>
     </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="Role">
+    <update id="updateByPrimaryKeySelective" parameterType="Permission">
         update user
         <set>
             <if test="code!= null">
                 code=#{code},
+            </if>
+            <if test="name!= null">
+                name=#{name},
             </if>
             <if test="desc!= null">
                 desc=#{desc},

@@ -12,7 +12,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        nick_name,figure_url, gender, open_id, status, disabled_time
+        id,nick_name,figure_url, gender, open_id, status, disabled_time
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">

@@ -1,10 +1,10 @@
 package com.github.mahui53541.blog.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author 马辉
@@ -41,9 +41,6 @@ public class User implements Serializable{
 
     //用户拥有的文章
     private List<Post> posts;
-    
-    //用户角色
-    private List<Role> roles;
 
 	public Integer getId() {
 		return id;
@@ -108,13 +105,5 @@ public class User implements Serializable{
 
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
-	}
-	
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
 	}
 }

@@ -16,7 +16,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        title,post_time, post_content,post_type, last_modify_time, read_times, status,enable_comment
+        id,title,post_time, post_content,post_type, last_modify_time, read_times, status,enable_comment
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">

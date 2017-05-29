@@ -20,7 +20,11 @@ public class Permission implements Serializable{
 	
 	//权限码
 	private String code;
-	
+
+	//权限说明
+	private String name;
+
+
 	//显示顺序
 	private Integer desc;
 
@@ -38,7 +42,14 @@ public class Permission implements Serializable{
 
 	public void setCode(String code) {
 		this.code = code;
+	}public String getName() {
+		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 	public Integer getDesc() {
 		return desc;
