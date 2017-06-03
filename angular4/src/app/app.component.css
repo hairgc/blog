@@ -12,15 +12,13 @@
 .nav > li > a {
   color: #fff;
 }
-.nav > li{
-  background-color: #6f5499;
-}
-.nav > li.active,
+
+.nav > li.myActive,
 .nav > li > a:hover,
 .nav > li > a:focus,
 .nav .open > a,
 .nav .open > a:hover,
-.nav .open > a:focus {
+.nav .open > a:focus{
   color: #fff;
   background-color: #777;
 }

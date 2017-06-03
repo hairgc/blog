@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.mahui53541.blog.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.github.mahui53541.blog.domain.User">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+        <result column="figure_url" jdbcType="VARCHAR" property="figureUrl" />
+        <result column="gender" jdbcType="CHAR" property="gender" />
+        <result column="open_id" jdbcType="VARCHAR" property="openId" />
+        <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="disabled_time" jdbcType="TIMESTAMP" property="disabledTime" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,nick_name,figure_url, gender, open_id, status, disabled_time
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
+        select * from user where id = #{id}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" databaseId="mysql">
+        delete from user where id = #{id}
+    </delete>
+
+    <insert id="insertSelective" parameterType="User" useGeneratedKeys="true" keyProperty="id" databaseId="mysql">
+        <!--<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">-->
+            <!--SELECT LAST_INSERT_ID() AS id-->
+        <!--</selectKey>-->
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nickName!= null">
+                nick_name,
+            </if>
+            <if test="figureUrl!= null">
+                figure_url,
+            </if>
+            <if test="gender!= null">
+                gender,
+            </if>
+            <if test="openId!=null">
+                open_id,
+            </if>
+            <if test="status!= null">
+                status,
+            </if>
+            <if test="disabledTime != null">
+                disabled_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="nickName != null">
+                #{nickName},
+            </if>
+            <if test="figureUrl != null">
+                #{figureUrl},
+            </if>
+            <if test="gender!= null">
+                #{gender},
+            </if>
+            <if test="openId!=null">
+                #{openId},
+            </if>
+            <if test="status!= null">
+                #{status},
+            </if>
+            <if test="disabledTime!= null">
+                #{disabledTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="User">
+        update user
+        <set>
+            <if test="nickName != null">
+                nick_name=#{nickName},
+            </if>
+            <if test="figureUrl != null">
+                figure_url=#{figureUrl},
+            </if>
+            <if test="gender != null">
+                gender=#{gender},
+            </if>
+            <if test="openId!=null">
+                open_id=#{openId},
+            </if>
+            <if test="status != null">
+                status=#{status},
+            </if>
+            <if test="disabledTime != null">
+                disabled_time=#{disabledTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

@@ -8,32 +8,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="posts" class="navbar-brand navbar-brand-my">
-        NiceFish
+      <a class="navbar-brand navbar-brand-my">
+        MaHui
       </a>
     </div>
-    <div class="collapse navbar-collapse" aria-expanded="false">
+    <div class="collapse navbar-collapse navbar-responsive-collapse" aria-expanded="false">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="posts">{{"app.welcome" | translate}}</a>
-        </li>
-        <li class="dropdown">
-          <a href="echart">集成图表</a>
-        </li>
-        <li class="dropdown">
-          <a href="map">高德地图</a>
-        </li>
-        <li class="dropdown">
-          <a href="jquery">集成jQuery</a>
-        </li>
-        <li class="dropdown">
-          <a href="jsplumb">集成jsplumb</a>
-        </li>
-        <li class="dropdown">
-          <a href="http://git.oschina.net/mumu-osc/NiceFish" data-toggle="dropdown" class="dropdown-toggle" target="_blank">NiceFish</a>
-        </li>
-        <li class="dropdown">
-          <a href="http://git.oschina.net/zt_zhong/CodeBe" data-toggle="dropdown" class="dropdown-toggle" target="_blank">CodeBe</a>
+        <li routerLinkActive="myActive" class="dropdown">
+          <a routerLink="posts">{{"app.articles" | translate}}</a>
         </li>
       </ul>
       <!--<ul *ngIf="!currentUser?.userName" class="nav navbar-nav navbar-right">-->
@@ -60,14 +42,14 @@
 </div>
 <!-- 主体内容区域 -->
 <div class="container main-container">
-  <!--<router-outlet></router-outlet>-->
+  <router-outlet></router-outlet>
 </div>
 <!-- 底部区域 -->
 <div class="footer bs-footer">
   <div class="container">
     <div class="row">
       <p>
-        Powered by <a href="http://git.oschina.net/mumu-osc/NiceFish" target="_blank">NiceFish</a>
+        Powered by <a href="https://github.com/mahui53541/blog" target="_blank">MyBlog</a>
       </p>
     </div>
   </div>

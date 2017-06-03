@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.mahui53541.blog.mapper.PermissionMapper">
+    <resultMap id="BaseResultMap" type="com.github.mahui53541.blog.domain.Permission">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="desc" jdbcType="TINYINT" property="desc" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,code, name,desc
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
+        select * from permission where id = #{id}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" databaseId="mysql">
+        delete from permission where id = #{id}
+    </delete>
+
+    <insert id="insertSelective" parameterType="Permission" useGeneratedKeys="true" keyProperty="id" databaseId="mysql">
+        insert into role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="code!= null">
+                code,
+            </if>
+            <if test="name!= null">
+                name,
+            </if>
+            <if test="desc!= null">
+                desc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="code!= null">
+                code,
+            </if>
+            <if test="name!= null">
+                name,
+            </if>
+            <if test="desc!= null">
+                desc,
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="Permission">
+        update user
+        <set>
+            <if test="code!= null">
+                code=#{code},
+            </if>
+            <if test="name!= null">
+                name=#{name},
+            </if>
+            <if test="desc!= null">
+                desc=#{desc},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
