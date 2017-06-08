@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { HomeComponent } from './home.component';
 import { CategoryComponent } from './category/category.component';
@@ -10,6 +11,7 @@ import {CategoryService} from "./category/services/category.service";
 @NgModule({
   imports: [
     CommonModule,
+    TranslateModule,
     RouterModule.forChild(homeRoutes)
   ],
   declarations: [HomeComponent, CategoryComponent],
