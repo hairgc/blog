@@ -36,12 +36,12 @@
 
 .main-container {
   padding-top: 80px;
-  min-height: 800px;
+  min-height: 500px;
 }
 
 .footer {
   text-align: left;
-  padding: 40px 48px;
+  padding: 20px 20px;
   background: #263238;
   color: #fff;
   position: absolute;

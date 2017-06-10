@@ -9,8 +9,9 @@ export const postRoutes=[
     pathMatch:'full'
   },
   {
-    path:'page/:page',
-    component:PostlistComponent
-  },
-  { path: 'write', component: WritePostComponent },
+    path: 'page/:page',
+    component: PostlistComponent
+  }
+  // },
+  // { path: 'write', component: WritePostComponent },
 ];

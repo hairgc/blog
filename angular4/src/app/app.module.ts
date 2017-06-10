@@ -6,15 +6,18 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import {WritePostComponent} from "app/post/write-post/write-post.component";
 
 import {appRoutes} from './app.routes';
+
 
 export function createTranslateLoader(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WritePostComponent
   ],
   imports: [
     BrowserModule,

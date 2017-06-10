@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit ,ElementRef } from '@angular/core';
+import {Post} from "../model/post.model";
 
 @Component({
   selector: 'app-write-post',
@@ -7,8 +8,12 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 })
 export class WritePostComponent implements OnInit,AfterViewInit {
 
-
-  constructor() { }
+  private post:Post = new Post();
+  private saveDisabled:boolean=true;
+  private firstSubmit:boolean=true;
+  private isNull:boolean=true;
+  private editor:any;
+  constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
 
@@ -39,15 +44,44 @@ export class WritePostComponent implements OnInit,AfterViewInit {
     //
     // });
 
-    var editor = editormd("editormd", {
+    let that=this;
+    that.editor = editormd("editormd", {
       path : "../assets/editormd/lib/", // Autoload modules mode, codemirror, marked... dependents libs path
       autoHeight : true,
-      emoji:true,
+      delay:500,
+      //height:$(window)-200,
+      flowChart : true,             // 开启流程图支持，默认关闭
+      sequenceDiagram : true,
       toolbarIcons : function() {
         // Or return editormd.toolbarModes[name]; // full, simple, mini
         // Using "||" set icons align right.
-        return ["undo", "redo", "|", "bold", "hr", "|", "preview", "watch", "|", "fullscreen", "info", "testIcon", "testIcon2", "file", "faicon", "||", "watch", "fullscreen", "preview", "testIcon"]
+        return ["undo", "redo", "|", "bold", "hr","quote", "|","image","code","code-block","table","|","link", "reference-link",
+          "|" ,"list-ul", "list-ol","html-entities","|","preview", "watch"]
+      },
+      codeFold : true,
+      imageUpload: true,
+      imageUploadURL : "./php/upload.php",
+      editorTheme:"mdn-like",
+      onchange : function() {
+        //$('#save').attr("disabled",false)
+        if(that.saveDisabled){
+          that.saveDisabled=false;
+        }
+        that.post.postContent=that.editor.getMarkdown();
       }
     });
+
+
+  }
+  public save(form){
+    if(!this.saveDisabled){
+      this.saveDisabled=true;
+    }
+    this.firstSubmit=false;
+    if(this.post.postContent==null || this.post.postContent.trim().length==0){
+      this.isNull=true;
+    }
+    console.log(this.post);
+    //console.log(this.elementRef.nativeElement.querySelector('#save').disabled='disabled');
   }
 }

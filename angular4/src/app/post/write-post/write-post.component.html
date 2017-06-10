@@ -1,9 +1,28 @@
 <!--<textarea id="post_editor" class="form-control" rows="20" placeholder="内容，最少140字，最多2万字。图片每张最大500K，每篇文章最多50张图。"></textarea>-->
 <div class="row">
-  <div class="col-sm-12">
-    <div id="editormd">
-      <textarea style="display:none;">### Hello Editor.md !</textarea>
-    </div>
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <form #postForm="ngForm" novalidate role="form">
+      <div class="form-group col-sm-9 col-md-9 col-lg-10">
+        <input type="text" class="form-control" placeholder="标题，2到32个字符" required minlength="2" maxlength="32"
+               #title="ngModel" [(ngModel)]="post.title" name="title">
+        <div *ngIf="!firstSubmit && !title.valid" class="alert alert-warning">标题必须是2到32个字符</div>
+      </div>
+      <div class="form-group col-sm-3 col-md-3 col-lg-2">
+        <button id="save" type="button" (click)="save(postForm)" [disabled]="saveDisabled" class="btn btn-success">
+          <span class="fa fa-save" aria-hidden="true"></span>
+          保存
+        </button>
+        <button type="button" (click)="save(postForm)" class="btn btn-success">
+          <span class="fa fa-share" aria-hidden="true"></span>
+          发布
+        </button>
+      </div>
+      <div id="editormd" class="form-group">
+        <textarea style="display:none;" name="content" required></textarea>
+      </div>
+    </form>
   </div>
 </div>
+
+
 

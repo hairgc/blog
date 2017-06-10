@@ -8,7 +8,6 @@ import { PostlistComponent } from './postlist/postlist.component';
 
 import { postRoutes } from './post.routes';
 import {PostlistService} from "./postlist/services/postlist.service";
-import { WritePostComponent } from './write-post/write-post.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +15,7 @@ import { WritePostComponent } from './write-post/write-post.component';
     TranslateModule,
     RouterModule.forChild(postRoutes)
   ],
-  declarations: [PostlistComponent, WritePostComponent],
+  declarations: [PostlistComponent],
 
   providers:[
     PostlistService
