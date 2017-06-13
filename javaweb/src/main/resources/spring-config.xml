@@ -23,6 +23,9 @@
     <!--导入Mybatis配置文件-->
 	<import resource="spring-mybatis-config.xml" />
 
+	<!--导入shiro配置文件-->
+	<import resource="spring-shiro-config.xml" />
+
 	<!-- 启用支持annotation注解方式事务管理 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 

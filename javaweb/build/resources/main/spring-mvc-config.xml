@@ -23,7 +23,7 @@
     		<bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
     		<bean class="org.springframework.http.converter.BufferedImageHttpMessageConverter"/>
             <!-- 配置fastjson中实现HttpMessageConverter接口的转换器 -->
-            <bean id="fastJsonHttpMessageConverter" 
+            <bean id="fastJsonHttpMessageConverter"
             	class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
                 <!-- 加入支持的媒体类型：返回contentType -->
                 <property name="supportedMediaTypes">
