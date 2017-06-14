@@ -45,6 +45,7 @@ public class OAuth2Realm extends AuthorizingRealm {
         OAuth2Token oAuth2Token = (OAuth2Token) token;
         String code = oAuth2Token.getAuthCode();
         User user = extractUser(code);
+        System.out.println("登录依次");
         SimpleAuthenticationInfo authenticationInfo =
                 new SimpleAuthenticationInfo(user, code, getName());
         return authenticationInfo;
@@ -57,7 +58,7 @@ public class OAuth2Realm extends AuthorizingRealm {
 
             String accessToken = accessTokenObj.getAccessToken();
 
-            Long expiresIn = accessTokenObj.getExpireIn();
+            //Long expiresIn = accessTokenObj.getExpireIn();
             OpenID openIDObj =  new OpenID(accessToken);
             String openID = openIDObj.getUserOpenID();
 
