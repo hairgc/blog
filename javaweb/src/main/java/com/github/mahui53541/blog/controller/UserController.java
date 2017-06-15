@@ -1,6 +1,6 @@
 package com.github.mahui53541.blog.controller;
 
-import com.github.mahui53541.blog.domain.User;
+import com.github.mahui53541.blog.po.User;
 import com.github.mahui53541.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class UserController {
 	@RequestMapping(value = "/queryAll", method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String,Object> getPosts() throws Exception{
-		User user=userService.selectByPrimaryKey(1);
+		User user=userService.selectByPrimaryKey(2);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("user",user);
 		return map;

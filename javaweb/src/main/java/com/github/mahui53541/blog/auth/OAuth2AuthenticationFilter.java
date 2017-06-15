@@ -10,7 +10,6 @@ import org.apache.shiro.web.util.WebUtils;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 /**
  * @author mahui
@@ -22,6 +21,18 @@ public class OAuth2AuthenticationFilter extends AuthenticatingFilter {
 
     private String failureUrl;
 
+    public static final String DEFAULT_ERROR_KEY_ATTRIBUTE_NAME = "shiroLoginFailure";
+
+    private String failureKeyAttribute = DEFAULT_ERROR_KEY_ATTRIBUTE_NAME;
+
+    public String getFailureKeyAttribute() {
+        return failureKeyAttribute;
+    }
+
+    public void setFailureKeyAttribute(String failureKeyAttribute) {
+        this.failureKeyAttribute = failureKeyAttribute;
+    }
+
     public void setAuthcCodeParam(String authcCodeParam) {
         this.authcCodeParam = authcCodeParam;
     }
@@ -29,6 +40,7 @@ public class OAuth2AuthenticationFilter extends AuthenticatingFilter {
     public void setFailureUrl(String failureUrl) {
         this.failureUrl = failureUrl;
     }
+
 
     @Override
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) throws Exception {
@@ -58,6 +70,8 @@ public class OAuth2AuthenticationFilter extends AuthenticatingFilter {
                 saveRequestAndRedirectToLogin(request, response);
                 return false;
             }
+        }else{
+            return true;
         }
 
         return executeLogin(request, response);
@@ -71,22 +85,15 @@ public class OAuth2AuthenticationFilter extends AuthenticatingFilter {
     }
 
     @Override
-    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException ae, ServletRequest request,
+    protected boolean onLoginFailure(AuthenticationToken token, AuthenticationException e, ServletRequest request,
                                      ServletResponse response) {
-        Subject subject = getSubject(request, response);
-        if (subject.isAuthenticated() || subject.isRemembered()) {
-            try {
-                issueSuccessRedirect(request, response);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                WebUtils.issueRedirect(request, response, failureUrl);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
+        setFailureAttribute(request, e);
+        //login failed, let request continue back to the login page:
+        return true;
+    }
+
+    protected void setFailureAttribute(ServletRequest request, AuthenticationException ae) {
+        String className = ae.getClass().getName();
+        request.setAttribute(getFailureKeyAttribute(), className);
     }
 }

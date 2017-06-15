@@ -1,6 +1,6 @@
 package com.github.mahui53541.blog.service.impl;
 
-import com.github.mahui53541.blog.domain.Comment;
+import com.github.mahui53541.blog.po.Comment;
 import com.github.mahui53541.blog.service.CommentService;
 import org.springframework.stereotype.Service;
 

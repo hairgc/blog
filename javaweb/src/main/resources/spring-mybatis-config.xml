@@ -41,7 +41,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="databaseIdProvider" ref="databaseIdProvider" />
-        <property name="typeAliasesPackage" value="com.github.mahui53541.blog.domain" />
+        <property name="typeAliasesPackage" value="com.github.mahui53541.blog.po" />
         <property name="mapperLocations" value="classpath:*Mapper.xml" />
         <property name="plugins">
             <list>

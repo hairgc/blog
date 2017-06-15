@@ -1,6 +1,6 @@
 package com.github.mahui53541.blog.service.impl;
 
-import com.github.mahui53541.blog.domain.Permission;
+import com.github.mahui53541.blog.po.Permission;
 import com.github.mahui53541.blog.service.PermissionService;
 import org.springframework.stereotype.Service;
 

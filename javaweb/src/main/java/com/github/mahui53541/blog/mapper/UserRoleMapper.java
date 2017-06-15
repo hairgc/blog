@@ -1,6 +1,6 @@
 package com.github.mahui53541.blog.mapper;
 
-import com.github.mahui53541.blog.domain.UserRole;
+import com.github.mahui53541.blog.po.UserRole;
 import com.github.mahui53541.blog.util.base.BaseMapper;
 
 /**

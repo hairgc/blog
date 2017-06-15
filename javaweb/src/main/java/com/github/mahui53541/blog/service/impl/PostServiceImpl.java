@@ -1,6 +1,6 @@
 package com.github.mahui53541.blog.service.impl;
 
-import com.github.mahui53541.blog.domain.Post;
+import com.github.mahui53541.blog.po.Post;
 import com.github.mahui53541.blog.service.PostService;
 import org.springframework.stereotype.Service;
 

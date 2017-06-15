@@ -1,6 +1,5 @@
 package com.github.mahui53541.blog.service.impl;
 
-import com.github.mahui53541.blog.domain.Picture;
 import com.github.mahui53541.blog.mapper.*;
 import com.github.mahui53541.blog.service.BaseService;
 import com.github.mahui53541.blog.util.base.BaseMapper;

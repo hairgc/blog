@@ -1,19 +1,14 @@
-package com.github.mahui53541.blog.domain;
+package com.github.mahui53541.blog.po;
 
 import java.io.Serializable;
 
 /**
  * Created by mahui on 2017/5/29.
  */
-public class RolePermission implements Serializable {
-    /**
-     * 序列号
-     */
-    private static final long serialVersionUID = -4152278657626480897L;
-
+public class UserRole implements Serializable{
     private String id;
 
-    private String permissionId;
+    private String openId;
 
     private String roleId;
 
@@ -25,12 +20,12 @@ public class RolePermission implements Serializable {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getPermissionId() {
-        return permissionId;
+    public String getOpenId() {
+        return openId;
     }
 
-    public void setPermissionId(String permissionId) {
-        this.permissionId = permissionId == null ? null : permissionId.trim();
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     public String getRoleId() {

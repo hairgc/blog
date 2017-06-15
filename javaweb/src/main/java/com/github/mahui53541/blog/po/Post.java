@@ -1,4 +1,4 @@
-package com.github.mahui53541.blog.domain;
+package com.github.mahui53541.blog.po;
 
 import java.io.Serializable;
 import java.util.Date;

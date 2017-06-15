@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.mahui53541.blog.mapper.PostMapper">
-    <resultMap id="BaseResultMap" type="com.github.mahui53541.blog.domain.Post">
+    <resultMap id="BaseResultMap" type="com.github.mahui53541.blog.po.Post">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="title" jdbcType="VARCHAR" property="title" />
         <result column="post_time" jdbcType="TIMESTAMP" property="postTime" />
@@ -11,7 +11,7 @@
         <result column="enable_comment" jdbcType="BIT" property="enableComment" />
         <result column="status" jdbcType="TINYINT" property="status" />
     </resultMap>
-    <resultMap id="ResultMapWithContent" type="com.github.mahui53541.blog.domain.Post" extends="BaseResultMap">
+    <resultMap id="ResultMapWithContent" type="com.github.mahui53541.blog.po.Post" extends="BaseResultMap">
         <result column="post_content" property="postContent" jdbcType="LONGVARCHAR" />
     </resultMap>
 

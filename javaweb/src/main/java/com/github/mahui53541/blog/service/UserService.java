@@ -1,6 +1,6 @@
 package com.github.mahui53541.blog.service;
 
-import com.github.mahui53541.blog.domain.User;
+import com.github.mahui53541.blog.po.User;
 
 public interface UserService extends BaseService<User,Integer>{
     /**

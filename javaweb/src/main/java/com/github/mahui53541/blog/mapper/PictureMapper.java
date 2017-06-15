@@ -1,6 +1,6 @@
 package com.github.mahui53541.blog.mapper;
 
-import com.github.mahui53541.blog.domain.Picture;
+import com.github.mahui53541.blog.po.Picture;
 import com.github.mahui53541.blog.util.base.BaseMapper;
 
 /**

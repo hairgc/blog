@@ -1,6 +1,6 @@
 package com.github.mahui53541.blog.auth;
 
-import com.github.mahui53541.blog.domain.User;
+import com.github.mahui53541.blog.po.User;
 import com.github.mahui53541.blog.exception.OAuth2AuthenticationException;
 import com.github.mahui53541.blog.service.UserService;
 import com.qq.connect.api.OpenID;
@@ -8,10 +8,7 @@ import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -44,8 +41,12 @@ public class OAuth2Realm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         OAuth2Token oAuth2Token = (OAuth2Token) token;
         String code = oAuth2Token.getAuthCode();
+        System.out.println("登录依次1");
         User user = extractUser(code);
-        System.out.println("登录依次");
+        System.out.println("登录依次2");
+        if(user.getStatus()==1 && user.getDisabledTime().after(new Date())){
+            throw new LockedAccountException();
+        }
         SimpleAuthenticationInfo authenticationInfo =
                 new SimpleAuthenticationInfo(user, code, getName());
         return authenticationInfo;
