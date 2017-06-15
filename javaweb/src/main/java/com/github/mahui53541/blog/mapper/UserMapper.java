@@ -10,5 +10,10 @@ import com.github.mahui53541.blog.util.base.BaseMapper;
  * @history 2017年4月7日下午6:39:39 马辉 新建
  */
 public interface UserMapper extends BaseMapper<User,Integer>{
-
+    /**
+     * 根据OpenID获取用户
+     * @param openId
+     * @return
+     */
+    User selectByOpenID(String openId);
 }

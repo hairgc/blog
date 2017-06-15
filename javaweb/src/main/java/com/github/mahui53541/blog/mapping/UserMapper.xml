@@ -94,4 +94,8 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="selectByOpenID" resultMap="BaseResultMap" parameterType="java.lang.String" databaseId="mysql">
+        select * from user where open_id = #{openId}
+    </select>
 </mapper>
