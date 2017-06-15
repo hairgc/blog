@@ -7,8 +7,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import {WritePostComponent} from "app/post/write-post/write-post.component";
+import {LoginService} from "./user/login/login.service";
 
 import {appRoutes} from './app.routes';
+
 
 
 export function createTranslateLoader(http: Http) {
@@ -33,7 +35,7 @@ export function createTranslateLoader(http: Http) {
     }),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
