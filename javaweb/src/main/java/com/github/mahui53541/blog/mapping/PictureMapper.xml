@@ -8,6 +8,10 @@
         <result column="picture_url" jdbcType="VARCHAR" property="pictureUrl" />
     </resultMap>
 
+    <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
+        SELECT * FROM picture
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
         select * from picture where id = #{id}
     </select>

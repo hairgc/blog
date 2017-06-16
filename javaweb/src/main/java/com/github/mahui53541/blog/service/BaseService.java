@@ -1,6 +1,9 @@
 package com.github.mahui53541.blog.service;
 
+import org.apache.ibatis.session.RowBounds;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by mahui on 2017/5/26.
@@ -33,4 +36,17 @@ public interface BaseService<T,PK extends Serializable> {
      * @return
      */
     T selectByPrimaryKey(PK id);
+
+    /**
+     * 查询所有
+     * @return
+     */
+    List<T> findAll();
+
+    /**
+     * 分页
+     * @param rowBounds
+     * @return
+     */
+    List<T> findAll(RowBounds rowBounds);
 }

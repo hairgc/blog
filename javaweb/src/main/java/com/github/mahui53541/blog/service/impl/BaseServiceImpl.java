@@ -3,6 +3,7 @@ package com.github.mahui53541.blog.service.impl;
 import com.github.mahui53541.blog.mapper.*;
 import com.github.mahui53541.blog.service.BaseService;
 import com.github.mahui53541.blog.util.base.BaseMapper;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 /**
  * Created by mahui on 2017/5/26.
@@ -58,6 +60,9 @@ public class BaseServiceImpl<T,PK extends Serializable> implements BaseService<T
     protected RolePermissionMapper rolePermissionMapper;
     @Autowired
     protected UserRoleMapper userRoleMapper;
+    @Autowired
+    protected CategoryMapper categoryMapper;
+
     @Override
     public int insertSelective(T entity) {
         return baseMapper.insertSelective(entity);
@@ -76,5 +81,14 @@ public class BaseServiceImpl<T,PK extends Serializable> implements BaseService<T
     @Override
     public T selectByPrimaryKey(PK id) {
         return (T)baseMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<T> findAll() {
+        return baseMapper.findAll();
+    }
+    @Override
+    public List<T> findAll(RowBounds rowBounds) {
+        return baseMapper.findAll(rowBounds);
     }
 }

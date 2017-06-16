@@ -2,6 +2,7 @@ package com.github.mahui53541.blog.controller;
 
 import com.github.mahui53541.blog.po.User;
 import com.github.mahui53541.blog.service.UserService;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/queryAll", method = RequestMethod.GET)
 	@ResponseBody
+	@RequiresRoles("test")
 	public Map<String,Object> getPosts() throws Exception{
 		User user=userService.selectByPrimaryKey(2);
 		Map<String, Object> map = new HashMap<String, Object>();

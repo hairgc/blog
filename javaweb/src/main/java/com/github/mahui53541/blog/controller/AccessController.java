@@ -50,9 +50,6 @@ public class AccessController extends BaseController{
             return this.ajaxFailureResponse("未登录");
         }else{
             User user= (User) SecurityUtils.getSubject().getPrincipal();
-            user.setOpenId(null);
-            user.setDisabledTime(null);
-            user.setStatus(null);
             return user;
         }
     }

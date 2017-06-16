@@ -19,6 +19,10 @@
         id,title,post_time, post_content,post_type, last_modify_time, read_times, status,enable_comment
     </sql>
 
+    <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
+        SELECT * FROM post
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
         select * from post where id = #{id}
     </select>

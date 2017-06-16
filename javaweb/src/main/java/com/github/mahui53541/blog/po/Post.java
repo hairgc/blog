@@ -1,10 +1,10 @@
 package com.github.mahui53541.blog.po;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 文章实体
@@ -31,10 +31,10 @@ public class Post implements Serializable{
 	//文章内容
 	private String postContent;
 	
-	//文章类型
+	//文章类型（原创，转载）
 	private Byte postType;
 	
-	//最近修改
+	//最近一次修改
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date lastModifyTime;
 	
@@ -49,6 +49,9 @@ public class Post implements Serializable{
 	
 	//QQ登录open_id关联用户
 	private User user;
+
+	//文章分类
+	private Category category;
 
 	//对应评论
 	private List<Comment> comments;
@@ -131,6 +134,12 @@ public class Post implements Serializable{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public List<Comment> getComments() {

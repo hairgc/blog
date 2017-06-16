@@ -12,6 +12,10 @@
         id,code, name,desc
     </sql>
 
+    <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
+        SELECT * FROM permission
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
         select * from permission where id = #{id}
     </select>
@@ -61,4 +65,13 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="selectPermissionByOpenID" parameterType="String" databaseId="mysql" resultType="String">
+        SELECT DISTINCT p.code FROM permission AS p
+          LEFT JOIN role_permission rp ON p.id=rp.permission_id
+          LEFT JOIN role r ON r.id = rp.role_id
+          LEFT JOIN user_role ur ON r.id = ur.role_id
+          LEFT JOIN user u ON u.open_id = ur.open_id
+        where u.open_id=#{openId}
+    </select>
 </mapper>

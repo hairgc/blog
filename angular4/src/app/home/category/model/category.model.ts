@@ -1,4 +1,6 @@
 export class Category {
   id:number
-  description:string
+  categoryName:string;
+  postSize:number;
+  desc:number;
 }

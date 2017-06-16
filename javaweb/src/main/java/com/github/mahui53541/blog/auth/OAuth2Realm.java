@@ -1,7 +1,9 @@
 package com.github.mahui53541.blog.auth;
 
-import com.github.mahui53541.blog.po.User;
 import com.github.mahui53541.blog.exception.OAuth2AuthenticationException;
+import com.github.mahui53541.blog.po.User;
+import com.github.mahui53541.blog.service.PermissionService;
+import com.github.mahui53541.blog.service.RoleService;
 import com.github.mahui53541.blog.service.UserService;
 import com.qq.connect.api.OpenID;
 import com.qq.connect.api.qzone.UserInfo;
@@ -16,6 +18,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author mahui
@@ -25,6 +28,17 @@ public class OAuth2Realm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private PermissionService permissionService;
+
+    // 设置realm的名称
+    @Override
+    public void setName(String name) {
+        super.setName("oauth2Realm");
+    }
+
     @Override
     public boolean supports(AuthenticationToken token) {
         return token != null && token instanceof OAuth2Token;//表示此Realm只支持OAuth2Token类型
@@ -32,8 +46,16 @@ public class OAuth2Realm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        User user = (User) principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-
+        //授权
+        try {
+            List<String> roles=roleService.selectRoleByOpenID(user.getOpenId());
+            authorizationInfo.addRoles(roleService.selectRoleByOpenID(user.getOpenId()));
+            authorizationInfo.addStringPermissions(permissionService.selectPermissionByOpenID(user.getOpenId()));
+        }catch (Exception e){
+            e.getStackTrace();
+        }
         return authorizationInfo;
     }
 
@@ -41,9 +63,7 @@ public class OAuth2Realm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         OAuth2Token oAuth2Token = (OAuth2Token) token;
         String code = oAuth2Token.getAuthCode();
-        System.out.println("登录依次1");
         User user = extractUser(code);
-        System.out.println("登录依次2");
         if(user.getStatus()==1 && user.getDisabledTime().after(new Date())){
             throw new LockedAccountException();
         }
@@ -71,6 +91,7 @@ public class OAuth2Realm extends AuthorizingRealm {
                 user.setGender(userInfoBean.getGender());
                 user.setFigureUrl(userInfoBean.getAvatar().getAvatarURL30());
                 user.setNickName(userInfoBean.getNickname());
+                user.setOpenId(openID);
                 if(user.getStatus()==1 && user.getDisabledTime().before(new Date())){
                     user.setStatus((byte)0);
                 }

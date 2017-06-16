@@ -11,28 +11,37 @@ import {Subject} from "rxjs/Subject";
   styleUrls: ['./postlist.component.css']
 })
 export class PostlistComponent implements OnInit {
+
   public maxSize:number = 5;
-  public itemsPerPage:number=5;
-  public totalItems:number;
-  //不要手动对这个属性进行赋值，它是和分页工具条自动绑定的
+  public totalItems:number = 175;
   public currentPage:number = 1;
-  public numPages;
+  public numPages:number = 0;
 
   public searchText:string;
   public searchTextStream:Subject<string> = new Subject<string>();
 
   public postList:Array<Post>;
+  public categoryId:number;
 
   constructor(public router: Router,
               public activeRoute: ActivatedRoute,
               public postService:PostlistService) { }
 
   ngOnInit() {
+
     this.activeRoute.params.subscribe(params => {
+      this.activeRoute.queryParams.subscribe(params=>{
+        this.categoryId=params.categoryId;
+        console.log("categoryId:"+this.categoryId);
+      })
       // 这里可以从路由里面获取URL参数
-      console.log(params);
+      this.currentPage=params.page;
+      console.log("currentPage:"+this.currentPage);
+
       this.loadData(this.searchText,this.currentPage);
     });
+
+
 
     this.searchTextStream
       .debounceTime(500)
@@ -44,8 +53,8 @@ export class PostlistComponent implements OnInit {
   }
 
   public loadData(searchText:string,page:number){
-    let offset = (this.currentPage-1)*this.itemsPerPage;
-    let end = (this.currentPage)*this.itemsPerPage;
+    let offset = (this.currentPage-1)*this.maxSize;
+    let end = (this.currentPage)*this.maxSize;
 
     return this.postService.getPostList(searchText,page).subscribe(
       res=>{

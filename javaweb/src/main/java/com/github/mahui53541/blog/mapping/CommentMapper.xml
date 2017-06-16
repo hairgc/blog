@@ -11,7 +11,9 @@
     <sql id="Base_Column_List">
         content,comment_time, status
     </sql>
-
+    <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
+        SELECT * FROM comment
+    </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
         select * from comment where id = #{id}
     </select>

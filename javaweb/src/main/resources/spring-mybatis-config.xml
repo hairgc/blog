@@ -54,6 +54,7 @@
                             supportMethodsArguments=true
                             returnPageInfo=check
                             params=count=countSql
+                            rowBoundsWithCount=true
                         </value>
                     </property>
                 </bean>

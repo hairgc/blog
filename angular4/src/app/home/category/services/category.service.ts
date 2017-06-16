@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { SITE_HOST_URL } from '../../../shared/config/env.config';
-import {Category} from "../model/category.model";
+import { Category } from "../model/category.model";
 
 @Injectable()
 export class CategoryService {

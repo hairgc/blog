@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.mahui53541.blog.mapper.CategoryMapper">
+    <resultMap id="BaseResultMap" type="com.github.mahui53541.blog.po.Category">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+        <result column="post_size" jdbcType="INTEGER" property="INTEGER" />
+        <result column="desc" jdbcType="INTEGER" property="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,category_name,post_size, desc
+    </sql>
+    <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
+        SELECT * FROM category
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
+        select * from category where id = #{id}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" databaseId="mysql">
+        delete from category where id = #{id}
+    </delete>
+
+    <insert id="insertSelective" parameterType="Category" useGeneratedKeys="true" keyProperty="id" databaseId="mysql">
+        insert into category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="categoryName!= null">
+                category_name,
+            </if>
+            <if test="postSize!= null">
+                post_size,
+            </if>
+            <if test="desc!= null">
+                desc,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="categoryName!= null">
+                #{categoryName},
+            </if>
+            <if test="postSize!= null">
+                #{postSize},
+            </if>
+            <if test="desc!= null">
+                #{desc},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="Category">
+        update user
+        <set>
+            <if test="categoryName!= null">
+                category_name=#{categoryName},
+            </if>
+            <if test="postSize!= null">
+                post_size=#{postSize},
+            </if>
+            <if test="desc!= null">
+                desc=#{desc},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

@@ -11,6 +11,10 @@
         id,role_name, role_type
     </sql>
 
+    <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
+        SELECT * FROM role
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
         select * from role where id = #{id}
     </select>
@@ -51,4 +55,9 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="selectRoleByOpenID" parameterType="String" databaseId="mysql" resultType="String">
+        SELECT DISTINCT r.role_name FROM role AS r LEFT JOIN user_role ur ON r.id=ur.role_id LEFT JOIN user u ON ur.open_id = u.open_id
+        where u.open_id=#{openId}
+    </select>
 </mapper>

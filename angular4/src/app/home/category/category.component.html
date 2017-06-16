@@ -4,7 +4,10 @@
       <h3 class="panel-title">文章分类</h3>
     </div>
     <div class="list-group">
-      <a href="#" class="list-group-item" *ngFor="let category of categories; let index=index">{{category.description}}</a>
+      <a class="list-group-item" *ngFor="let category of categories; let index=index" (click)="onSelectCategory(category)">
+        {{category.categoryName}}
+        <span class="badge">{{category.postSize}}</span>
+      </a>
     </div>
   </div>
 </div>

@@ -11,6 +11,10 @@
         id,open_id, role_id
     </sql>
 
+    <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
+        SELECT * FROM user_role
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
         select * from user_role where id = #{id}
     </select>
