@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @author mahui
  * @create 2017-06-13 22:18
  **/
 @Controller
-public class AccessController {
+public class AccessController extends BaseController{
 
     @RequestMapping(value="/oauth2-login",method = RequestMethod.GET)
     @ResponseBody
@@ -33,5 +34,26 @@ public class AccessController {
         }
         User user= (User) SecurityUtils.getSubject().getPrincipal();
         return user;
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> logout() throws Exception {
+        SecurityUtils.getSubject().logout();
+        return this.ajaxSuccessResponse();
+    }
+
+    @RequestMapping(value="/info",method = RequestMethod.GET)
+    @ResponseBody
+    public Object info()throws Exception{
+        if(!SecurityUtils.getSubject().isAuthenticated()){
+            return this.ajaxFailureResponse("未登录");
+        }else{
+            User user= (User) SecurityUtils.getSubject().getPrincipal();
+            user.setOpenId(null);
+            user.setDisabledTime(null);
+            user.setStatus(null);
+            return user;
+        }
     }
 }

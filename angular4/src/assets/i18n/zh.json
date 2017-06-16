@@ -4,8 +4,7 @@
         "welcome": "欢迎你",
         "logout": "退出",
         "login": "登录",
-        "register": "注册",
-        "doc": "官方文档",
+        "explore": "个人中心",
         "console": "管理后台"
     },
     "post": {

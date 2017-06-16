@@ -67,7 +67,8 @@ public class OAuth2AuthenticationFilter extends AuthenticatingFilter {
         if(!subject.isAuthenticated()) {
             if(StringUtils.isEmpty(request.getParameter(authcCodeParam))) {
                 //如果用户没有身份验证，且没有auth code，则重定向到服务端授权
-                saveRequestAndRedirectToLogin(request, response);
+                //saveRequestAndRedirectToLogin(request, response);
+                redirectToLogin(request, response);
                 return false;
             }
         }else{

@@ -3,14 +3,13 @@
         "welcome":"Welcome",
         "logout":"Logout",
         "login":"Login",
-        "register":"Register",
         "articles":"Articles",
-        "doc":"Document",
+        "explore":"Explore",
         "console":"Console"
     },
     "post":{
         "publish":"publish"
-    },    
+    },
     "userRegister":{
         "userSignUp":"User Sign Up",
         "userName":"UserName:",

@@ -91,8 +91,8 @@
     <!-- Shiro的Web过滤器 -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="https://graph.qq.com/oauth2.0/authorize?client_id=101389269&amp;response_type=code&amp;state=blog&amp;redirect_uri=http://localhost:8080/oauth2-login"/>
-        <property name="successUrl" value="/"/>
+        <property name="loginUrl" value="https://graph.qq.com/oauth2.0/authorize?client_id=101389269&amp;response_type=code&amp;state=blog&amp;redirect_uri=http://localhost:8080/blog/oauth2-login"/>
+        <property name="successUrl" value="http://localhost"/>
         <property name="filters">
             <util:map>
                 <entry key="oauth2Authc" value-ref="oAuth2AuthenticationFilter"/>
@@ -101,9 +101,9 @@
         <property name="filterChainDefinitions">
             <value>
                 / = anon
-                /oauth2Failure.jsp = anon
+                /info = anon
+                /logout = anon
                 /oauth2-login = oauth2Authc
-                /logout = logout
                 /** = user
             </value>
         </property>

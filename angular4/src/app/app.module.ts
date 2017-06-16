@@ -5,6 +5,9 @@ import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import {WritePostComponent} from "app/post/write-post/write-post.component";
 import {LoginService} from "./user/login/login.service";
@@ -23,9 +26,11 @@ export function createTranslateLoader(http: Http) {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     JsonpModule,
+    ToastrModule.forRoot(),
     TranslateModule.forRoot({
        loader: {
          provide: TranslateLoader,

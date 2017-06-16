@@ -9,13 +9,21 @@
 .navbar-toggle .icon-bar {
   background-color: #fff;
 }
-.nav > li > a {
+.nav> li > a {
+  color: #fff;
+}
+.nav> li {
+  background: #6f5499;
+}
+.my-menu> li > a {
   color: #fff;
 }
 
 .nav > li.myActive,
 .nav > li > a:hover,
 .nav > li > a:focus,
+.my-menu > li > a:hover,
+.my-menu > li > a:focus,
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus{

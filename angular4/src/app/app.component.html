@@ -18,24 +18,24 @@
           <a routerLink="posts">{{"app.articles" | translate}}</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul *ngIf="!currentUser?.id" class="nav navbar-nav navbar-right">
         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <a (click)="login()">{{'app.login' | translate}}</a>
+          <a href="javascript:void(0);" (click)="login()">{{'app.login' | translate}}</a>
         </li>
-        <!--<li routerLinkActive="active">-->
-          <!--<a routerLink="register">{{'app.register' | translate}}</a>-->
-        <!--</li>-->
-      <!--</ul>-->
-      <!--<ul *ngIf="currentUser?.userName" class="nav navbar-nav navbar-right">-->
-        <!--<li routerLinkActive="active">-->
-          <!--<a routerLink="user">{{'app.welcome' | translate}}：{{currentUser?.userName}}</a>-->
-        <!--</li>-->
-        <!--<li routerLinkActive="active">-->
-          <!--<a routerLink="manage">{{'app.console' | translate}}</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="javascript:void(0);" (click)="doLogout()">{{'app.logout' | translate}}</a>-->
-        <!--</li>-->
+      </ul>
+      <ul *ngIf="currentUser?.id" class="nav navbar-nav navbar-right">
+        <li routerLinkActive="myActive">
+          <a class="navbar-brand" href="javascript:void(0);" style="padding: 10px;">
+            <img [src]="currentUser?.figureUrl" alt="头像" class="img-circle">
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{currentUser?.nickName}}<span class="caret"></span></a>
+          <ul class="dropdown-menu my-menu" style="background-color: #6f5499;">
+            <li routerLinkActive="myActive"><a routerLink="user">{{'app.explore' | translate}}</a></li>
+            <li routerLinkActive="myActive"><a href="javascript:void(0);" (click)="doLogout()">{{'app.logout' | translate}}</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
