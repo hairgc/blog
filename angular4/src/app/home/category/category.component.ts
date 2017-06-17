@@ -10,12 +10,12 @@ import {Router} from "@angular/router";
 })
 export class CategoryComponent implements OnInit {
 
-  private categories:Array<Category>;
+  public categories:Array<Category>;
 
-  private category:Category=new Category();
+  public category:Category=new Category();
 
-  constructor(private categoryService:CategoryService,
-              private router: Router) { }
+  constructor(public categoryService:CategoryService,
+              public router: Router) { }
 
   ngOnInit() {
     this.queryCategory();
@@ -32,7 +32,7 @@ export class CategoryComponent implements OnInit {
 
   onSelectCategory(category:Category){
     if(!this.category || this.category.id!==category.id){
-      this.router.navigate(['/posts/page',1],{queryParams:{categoryId:category.id}});
+      this.router.navigate(['/posts/page'],{queryParams:{categoryId:category.id,page:1}});
       this.category=category;
     }
   }

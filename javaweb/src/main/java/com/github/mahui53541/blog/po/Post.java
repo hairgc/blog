@@ -1,6 +1,6 @@
 package com.github.mahui53541.blog.po;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.alibaba.fastjson.annotation.JSONField;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -25,7 +25,7 @@ public class Post implements Serializable{
 	private String title;
 	
 	//发表时间
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	@JSONField(format = "yyyy-MM-dd HH:mm")
 	private Date postTime;
 	
 	//文章内容
@@ -35,12 +35,15 @@ public class Post implements Serializable{
 	private Byte postType;
 	
 	//最近一次修改
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	@JSONField(format = "yyyy-MM-dd HH:mm")
 	private Date lastModifyTime;
 	
 	//浏览次数
 	private Integer readTimes;
-	
+
+	//评论次数
+	private Integer commentTimes;
+
 	//文章状态(0：草稿；1：发布；2：置顶；3:删除)
 	private Byte status;
 	
@@ -112,6 +115,14 @@ public class Post implements Serializable{
 		this.readTimes = readTimes;
 	}
 
+	public Integer getCommentTimes() {
+		return commentTimes;
+	}
+
+	public void setCommentTimes(Integer commentTimes) {
+		this.commentTimes = commentTimes;
+	}
+
 	public Byte getStatus() {
 		return status;
 	}
@@ -135,9 +146,11 @@ public class Post implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
+
 	public Category getCategory() {
 		return category;
 	}
+
 	public void setCategory(Category category) {
 		this.category = category;
 	}

@@ -8,23 +8,35 @@
         <result column="post_type" jdbcType="TINYINT" property="postType" />
         <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
         <result column="read_times" jdbcType="INTEGER" property="readTimes" />
+        <result column="comment_times" jdbcType="INTEGER" property="commentTimes" />
         <result column="enable_comment" jdbcType="BIT" property="enableComment" />
         <result column="status" jdbcType="TINYINT" property="status" />
+        <association property="user" column="user_id"
+                     select="com.github.mahui53541.blog.mapper.UserMapper.selectByPrimaryKey"
+                     javaType="com.github.mahui53541.blog.po.User">
+        </association>
     </resultMap>
     <resultMap id="ResultMapWithContent" type="com.github.mahui53541.blog.po.Post" extends="BaseResultMap">
         <result column="post_content" property="postContent" jdbcType="LONGVARCHAR" />
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,title,post_time, post_content,post_type, last_modify_time, read_times, status,enable_comment
+        id,title,post_time,post_type, last_modify_time, read_times,comment_times, status,enable_comment,user_id
+    </sql>
+
+    <sql id="Blob_Column_List">
+        post_content
     </sql>
 
     <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
-        SELECT * FROM post
+        SELECT <include refid="Base_Column_List" /> FROM post
     </select>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
-        select * from post where id = #{id}
+        select
+        <include refid="Base_Column_List" />,
+        <include refid="Blob_Column_List" />
+        from post where id = #{id}
     </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" databaseId="mysql">
@@ -48,6 +60,9 @@
             </if>
             <if test="readTimes!=null">
                 read_times,
+            </if>
+            <if test="commentTimes!=null">
+                comment_times,
             </if>
             <if test="status!=null">
                 status,
@@ -74,6 +89,9 @@
             </if>
             <if test="readTimes!=null">
                 #{readTimes},
+            </if>
+            <if test="commentTimes!=null">
+                #{commentTimes},
             </if>
             <if test="status!=null">
                 #{status},
@@ -105,6 +123,9 @@
             <if test="readTimes!=null">
                 read_times=#{readTimes},
             </if>
+            <if test="commentTimes!=null">
+                comment_times=#{commentTimes},
+            </if>
             <if test="status!=null">
                 status=#{status},
             </if>
@@ -117,4 +138,15 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="queryByPage" resultMap="BaseResultMap" databaseId="mysql">
+        select <include refid="Base_Column_List" /> from post where status!=0 and status!=3
+        <if test="categoryId !=null and categoryId>0">
+            and category_id=#{categoryId,jdbcType=INTEGER}
+        </if>
+        <if test="searchText != null and searchText!=''">
+            and (title like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%'))
+        </if>
+        order by status desc,POST_TIME desc
+    </select>
 </mapper>

@@ -4,11 +4,11 @@ import { PostlistComponent } from './postlist/postlist.component';
 export const postRoutes=[
   {
     path:'',
-    redirectTo:'page/1',
+    redirectTo:'page',
     pathMatch:'full'
   },
   {
-    path: 'page/:page',
+    path: 'page',
     component: PostlistComponent
   }
 ];

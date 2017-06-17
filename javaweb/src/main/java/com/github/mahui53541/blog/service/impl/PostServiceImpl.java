@@ -2,11 +2,18 @@ package com.github.mahui53541.blog.service.impl;
 
 import com.github.mahui53541.blog.po.Post;
 import com.github.mahui53541.blog.service.PostService;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by mahui on 2017/5/29.
  */
 @Service
 public class PostServiceImpl extends BaseServiceImpl<Post,Integer> implements PostService{
+    @Override
+    public List<Post> queryByPage(RowBounds rowBounds, Integer categoryId,String searchText) {
+        return postMapper.queryByPage(rowBounds,categoryId,searchText);
+    }
 }

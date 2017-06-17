@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import {Post} from "../model/post.model";
 import {ActivatedRoute, Router,Params} from "@angular/router";
 import {PostlistService} from "./services/postlist.service";
@@ -13,7 +12,8 @@ import {Subject} from "rxjs/Subject";
 export class PostlistComponent implements OnInit {
 
   public maxSize:number = 5;
-  public totalItems:number = 175;
+  public totalItems:number = 0;
+  public itemsPerPage:number=5;
   public currentPage:number = 1;
   public numPages:number = 0;
 
@@ -29,38 +29,25 @@ export class PostlistComponent implements OnInit {
 
   ngOnInit() {
 
-    this.activeRoute.params.subscribe(params => {
-      this.activeRoute.queryParams.subscribe(params=>{
-        this.categoryId=params.categoryId;
-        console.log("categoryId:"+this.categoryId);
-      })
-      // 这里可以从路由里面获取URL参数
-      this.currentPage=params.page;
-      console.log("currentPage:"+this.currentPage);
-
+    this.activeRoute.queryParams.subscribe(params=>{
+      this.categoryId=params.categoryId?params.categoryId:-1;
       this.loadData(this.searchText,this.currentPage);
-    });
-
+    })
 
 
     this.searchTextStream
       .debounceTime(500)
       .distinctUntilChanged()
       .subscribe(searchText => {
-        console.log(this.searchText);
         this.loadData(this.searchText,this.currentPage)
       });
   }
 
   public loadData(searchText:string,page:number){
-    let offset = (this.currentPage-1)*this.maxSize;
-    let end = (this.currentPage)*this.maxSize;
-
-    return this.postService.getPostList(searchText,page).subscribe(
+    return this.postService.getPostList(searchText,page,this.categoryId).subscribe(
       res=>{
         this.totalItems = res["total"];
-        //TODO.正式环境中，需要去掉slice
-        this.postList = res["items"].slice(offset,end>this.totalItems?this.totalItems:end);
+        this.postList = res["rows"];
       },
       error => {console.log(error)},
       () => {}
@@ -68,15 +55,10 @@ export class PostlistComponent implements OnInit {
   }
 
   public pageChanged(event:any):void {
-    this.router.navigateByUrl("posts/page/"+event.page);
+    this.router.navigate(['/posts/page'],{queryParams:{categoryId:this.categoryId,page:event.page}});
   }
 
   public searchChanged($event):void{
     this.searchTextStream.next(this.searchText);
-  }
-
-  public gotoWrite():void{
-    //TODO：如果没有登录，跳转到登录页，如果已登录，跳往写作页
-    this.router.navigateByUrl("write");
   }
 }

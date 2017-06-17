@@ -5,32 +5,35 @@
         <div class="input-group">
           <input class="form-control" type="text" placeholder="{{'search' | translate}}" [(ngModel)]="searchText" (keyup)="searchChanged($event)" (change)="searchChanged($event)" id="searchText" name="searchText">
           <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" (click)="searchChanged($event)"><i class="fa fa-search" aria-hidden="true"></i> {{'search' | translate}}</button>
-                    </span>
+              <button class="btn btn-default" type="button" (click)="searchChanged($event)"><i class="fa fa-search" aria-hidden="true"></i> {{'search' | translate}}</button>
+          </span>
         </div>
       </div>
-      <div class="col-sm-2">
-        <div class="input-group">
-          <button class="btn btn-success" type="button" (click)="gotoWrite()"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> {{'post.publish' | translate}}</button>
-        </div>
-      </div>
+
     </div>
   </form>
   <div class="row">
     <div class="col-sm-12">
       <div class="post-item-container" *ngFor="let post of postList">
         <h4>
-          <a href="#">{{post.title}}</a>
+          <a href="#" style="text-decoration: none;">{{post.title}}</a>&nbsp;&nbsp;
+          <span *ngIf="post.status==2" class="label label-success">{{'post.sticky' | translate}}</span>
         </h4>
         <p>
-          <i class="fa fa-thumbs-up" aria-hidden="true"></i>&nbsp;{{post.likedTimes}} &nbsp;&nbsp;&nbsp;&nbsp;
           <i class="fa fa-comment" aria-hidden="true"></i>&nbsp;{{post.commentTimes}} &nbsp;&nbsp;&nbsp;&nbsp;
-          <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{post.readTimes}} &nbsp;&nbsp;&nbsp;&nbsp;{{post.userName }} &nbsp;&nbsp;&nbsp;&nbsp;{{post.postTime}}
+          <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{post.readTimes}} &nbsp;&nbsp;&nbsp;&nbsp;
+          {{post.user.nickName }}&nbsp;&nbsp;&nbsp;&nbsp;{{post.postTime}}
         </p>
       </div>
-      <!--<pagination [totalItems]="totalItems" [maxSize]="maxSize" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" firstText="{{'firstPage' | translate}}" lastText="{{'lastPage' | translate}}" previousText="{{'previousPage' | translate}}" nextText="{{'nextPage' | translate}}" [boundaryLinks]="true" [rotate]="false" (pageChanged)="pageChanged($event)" class="pagination-sm"></pagination>-->
-      <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="maxSize" class="pagination-sm"
-                  (pageChanged)="pageChanged($event)" [boundaryLinks]="true" [rotate]="false" (numPages)="numPages = $event"></pagination>
+      <pagination [totalItems]="totalItems" [(ngModel)]="currentPage"
+                  [maxSize]="maxSize" class="pagination-sm" [itemsPerPage]="itemsPerPage"
+                  (pageChanged)="pageChanged($event)" [boundaryLinks]="true"
+                  [rotate]="false" (numPages)="numPages = $event"
+                  firstText="{{'firstPage' | translate}}" lastText="{{'lastPage' | translate}}"
+                  previousText="{{'previousPage' | translate}}" nextText="{{'nextPage' | translate}}"
+      >
+
+      </pagination>
     </div>
   </div>
 </div>

@@ -2,6 +2,10 @@ package com.github.mahui53541.blog.mapper;
 
 import com.github.mahui53541.blog.po.Post;
 import com.github.mahui53541.blog.util.base.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
+
+import java.util.List;
 
 /**
  * 文章
@@ -10,5 +14,12 @@ import com.github.mahui53541.blog.util.base.BaseMapper;
  * @history 2017年4月7日下午7:33:36 马辉 新建
  */
 public interface PostMapper extends BaseMapper<Post,Integer> {
-
+    /**
+     * 分页查询post，亦可搜索
+     * @param rowBounds
+     * @param categoryId
+     * @param searchText
+     * @return
+     */
+    public List<Post> queryByPage(@Param("rowBounds") RowBounds rowBounds,@Param("categoryId")Integer categoryId ,@Param("searchText")String searchText);
 }

@@ -1,9 +1,9 @@
 package com.github.mahui53541.blog.po;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 文章评论
@@ -25,7 +25,7 @@ public class Comment implements Serializable{
 	private String content;
 	
 	//评论时间
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	private Date commentTime;
 	
 	//状态（0：已删除，1：已发布，2：优质评论）
