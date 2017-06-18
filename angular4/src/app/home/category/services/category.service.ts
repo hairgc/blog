@@ -8,11 +8,14 @@ import { Category } from "../model/category.model";
 @Injectable()
 export class CategoryService {
 
+  public categoryListURL = 'blog/category/query';
+
   constructor(private http:Http) { }
 
   public queryCategory():Observable<Array<Category>>{
     return 	this.http
-      .get(SITE_HOST_URL+'category-mock.json')
-      .map((res: Response) => res.json());
+      .get(this.categoryListURL)
+      .map((res: Response) => res.json())
+      .catch((error:any) => Observable.throw(error || 'Server error'));
   }
 }

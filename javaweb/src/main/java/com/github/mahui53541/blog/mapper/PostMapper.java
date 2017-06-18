@@ -22,4 +22,17 @@ public interface PostMapper extends BaseMapper<Post,Integer> {
      * @return
      */
     public List<Post> queryByPage(@Param("rowBounds") RowBounds rowBounds,@Param("categoryId")Integer categoryId ,@Param("searchText")String searchText);
+
+    /**
+     * 浏览次数加一
+     * @param id
+     */
+    void readTimesPlusOne(@Param("id") Integer id);
+
+    /**
+     * 评论数加一
+     * @param id
+     */
+    void commentTimesPlusOne(@Param("id") Integer id);
+
 }

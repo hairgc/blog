@@ -1,0 +1,14 @@
+<div class="post-detail-container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h2>{{ post.title }}</h2>
+      <p>{{ post.user.nickName }} 发表于 {{ post.postTime | date:'yyyy-MM-dd HH:mm:ss'}}&#12288;&#12288;&#12288;&#12288;阅读：{{ post.readTimes }} &#12288;&#12288;&#12288;&#12288;评论：{{ post.commentTimes }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12" id="editormd-view">
+      <textarea style="display:none;">
+      </textarea>
+    </div>
+  </div>
+</div>

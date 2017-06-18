@@ -24,6 +24,8 @@ public class CategoryContrller extends BaseController {
     @RequestMapping(value = "/query",method = RequestMethod.GET)
     @ResponseBody
     public List<Category> queryCategory(){
+        List<Category> list=categoryService.findAll();
+
         return categoryService.findAll();
     }
 }

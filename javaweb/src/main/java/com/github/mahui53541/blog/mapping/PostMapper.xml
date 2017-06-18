@@ -32,7 +32,7 @@
         SELECT <include refid="Base_Column_List" /> FROM post
     </select>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithContent" parameterType="java.lang.Integer" databaseId="mysql">
         select
         <include refid="Base_Column_List" />,
         <include refid="Blob_Column_List" />
@@ -48,6 +48,9 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="title!= null">
                 title,
+            </if>
+            <if test="postContent!=null">
+                post_content,
             </if>
             <if test="postTime!= null">
                 post_time,
@@ -70,13 +73,19 @@
             <if test="enableComment != null">
                 enable_comment,
             </if>
+            <if test="category!=null">
+                category_id,
+            </if>
             <if test="user!=null">
-                open_id,
+                user_id,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="title!= null">
                 #{title},
+            </if>
+            <if test="postContent!=null">
+                #{postContent},
             </if>
             <if test="postTime!= null">
                 #{postTime},
@@ -99,8 +108,11 @@
             <if test="enableComment != null">
                 #{enableComment},
             </if>
+            <if test="category!=null">
+                #{category.id},
+            </if>
             <if test="user!=null">
-                #{user.openId},
+                #{user.id},
             </if>
         </trim>
     </insert>
@@ -132,8 +144,11 @@
             <if test="enableComment != null">
                 enable_comment=#{enableComment},
             </if>
+            <if test="category!=null">
+                category_id=#{category.id},
+            </if>
             <if test="user!=null">
-                open_id=#{user.openId},
+                user_id=#{user.id},
             </if>
         </set>
         where id = #{id}
@@ -149,4 +164,17 @@
         </if>
         order by status desc,POST_TIME desc
     </select>
+
+    <!--根据categoryID查询个数-->
+    <select id="countByCategoryId" resultType="java.lang.Integer" parameterType="java.lang.Integer" databaseId="mysql">
+        select count(*) from post where status!=0 and status!=3 and category_id = #{categoryId}
+    </select>
+
+    <update id="readTimesPlusOne" parameterType="java.lang.Integer">
+        update post set read_times=post.read_times+1 where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="commentTimesPlusOne" parameterType="java.lang.Integer">
+        update post set comment_times=post.comment_times+1 where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

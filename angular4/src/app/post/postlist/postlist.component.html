@@ -16,8 +16,14 @@
     <div class="col-sm-12">
       <div class="post-item-container" *ngFor="let post of postList">
         <h4>
-          <a href="#" style="text-decoration: none;">{{post.title}}</a>&nbsp;&nbsp;
-          <span *ngIf="post.status==2" class="label label-success">{{'post.sticky' | translate}}</span>
+          <div class="row">
+            <div class="col-xs-10 col-sm-9">
+              <a [routerLink]="['/post/postdetail',post.id]" style="text-decoration: none;">{{post.title}}</a>
+            </div>
+            <div class="col-xs-2 col-sm-3">
+              <span *ngIf="post.status==2" class="label label-success">{{'post.sticky' | translate}}</span>
+            </div>
+          </div>
         </h4>
         <p>
           <i class="fa fa-comment" aria-hidden="true"></i>&nbsp;{{post.commentTimes}} &nbsp;&nbsp;&nbsp;&nbsp;

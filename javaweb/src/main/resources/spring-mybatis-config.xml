@@ -55,6 +55,7 @@
                             returnPageInfo=check
                             params=count=countSql
                             rowBoundsWithCount=true
+                            offsetAsPageNum=true
                         </value>
                     </property>
                 </bean>

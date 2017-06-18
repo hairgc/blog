@@ -16,4 +16,14 @@ public class PostServiceImpl extends BaseServiceImpl<Post,Integer> implements Po
     public List<Post> queryByPage(RowBounds rowBounds, Integer categoryId,String searchText) {
         return postMapper.queryByPage(rowBounds,categoryId,searchText);
     }
+
+    @Override
+    public void readTimesPlusOne(Integer id) {
+        postMapper.readTimesPlusOne(id);
+    }
+
+    @Override
+    public void commentTimesPlusOne(Integer id) {
+        postMapper.commentTimesPlusOne(id);
+    }
 }

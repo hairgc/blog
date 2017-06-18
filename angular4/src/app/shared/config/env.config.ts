@@ -7,4 +7,4 @@ export interface EnvConfig {
 
 //export const Config: EnvConfig = JSON.parse('<%= ENV_CONFIG %>');
 
-export const SITE_HOST_URL: string = 'mock-data/';
+export const SITE_HOST_URL: string = 'http://localhost/';

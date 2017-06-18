@@ -7,7 +7,11 @@ import { PaginationModule } from "ngx-bootstrap";
 import { PostlistComponent } from './postlist/postlist.component';
 
 import { postRoutes } from './post.routes';
-import {PostlistService} from "./postlist/services/postlist.service";
+import { PostlistService } from "./postlist/services/postlist.service";
+import { PostDetailService } from "./post-detail/service/post-detail.service";
+import { PostDetailMainComponent } from './post-detail-main/post-detail-main.component';
+import { PostDetailComponent } from './post-detail/post-detail.component';
+
 
 @NgModule({
   imports: [
@@ -17,10 +21,11 @@ import {PostlistService} from "./postlist/services/postlist.service";
     PaginationModule.forRoot(),
     RouterModule.forChild(postRoutes)
   ],
-  declarations: [PostlistComponent],
+  declarations: [PostlistComponent, PostDetailMainComponent, PostDetailComponent],
 
   providers:[
-    PostlistService
+    PostlistService,
+    PostDetailService
   ]
 })
 export class PostModule { }

@@ -31,7 +31,7 @@ export class PostlistComponent implements OnInit {
 
     this.activeRoute.queryParams.subscribe(params=>{
       this.categoryId=params.categoryId?params.categoryId:-1;
-      this.loadData(this.searchText,this.currentPage);
+      this.loadData(this.searchText,params.page?params.page:1);
     })
 
 

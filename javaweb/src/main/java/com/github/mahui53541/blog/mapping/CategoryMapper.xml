@@ -4,8 +4,12 @@
     <resultMap id="BaseResultMap" type="com.github.mahui53541.blog.po.Category">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
-        <result column="post_size" jdbcType="INTEGER" property="INTEGER" />
-        <result column="desc" jdbcType="INTEGER" property="INTEGER" />
+        <!--<result column="post_size" jdbcType="INTEGER" property="postSize" />-->
+        <result column="desc" jdbcType="INTEGER" property="desc" />
+        <association property="postSize" column="id"
+                     select="com.github.mahui53541.blog.mapper.PostMapper.countByCategoryId"
+                     javaType="java.lang.Integer">
+        </association>
     </resultMap>
 
     <sql id="Base_Column_List">

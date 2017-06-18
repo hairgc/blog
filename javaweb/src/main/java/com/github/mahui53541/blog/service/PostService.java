@@ -17,5 +17,16 @@ public interface PostService extends BaseService<Post,Integer> {
      * @param searchText
      * @return
      */
-    public List<Post> queryByPage(RowBounds rowBounds, Integer categoryId, String searchText);
+     List<Post> queryByPage(RowBounds rowBounds, Integer categoryId, String searchText);
+    /**
+     * 浏览次数加一
+     * @param id
+     */
+    void readTimesPlusOne(Integer id);
+
+    /**
+     * 评论数加一
+     * @param id
+     */
+    void commentTimesPlusOne(Integer id);
 }

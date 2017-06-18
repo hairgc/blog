@@ -1,6 +1,5 @@
-import { RouterModule } from '@angular/router';
-
 import { PostlistComponent } from './postlist/postlist.component';
+import {PostDetailMainComponent} from "./post-detail-main/post-detail-main.component";
 export const postRoutes=[
   {
     path:'',
@@ -10,5 +9,9 @@ export const postRoutes=[
   {
     path: 'page',
     component: PostlistComponent
+  },
+  {
+    path: 'postdetail/:postId',
+    component: PostDetailMainComponent
   }
 ];

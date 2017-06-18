@@ -10,10 +10,12 @@ import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
 import com.qq.connect.javabeans.qzone.UserInfoBean;
 import com.qq.connect.oauth.Oauth;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -67,6 +69,9 @@ public class OAuth2Realm extends AuthorizingRealm {
         if(user.getStatus()==1 && user.getDisabledTime().after(new Date())){
             throw new LockedAccountException();
         }
+        Session session= SecurityUtils.getSubject().getSession();
+        session.setAttribute("user",user);
+
         SimpleAuthenticationInfo authenticationInfo =
                 new SimpleAuthenticationInfo(user, code, getName());
         return authenticationInfo;

@@ -1,4 +1,5 @@
 import {User} from "../../user/model/user.model";
+import {Category} from "../../home/category/model/category.model";
 export class Post{
   id: number
   title: string
@@ -11,5 +12,6 @@ export class Post{
   lastModifyTime:Date
   readTimes: number
   commentTimes: number
-  user:User
+  user:User=new User();
+  category:Category=new Category();
 }

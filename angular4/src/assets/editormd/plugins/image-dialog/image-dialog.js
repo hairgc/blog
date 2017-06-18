@@ -51,8 +51,9 @@
                                         "<label>" + imageLang.url + "</label>" +
                                         "<input type=\"text\" data-url />" + (function(){
                                             return (settings.imageUpload) ? "<div class=\"" + classPrefix + "file-input\">" +
-                                                                                "<input type=\"file\" name=\"" + classPrefix + "image-file\" accept=\"image/*\" />" +
-                                                                                "<input type=\"submit\" value=\"" + imageLang.uploadButton + "\" />" +
+                                                                                //"<input type=\"file\" name=\"" + classPrefix + "image-file\" accept=\"image/*\" />" +
+                                              "<input type=\"file\" name=\"" + "imagefile\" accept=\"image/*\" />" +
+                                              "<input type=\"submit\" value=\"" + imageLang.uploadButton + "\" />" +
                                                                             "</div>" : "";
                                         })() +
                                         "<br/>" +
@@ -125,8 +126,8 @@
                     return ;
                 }
 
-				var fileInput  = dialog.find("[name=\"" + classPrefix + "image-file\"]");
-
+				//var fileInput  = dialog.find("[name=\"" + classPrefix + "image-file\"]");
+              var fileInput  = dialog.find("[name=\"imagefile\"]");
 				fileInput.bind("change", function() {
 					var fileName  = fileInput.val();
 					var isImage   = new RegExp("(\\.(" + settings.imageFormats.join("|") + "))$"); // /(\.(webp|jpg|jpeg|gif|bmp|png))$/
@@ -134,14 +135,14 @@
 					if (fileName === "")
 					{
 						alert(imageLang.uploadFileEmpty);
-                        
+
                         return false;
 					}
-					
+
                     if (!isImage.test(fileName))
 					{
 						alert(imageLang.formatNotAllowed + settings.imageFormats.join(", "));
-                        
+
                         return false;
 					}
 
@@ -152,7 +153,7 @@
                         var uploadIframe = document.getElementById(iframeName);
 
                         uploadIframe.onload = function() {
-                            
+
                             loading(false);
 
                             var body = (uploadIframe.contentWindow ? uploadIframe.contentWindow : uploadIframe.contentDocument).document.body;

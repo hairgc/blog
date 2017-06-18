@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -9,7 +8,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import {WritePostComponent} from "app/post/write-post/write-post.component";
 import {LoginService} from "./user/login/login.service";
 
 import {appRoutes} from './app.routes';
@@ -21,16 +19,17 @@ export function createTranslateLoader(http: Http) {
 }
 @NgModule({
   declarations: [
-    AppComponent,
-    WritePostComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
     HttpModule,
     JsonpModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 1500,
+      extendedTimeOut:500
+    }),
     TranslateModule.forRoot({
        loader: {
          provide: TranslateLoader,
