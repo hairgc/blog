@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 
 import {Post} from "../model/post.model";
-import {PostDetailService} from "./service/post-detail.service";
+import {PostDetailService} from "../post-detail-main/service/post-detail.service";
 
 
 @Component({
@@ -12,36 +12,29 @@ import {PostDetailService} from "./service/post-detail.service";
 })
 export class PostDetailComponent implements OnInit {
 
-  public post: Post = new Post();
+  public post: Post = new Post();//获取父组件传递的值
   public editormdView:any;
 
+  @Input()
+  set parentPost(post:Post){
+    this.post=post;
+    this.editormdView = editormd.markdownToHTML("editormd-view", {
+      htmlDecode      : "style,script,iframe",  // you can filter tags decode
+      markdown        :post.postContent,
+      emoji           : true,
+      taskList        : true,
+      tex             : true,  // 默认不解析
+      flowChart       : true,  // 默认不解析
+      sequenceDiagram : true,  // 默认不解析
+    });
+  }
+  get parentPost(){
+    return this.post;
+  }
   constructor(public postDetailService:PostDetailService,
               public activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activeRoute.params.subscribe(
-      params =>{
-        this.getPostDetail(params["postId"]);
-      }
-    );
-  }
-  public getPostDetail(id:number){
-    this.postDetailService
-      .getPostDetail(id)
-      .subscribe(
-        data => {
-          this.post = data;
-          this.editormdView = editormd.markdownToHTML("editormd-view", {
-            htmlDecode      : "style,script,iframe",  // you can filter tags decode
-            markdown        :data.postContent,
-            emoji           : true,
-            taskList        : true,
-            tex             : true,  // 默认不解析
-            flowChart       : true,  // 默认不解析
-            sequenceDiagram : true,  // 默认不解析
-          });
-        },
-        error => console.error(error)
-      );
+
   }
 }

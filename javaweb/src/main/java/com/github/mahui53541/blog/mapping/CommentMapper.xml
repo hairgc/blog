@@ -6,10 +6,14 @@
         <result column="content" jdbcType="LONGVARCHAR" property="content" />
         <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
         <result column="status" jdbcType="TINYINT" property="status" />
+        <association property="user" column="open_id"
+                     select="com.github.mahui53541.blog.mapper.UserMapper.selectByOpenID"
+                     javaType="com.github.mahui53541.blog.po.User">
+        </association>
     </resultMap>
 
     <sql id="Base_Column_List">
-        content,comment_time, status
+        id,content,comment_time, status,open_id
     </sql>
     <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
         SELECT * FROM comment
@@ -81,4 +85,12 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="selectByPostId" resultMap="BaseResultMap" databaseId="mysql">
+        select <include refid="Base_Column_List" /> from comment where status!=0
+        <if test="postId !=null and postId>0">
+            and post_id=#{postId,jdbcType=INTEGER}
+        </if>
+        order by status desc,comment_time desc
+    </select>
 </mapper>

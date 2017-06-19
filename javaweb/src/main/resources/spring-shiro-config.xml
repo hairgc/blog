@@ -104,6 +104,7 @@
                 /info = anon
                 /logout = anon
                 /post/** = anon
+                /comment/** = anon
                 /category/** = anon
                 /oauth2-login = oauth2Authc
                 /** = user

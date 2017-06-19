@@ -4,7 +4,9 @@
     <resultMap id="BaseResultMap" type="com.github.mahui53541.blog.po.User">
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
-        <result column="figure_url" jdbcType="VARCHAR" property="figureUrl" />
+        <result column="avatar_url30" jdbcType="VARCHAR" property="avatarURL30" />
+        <result column="avatar_url50" jdbcType="VARCHAR" property="avatarURL50" />
+        <result column="avatar_url100" jdbcType="VARCHAR" property="avatarURL100" />
         <result column="gender" jdbcType="CHAR" property="gender" />
         <result column="open_id" jdbcType="VARCHAR" property="openId" />
         <result column="status" jdbcType="TINYINT" property="status" />
@@ -12,7 +14,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,nick_name,figure_url, gender, open_id, status, disabled_time
+        id,nick_name,avatar_url30,avatar_url50,avatar_url100, gender, open_id, status, disabled_time
     </sql>
 
     <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
@@ -36,8 +38,14 @@
             <if test="nickName!= null">
                 nick_name,
             </if>
-            <if test="figureUrl!= null">
-                figure_url,
+            <if test="avatarURL30!= null">
+                avatar_url30,
+            </if>
+            <if test="avatarURL50!= null">
+                avatar_url50,
+            </if>
+            <if test="avatarURL100!= null">
+              avatar_url100,
             </if>
             <if test="gender!= null">
                 gender,
@@ -56,8 +64,14 @@
             <if test="nickName != null">
                 #{nickName},
             </if>
-            <if test="figureUrl != null">
-                #{figureUrl},
+            <if test="avatarURL30!= null">
+                #{avatarURL30},
+            </if>
+            <if test="avatarURL50!= null">
+                #{avatarURL50},
+            </if>
+            <if test="avatarURL100!= null">
+                #{avatarURL100},
             </if>
             <if test="gender!= null">
                 #{gender},
@@ -80,8 +94,14 @@
             <if test="nickName != null">
                 nick_name=#{nickName},
             </if>
-            <if test="figureUrl != null">
-                figure_url=#{figureUrl},
+            <if test="avatarURL30!= null">
+                avatar_url30=#{avatarURL30},
+            </if>
+            <if test="avatarURL50!= null">
+                avatar_url50=#{avatarURL50},
+            </if>
+            <if test="avatarURL100!= null">
+                avatar_url100=#{avatarURL100},
             </if>
             <if test="gender != null">
                 gender=#{gender},

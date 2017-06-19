@@ -94,7 +94,9 @@ public class OAuth2Realm extends AuthorizingRealm {
             User user = userService.selectByOpenID(openID);
             if(user!=null){
                 user.setGender(userInfoBean.getGender());
-                user.setFigureUrl(userInfoBean.getAvatar().getAvatarURL30());
+                user.setAvatarURL30(userInfoBean.getAvatar().getAvatarURL30());
+                user.setAvatarURL50(userInfoBean.getAvatar().getAvatarURL50());
+                user.setAvatarURL100(userInfoBean.getAvatar().getAvatarURL100());
                 user.setNickName(userInfoBean.getNickname());
                 user.setOpenId(openID);
                 if(user.getStatus()==1 && user.getDisabledTime().before(new Date())){
@@ -106,7 +108,9 @@ public class OAuth2Realm extends AuthorizingRealm {
                 user.setOpenId(openID);
                 user.setStatus((byte)0);
                 user.setGender(userInfoBean.getGender());
-                user.setFigureUrl(userInfoBean.getAvatar().getAvatarURL30());
+                user.setAvatarURL30(userInfoBean.getAvatar().getAvatarURL30());
+                user.setAvatarURL50(userInfoBean.getAvatar().getAvatarURL50());
+                user.setAvatarURL100(userInfoBean.getAvatar().getAvatarURL100());
                 user.setNickName(userInfoBean.getNickname());
                 userService.insertSelective(user);
             }

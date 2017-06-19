@@ -1,7 +1,12 @@
 <div class="post-detail-container">
   <div class="row">
     <div class="col-sm-12">
-      <h2>{{ post.title }}</h2>
+      <h3 style="line-height:1.3">
+        <span *ngIf="post.postType===0" class="label label-success">原创</span>
+        <span *ngIf="post.postType===1" class="label label-danger">转载</span>
+        <span *ngIf="post.postType===2" class="label label-warning">翻译</span>
+        {{ post.title }}
+      </h3>
       <p>{{ post.user.nickName }} 发表于 {{ post.postTime | date:'yyyy-MM-dd HH:mm:ss'}}&#12288;&#12288;&#12288;&#12288;阅读：{{ post.readTimes }} &#12288;&#12288;&#12288;&#12288;评论：{{ post.commentTimes }}</p>
     </div>
   </div>

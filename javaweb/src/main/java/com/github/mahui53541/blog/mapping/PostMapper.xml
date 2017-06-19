@@ -8,7 +8,7 @@
         <result column="post_type" jdbcType="TINYINT" property="postType" />
         <result column="last_modify_time" jdbcType="TIMESTAMP" property="lastModifyTime" />
         <result column="read_times" jdbcType="INTEGER" property="readTimes" />
-        <result column="comment_times" jdbcType="INTEGER" property="commentTimes" />
+        <result column="comment_times" jdbcType="INTEGER" property="commentTimes"/>
         <result column="enable_comment" jdbcType="BIT" property="enableComment" />
         <result column="status" jdbcType="TINYINT" property="status" />
         <association property="user" column="user_id"
@@ -162,7 +162,7 @@
         <if test="searchText != null and searchText!=''">
             and (title like CONCAT('%',#{searchText,jdbcType=VARCHAR},'%'))
         </if>
-        order by status desc,POST_TIME desc
+        order by status desc,post_time desc
     </select>
 
     <!--根据categoryID查询个数-->

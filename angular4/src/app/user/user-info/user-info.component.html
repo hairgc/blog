@@ -1,0 +1,14 @@
+<div class="user-info-container">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{panelTitle}}</h3>
+    </div>
+    <div class="panel-body user-info-panel-body">
+      <!--<p><a href="#">{{currentUser?.userName}}</a></p>-->
+      <img [class.hidden]="user===null" [src]="user?.avatarURL100" class="img-responsive center-block img-thumbnail" style="object-fit: cover;" alt="头像">
+      <p>{{'user.nickName' | translate}}：<b>{{user.nickName}}</b></p>
+      <p>{{'post.readTimes' | translate}}：{{readTimes}}</p>
+      <p>{{'post.commentTimes' | translate}}：{{commentTimes}}</p>
+    </div>
+  </div>
+</div>

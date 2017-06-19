@@ -8,26 +8,21 @@
         "console":"Console"
     },
     "post":{
-        "publish":"publish",
-        "sticky":"Sticky"
+      "publish":"publish",
+      "sticky":"Sticky",
+      "readTimes":"read",
+      "commentTimes":"comment"
     },
-    "userRegister":{
-        "userSignUp":"User Sign Up",
-        "userName":"UserName:",
-        "userName-placeholder":"4-32 characters",
-        "nickName":"NickName:",
-        "nickName-placeholder":"2-32 characters",
-        "email":"Email:",
-        "email-placeholder":"Frequently used mailboxes, sign in after verification.",
-        "notice":"If you do not receive a verification email in your inbox, check your trash.",
-        "password":"Password:",
-        "password-placeholder":"Password, at least 8 characters.",
-        "repeat-pwd":"Repeat PWD:",
-        "repeat-pwd-placeholder":"Repeat password, two inputs must be consistent.",
-        "signUp":"SignUp"
+    "user":{
+      "authorinfo":"Author Info",
+      "nickName":"NickName"
     },
     "userLogin":{
         "userLogin":"User Login"
+    },
+    "comment":{
+      "loading":"Loading ...",
+      "loadmore":"Load More"
     },
     "search":"search",
     "submit":"Submit",

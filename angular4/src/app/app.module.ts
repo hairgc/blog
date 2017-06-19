@@ -7,10 +7,12 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { SharedModule } from "./shared/shared.module";
 import { AppComponent } from './app.component';
-import {LoginService} from "./user/login/login.service";
+import { LoginService } from "./user/login/login.service";
 
 import {appRoutes} from './app.routes';
+
 
 
 
@@ -19,13 +21,14 @@ export function createTranslateLoader(http: Http) {
 }
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
     JsonpModule,
+    SharedModule,
     ToastrModule.forRoot({
       timeOut: 1500,
       extendedTimeOut:500

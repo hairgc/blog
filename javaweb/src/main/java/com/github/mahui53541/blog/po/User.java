@@ -23,8 +23,14 @@ public class User implements Serializable{
     //昵称
     private String nickName;
 
-    //头像链接
-    private String figureUrl;
+    //30*30
+	private String avatarURL30;
+
+	//50*50
+	private String avatarURL50;
+
+	//100*100
+	private String avatarURL100;
 
     //性别
     private String gender;
@@ -58,12 +64,28 @@ public class User implements Serializable{
 		this.nickName = nickName;
 	}
 
-	public String getFigureUrl() {
-		return figureUrl;
+	public String getAvatarURL30() {
+		return avatarURL30;
 	}
 
-	public void setFigureUrl(String figureUrl) {
-		this.figureUrl = figureUrl;
+	public void setAvatarURL30(String avatarURL30) {
+		this.avatarURL30 = avatarURL30;
+	}
+
+	public String getAvatarURL50() {
+		return avatarURL50;
+	}
+
+	public void setAvatarURL50(String avatarURL50) {
+		this.avatarURL50 = avatarURL50;
+	}
+
+	public String getAvatarURL100() {
+		return avatarURL100;
+	}
+
+	public void setAvatarURL100(String avatarURL100) {
+		this.avatarURL100 = avatarURL100;
 	}
 
 	public String getGender() {

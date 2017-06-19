@@ -12,6 +12,6 @@ export class Post{
   lastModifyTime:Date
   readTimes: number
   commentTimes: number
-  user:User=new User();
-  category:Category=new Category();
+  user:User=new User()
+  category:Category=new Category()
 }

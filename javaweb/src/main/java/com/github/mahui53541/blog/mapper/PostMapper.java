@@ -21,7 +21,7 @@ public interface PostMapper extends BaseMapper<Post,Integer> {
      * @param searchText
      * @return
      */
-    public List<Post> queryByPage(@Param("rowBounds") RowBounds rowBounds,@Param("categoryId")Integer categoryId ,@Param("searchText")String searchText);
+    List<Post> queryByPage(@Param("rowBounds") RowBounds rowBounds,@Param("categoryId")Integer categoryId ,@Param("searchText")String searchText);
 
     /**
      * 浏览次数加一

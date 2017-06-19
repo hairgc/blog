@@ -29,7 +29,7 @@ public class Comment implements Serializable{
 	private Date commentTime;
 	
 	//状态（0：已删除，1：已发布，2：优质评论）
-	private String status;
+	private Integer status;
 	
 	//评论用户
 	private User user;
@@ -61,11 +61,11 @@ public class Comment implements Serializable{
 		this.commentTime = commentTime;
 	}
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
