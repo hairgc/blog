@@ -24,9 +24,9 @@ public class FileUpload {
         //...其他参数参考类注释
         UploadManager uploadManager = new UploadManager(cfg);
         //...生成上传凭证，然后准备上传
-        String accessKey = "xx";
-        String secretKey = "xx";
-        String bucket = "xx";
+        String accessKey = "CSxVEu3xKOfcgP6zx305bvgeeGPUJKsh5EbMY5q2";
+        String secretKey = "fHDQKAVY0RJFF3oFvN-7FdgiJfhdNudXT_9hxdxH";
+        String bucket = "myblog";
         try {
             byte[] uploadBytes = file.getBytes();
             Auth auth = Auth.create(accessKey, secretKey);
