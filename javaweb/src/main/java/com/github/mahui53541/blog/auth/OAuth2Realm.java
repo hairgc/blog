@@ -71,6 +71,7 @@ public class OAuth2Realm extends AuthorizingRealm {
         }
         Session session= SecurityUtils.getSubject().getSession();
         session.setAttribute("user",user);
+        session.setAttribute("permission",permissionService.selectPermissionByOpenID(user.getOpenId()));
 
         SimpleAuthenticationInfo authenticationInfo =
                 new SimpleAuthenticationInfo(user, code, getName());

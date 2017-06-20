@@ -38,8 +38,10 @@ export class AppComponent {
         res=>{
           if(res&&!res.msg){
             this.loginService.hasLogin=true;
-            window.localStorage.setItem("currentUser",JSON.stringify(Object.assign(this.currentUser,res)));
-            this.loginService.triggerNextValue(res);
+            window.localStorage.setItem("currentUser",JSON.stringify(Object.assign(this.currentUser,res['user'])));
+            window.localStorage.setItem("permission",JSON.stringify(res['permission']));
+            this.loginService.triggerNextValue(res['user']);
+            console.log(JSON.parse(window.localStorage.getItem("permission")))
           }
         },
         error => {console.log(error)},

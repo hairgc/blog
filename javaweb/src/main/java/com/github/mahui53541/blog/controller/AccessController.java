@@ -3,12 +3,14 @@ package com.github.mahui53541.blog.controller;
 import com.github.mahui53541.blog.po.User;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.session.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -49,8 +51,15 @@ public class AccessController extends BaseController{
         if(!SecurityUtils.getSubject().isAuthenticated()){
             return this.ajaxFailureResponse("未登录");
         }else{
-            User user= (User) SecurityUtils.getSubject().getPrincipal();
-            return user;
+            Session session=SecurityUtils.getSubject().getSession(false);
+            if(session!=null){
+                HashMap<String,Object> result=new HashMap<String,Object>();
+                result.put("user",session.getAttribute("user"));
+                result.put("permission",session.getAttribute("permission"));
+                return result;
+            }else{
+                return this.ajaxFailureResponse("回话已过期");
+            }
         }
     }
 }

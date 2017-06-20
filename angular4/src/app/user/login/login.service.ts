@@ -42,6 +42,7 @@ export class LoginService {
         console.log("用户退出登录...");
         this.hasLogin=false;
         window.localStorage.removeItem("currentUser");
+        window.localStorage.removeItem("permission");
         this.subject.next(Object.assign({}));
         return res;
       });
