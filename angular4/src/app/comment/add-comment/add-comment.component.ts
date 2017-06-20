@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LoginService} from "../../user/login/login.service";
 import {CommentService} from "../service/comment.service";
 import {ToastrService} from "ngx-toastr";
@@ -11,14 +11,26 @@ import {Comment} from "../model/comment.model";
 export class AddCommentComponent implements OnInit {
 
   public hasLogin:boolean=false;//用户是否已经登录
+  public submitted:boolean=false;//是否已经提交过
   @Output() onComment=new EventEmitter();
   @Input() public postId:number;
 
+  @Input()
+  set reName(value:{}){
+    if(value && value['reName']){
+      this.comment.reName=value['reName']
+      this.elementRef.nativeElement.querySelector("#commentContent").focus()
+    }
+  }
+  get reName(){
+    return this.comment.reName;
+  }
   public comment:Comment=new Comment();
 
   constructor(public commentService: CommentService,
               public loginService: LoginService,
-              public toastr: ToastrService) { }
+              public toastr: ToastrService,
+              public elementRef: ElementRef) { }
 
   ngOnInit() {
     this.hasLogin=this.loginService.hasLogin;
@@ -30,13 +42,13 @@ export class AddCommentComponent implements OnInit {
       res => {
         if(res&&res.success){
           this.onComment.emit();
+          this.comment=new Comment();
         }else{
-          this.toastr.error('评论失败！','系统提示');
+          this.toastr.error(res["msg"],'评论失败提示！');
         }
       },
       error => {
-        console.error(error)
-        this.toastr.error('评论失败！','系统提示');
+        this.toastr.error(error.json()["msg"]?error.json()["msg"]:"未知错误",'评论失败提示！');
       }
     );
   }

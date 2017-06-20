@@ -26,4 +26,9 @@ public class PostServiceImpl extends BaseServiceImpl<Post,Integer> implements Po
     public void commentTimesPlusOne(Integer id) {
         postMapper.commentTimesPlusOne(id);
     }
+
+    @Override
+    public void commentTimesMinusOne(Integer id) {
+        postMapper.commentTimesMinusOne(id);
+    }
 }

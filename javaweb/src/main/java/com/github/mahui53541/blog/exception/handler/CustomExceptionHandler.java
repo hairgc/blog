@@ -2,6 +2,7 @@ package com.github.mahui53541.blog.exception.handler;
 
 import com.github.mahui53541.blog.controller.BaseController;
 import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authz.AuthorizationException;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,6 +24,12 @@ public class CustomExceptionHandler extends BaseController{
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public Object handlerUnauthorizedException(UnauthorizedException e){
         return this.ajaxFailureResponse("没有访问权限");
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Object handlerAuthorizationException(AuthorizationException e){
+        return this.ajaxFailureResponse("没有访问权限,请登录或换号登录后重试！");
     }
 
     @ExceptionHandler(Exception.class)

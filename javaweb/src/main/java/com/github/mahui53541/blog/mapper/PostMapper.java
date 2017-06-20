@@ -35,4 +35,10 @@ public interface PostMapper extends BaseMapper<Post,Integer> {
      */
     void commentTimesPlusOne(@Param("id") Integer id);
 
+    /**
+     * 评论数减一
+     * @param id
+     */
+    void commentTimesMinusOne(@Param("id") Integer id);
+
 }

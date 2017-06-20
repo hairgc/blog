@@ -1,16 +1,20 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="comment-form-container">
-      <form #commentForm="ngForm" (ngSubmit)="commentForm.form.valid && submitCommet();commentForm.reset();" novalidate class="form-horizontal" role="form">
+      <form #commentForm="ngForm" (ngSubmit)="commentForm.form.valid && submitCommet();" class="form-horizontal" role="form">
         <div class="form-group" [ngClass]="{ 'has-error': commentForm.submitted && !content.valid }">
           <div class="col-sm-12">
-            <textarea class="form-control" rows="5" placeholder="在这里输入你想说的话..." required minlength="5" maxlength="140" name="content" [(ngModel)]="comment.content" #content="ngModel"></textarea>
+            <textarea id="commentContent" class="form-control" rows="5" placeholder="在这里输入你想说的话..." required minlength="5" maxlength="140" name="content" [(ngModel)]="comment.content" #content="ngModel"></textarea>
             <div *ngIf="commentForm.submitted && !content.valid" class="text-danger">5-140个字符，评论内容不能为空</div>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-10">
-            <button type="submit" class="btn btn-success">发表评论</button>
+            <button type="submit" class="btn btn-success" [disabled]="!hasLogin">{{'comment.submit'|translate}}</button>
+            <button (click)="comment.reName=null" *ngIf="comment.reName!=null && comment.reName.trim().length>0" type="button" class="btn btn-default">
+              {{'comment.replay'|translate}}@{{comment.reName}}
+              <span class="glyphicon glyphicon-remove" title="{{'comment.cancelReplay'|translate}}"></span>
+            </button>
           </div>
         </div>
       </form>

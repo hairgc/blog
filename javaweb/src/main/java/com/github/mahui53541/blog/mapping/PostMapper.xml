@@ -177,4 +177,7 @@
     <update id="commentTimesPlusOne" parameterType="java.lang.Integer">
         update post set comment_times=post.comment_times+1 where id = #{id,jdbcType=INTEGER}
     </update>
+    <update id="commentTimesMinusOne" parameterType="java.lang.Integer">
+        update post set comment_times=post.comment_times-1 where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

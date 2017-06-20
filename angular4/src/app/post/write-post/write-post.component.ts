@@ -23,7 +23,7 @@ export class WritePostComponent implements OnInit,AfterViewInit {
   public firstSubmit:boolean=true;
   public editor:any;
   public categories:Array<Category>;
-  constructor(private elementRef: ElementRef,
+  constructor(public elementRef: ElementRef,
               public categoryService:CategoryService,
               public writePostService:WritePostService,
               public router: Router,

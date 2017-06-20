@@ -22,7 +22,12 @@
     },
     "comment":{
       "loading":"Loading ...",
-      "loadmore":"Load More"
+      "loadmore":"Load More",
+      "delete":"delete",
+      "replay":"replay",
+      "cancelReplay":"cancel",
+      "submit":"Submit",
+      "author":"author"
     },
     "search":"search",
     "submit":"Submit",

@@ -43,6 +43,7 @@ public class CommentController extends BaseController {
     @RequiresPermissions("comment:add")
     public Map<String, Object> newComment(@RequestBody Comment comment)  {
         Session session= SecurityUtils.getSubject().getSession(false);
+
         if(session!=null){
             User user=(User)session.getAttribute("user");
             comment.setUser(user);
@@ -53,5 +54,26 @@ public class CommentController extends BaseController {
         //文章对应的评论数加一
         postService.commentTimesPlusOne(comment.getPost().getId());
         return this.ajaxSuccessResponse();
+    }
+
+    @RequestMapping(value = "/deleteComment", method = RequestMethod.POST)
+    @ResponseBody
+    @RequiresPermissions("comment:delete")
+    public Map<String, Object> deleteComment(@RequestBody Comment comment)  {
+        Session session= SecurityUtils.getSubject().getSession(false);
+        if(session!=null){
+            User user=(User)session.getAttribute("user");
+            if(comment.getUser()!=null && user.getId()==comment.getUser().getId()){
+                //文章对应的评论数减一
+                comment.setStatus(0);
+                commentService.updateByPrimaryKeySelective(comment);
+                postService.commentTimesMinusOne(comment.getPost().getId());
+                return this.ajaxSuccessResponse();
+            }else{
+                return this.ajaxFailureResponse("只能删除自己的评论哦！");
+            }
+        }else{
+            return this.ajaxFailureResponse("用户不存在，删除失败！");
+        }
     }
 }

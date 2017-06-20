@@ -6,6 +6,7 @@
         <result column="content" jdbcType="LONGVARCHAR" property="content" />
         <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
         <result column="status" jdbcType="TINYINT" property="status" />
+        <result column="re_name" jdbcType="VARCHAR" property="reName"/>
         <association property="user" column="open_id"
                      select="com.github.mahui53541.blog.mapper.UserMapper.selectByOpenID"
                      javaType="com.github.mahui53541.blog.po.User">
@@ -13,7 +14,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,content,comment_time, status,open_id
+        id,content,comment_time, status,re_name,open_id
     </sql>
     <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
         SELECT * FROM comment
@@ -38,6 +39,9 @@
             <if test="status!= null">
                 status,
             </if>
+            <if test="reName!=null and reName!=''">
+                re_name,
+            </if>
             <if test="user!=null">
                 open_id,
             </if>
@@ -55,6 +59,9 @@
             <if test="status!= null">
                 #{status},
             </if>
+            <if test="reName!=null and reName!=''">
+                #{reName},
+            </if>
             <if test="user!=null">
                 #{user.openId},
             </if>
@@ -65,22 +72,13 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="Comment">
-        update user
+        update comment
         <set>
             <if test="content!= null">
                 content=#{content},
             </if>
-            <if test="commentTime!= null">
-                comment_time=#{commentTime},
-            </if>
             <if test="status!= null">
                 status=#{status},
-            </if>
-            <if test="user!=null">
-                open_id=#{user.openId},
-            </if>
-            <if test="post!= null">
-                post_id=#{post.id},
             </if>
         </set>
         where id = #{id}

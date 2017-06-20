@@ -29,4 +29,10 @@ public interface PostService extends BaseService<Post,Integer> {
      * @param id
      */
     void commentTimesPlusOne(Integer id);
+
+    /**
+     * 评论数减一
+     * @param id
+     */
+    void commentTimesMinusOne(Integer id);
 }

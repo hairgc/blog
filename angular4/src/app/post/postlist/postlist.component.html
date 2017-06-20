@@ -17,19 +17,28 @@
       <div class="post-item-container" *ngFor="let post of postList">
         <h4>
           <div class="row">
-            <div class="col-xs-10 col-sm-9">
-              <a [routerLink]="['/post/postdetail',post.id]" style="text-decoration: none;">{{post.title}}</a>
+            <div class="col-xs-9 col-sm-9 col-md-10">
+              <a class="mypost" [routerLink]="['/post/postdetail',post.id]">{{post.title}}</a>
             </div>
-            <div class="col-xs-2 col-sm-3">
+            <div class="col-xs-3 col-sm-3 col-md-2">
               <span *ngIf="post.status==2" class="label label-success">{{'post.sticky' | translate}}</span>
             </div>
           </div>
         </h4>
-        <p>
-          <i class="fa fa-comment" aria-hidden="true"></i>&nbsp;{{post.commentTimes}} &nbsp;&nbsp;&nbsp;&nbsp;
-          <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{post.readTimes}} &nbsp;&nbsp;&nbsp;&nbsp;
-          {{post.user.nickName }}&nbsp;&nbsp;&nbsp;&nbsp;{{post.postTime}}
-        </p>
+        <div class="row info">
+          <div class="col-xs-4 col-sm-2 col-md-2">
+            <i class="fa fa-comment" aria-hidden="true"></i>&nbsp;{{post.commentTimes}}
+          </div>
+          <div class="col-xs-8 col-sm-2 col-md-2">
+            <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;{{post.readTimes}}
+          </div>
+          <div class="col-xs-4 col-sm-2 col-md-2">
+            {{post.user.nickName }}
+          </div>
+          <div class="col-xs-8 col-sm-4 col-md-3">
+            {{post.postTime}}
+          </div>
+        </div>
       </div>
       <pagination [totalItems]="totalItems" [(ngModel)]="currentPage"
                   [maxSize]="maxSize" class="pagination-sm" [itemsPerPage]="itemsPerPage"

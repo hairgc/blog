@@ -4,6 +4,7 @@ export class Comment{
   id: number;
   content: string;
   status:number;
+  reName:string;
   commentTime:Date;
   post:Post=new Post()
   user:User=new User()

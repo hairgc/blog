@@ -22,7 +22,12 @@
     },
     "comment":{
       "loading":"玩命加载中",
-      "loadmore":"加载更多"
+      "loadmore":"加载更多",
+      "delete":"删除",
+      "replay":"回复",
+      "cancelReplay":"取消回复",
+      "submit":"提交评论",
+      "author":"博主"
     },
     "search": "搜索",
     "submit": "提交",

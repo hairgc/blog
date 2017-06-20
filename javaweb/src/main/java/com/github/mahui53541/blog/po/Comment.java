@@ -30,7 +30,10 @@ public class Comment implements Serializable{
 	
 	//状态（0：已删除，1：已发布，2：优质评论）
 	private Integer status;
-	
+
+	//回复人
+	private String reName;
+
 	//评论用户
 	private User user;
 	
@@ -67,6 +70,14 @@ public class Comment implements Serializable{
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public String getReName() {
+		return reName;
+	}
+
+	public void setReName(String reName) {
+		this.reName = reName;
 	}
 
 	public User getUser() {
