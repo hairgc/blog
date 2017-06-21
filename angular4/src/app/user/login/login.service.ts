@@ -16,6 +16,9 @@ export class LoginService {
 
   public hasLogin:boolean=false;
 
+  public user:User=new User();//存储当前用户
+  public permission:Array<string>=new Array<string>();//存储用户权限
+
   constructor(public http:Http){}
 
   public get currentUser():Observable<User>{
@@ -39,8 +42,9 @@ export class LoginService {
     return this.http
       .get(this.userLoginOutURL)
       .map((res:Response)=>{
-        console.log("用户退出登录...");
         this.hasLogin=false;
+        this.user=new User();
+        this.permission=new Array<string>();
         window.localStorage.removeItem("currentUser");
         window.localStorage.removeItem("permission");
         this.subject.next(Object.assign({}));

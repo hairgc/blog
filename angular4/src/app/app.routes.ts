@@ -13,6 +13,10 @@ export const appRoutes=[
     loadChildren:'./post/post.module#PostModule'
   },
   {
+    path: 'manage',
+    loadChildren:'./manage/manage.module#ManageModule'
+  },
+  {
     path:'user',
     loadChildren:'./user/user.module#UserModule'
   },

@@ -44,7 +44,7 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="Role">
-        update user
+        update role
         <set>
             <if test="roleName!= null">
                 role_name=#{roleName},

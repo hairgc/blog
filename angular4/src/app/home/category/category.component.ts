@@ -12,8 +12,6 @@ export class CategoryComponent implements OnInit {
 
   public categories:Array<Category>;
 
-  public category:Category=new Category();
-
   constructor(public categoryService:CategoryService,
               public router: Router) { }
 
@@ -28,12 +26,5 @@ export class CategoryComponent implements OnInit {
         data => this.categories = data,
         error => console.error(error)
       )
-  }
-
-  onSelectCategory(category:Category){
-    if(!this.category || this.category.id!==category.id){
-      this.router.navigate(['/posts/page'],{queryParams:{categoryId:category.id,page:1}});
-      this.category=category;
-    }
   }
 }

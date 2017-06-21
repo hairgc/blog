@@ -44,7 +44,7 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="UserRole">
-        update role_permission
+        update user_role
         <set>
             <if test="openId!= null">
                 open_id=#{openId},

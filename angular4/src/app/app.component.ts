@@ -37,11 +37,16 @@ export class AppComponent {
       this.loginService.queryUserInfo().subscribe(
         res=>{
           if(res&&!res.msg){
-            this.loginService.hasLogin=true;
+
+            this.loginService.triggerNextValue(res['user']);
+            //用户信息存储到本地
             window.localStorage.setItem("currentUser",JSON.stringify(Object.assign(this.currentUser,res['user'])));
             window.localStorage.setItem("permission",JSON.stringify(res['permission']));
-            this.loginService.triggerNextValue(res['user']);
-            console.log(JSON.parse(window.localStorage.getItem("permission")))
+
+            //用户信息保存到service中
+            this.loginService.hasLogin=true;
+            this.loginService.user=res['user'];
+            this.loginService.permission=res['permission'];
           }
         },
         error => {console.log(error)},

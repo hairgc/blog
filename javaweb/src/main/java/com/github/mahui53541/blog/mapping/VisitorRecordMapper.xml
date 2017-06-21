@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.mahui53541.blog.mapper.RoleMapper">
+    <resultMap id="BaseResultMap" type="com.github.mahui53541.blog.po.VisitorRecord">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="visit_date" jdbcType="TIMESTAMP" property="visitDate" />
+        <result column="out_date" jdbcType="TIMESTAMP" property="outDate" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,visit_date,out_date, nick_name
+    </sql>
+
+    <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
+        SELECT * FROM visitor_record
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
+        select * from visitor_record where id = #{id}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" databaseId="mysql">
+        delete from visitor_record where id = #{id}
+    </delete>
+
+    <insert id="insertSelective" parameterType="VisitorRecord" useGeneratedKeys="true" keyProperty="id" databaseId="mysql">
+        insert into visitor_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="visitDate!= null">
+                visit_date,
+            </if>
+            <if test="outDate!= null">
+                out_date,
+            </if>
+            <if test="nickName!= null">
+                nick_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="visitDate!= null">
+                #{visitDate},
+            </if>
+            <if test="outDate!= null">
+                #{outDate},
+            </if>
+            <if test="nickName!= null">
+                #{nickName},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="Role">
+        update visitor_record
+        <set>
+            <if test="visitDate!= null">
+                visit_date=#{visitDate},
+            </if>
+            <if test="outDate!= null">
+                out_date=#{outDate},
+            </if>
+            <if test="nickName!= null">
+                nick_name=#{nickName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

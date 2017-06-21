@@ -59,7 +59,7 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="Picture">
-        update post
+        update picture
         <set>
             <if test="uploadTime!= null">
                 upload_time=#{uploadTime},

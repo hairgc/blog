@@ -53,7 +53,7 @@
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="Category">
-        update user
+        update category
         <set>
             <if test="categoryName!= null">
                 category_name=#{categoryName},

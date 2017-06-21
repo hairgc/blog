@@ -62,7 +62,8 @@ public class BaseServiceImpl<T,PK extends Serializable> implements BaseService<T
     protected UserRoleMapper userRoleMapper;
     @Autowired
     protected CategoryMapper categoryMapper;
-
+    @Autowired
+    protected VisitorRecordMapper visitorRecordMapper;
     @Override
     public int insertSelective(T entity) {
         return baseMapper.insertSelective(entity);

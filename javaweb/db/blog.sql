@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2017-06-19 22:14:27
+Date: 2017-06-21 22:16:15
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -44,6 +44,7 @@ CREATE TABLE `comment` (
   `content` text COMMENT '评论内容',
   `comment_time` datetime DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL COMMENT '状态：0：已删除，1：已发布，2：优质评论',
+  `re_name` varchar(50) DEFAULT NULL COMMENT '回复人',
   `open_id` varchar(255) NOT NULL,
   `post_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -51,39 +52,44 @@ CREATE TABLE `comment` (
   KEY `fk[comment_post]post_id` (`post_id`),
   CONSTRAINT `fk[comment_post]post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk[comment_user]open_id` FOREIGN KEY (`open_id`) REFERENCES `user` (`open_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
-INSERT INTO `comment` VALUES ('1', '这是我的评论', '2017-06-19 19:07:04', '1', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('2', '写的不错哦', '2017-06-13 19:07:32', '2', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('3', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '3', 'ADCA5196948120F29897B1BD9090A364', '21');
-INSERT INTO `comment` VALUES ('4', '这是我的评论', '2017-06-19 19:07:04', '1', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('5', '写的不错哦', '2017-06-13 19:07:32', '2', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('6', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '3', 'ADCA5196948120F29897B1BD9090A364', '21');
-INSERT INTO `comment` VALUES ('7', '这是我的评论', '2017-06-19 19:07:04', '1', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('8', '写的不错哦', '2017-06-13 19:07:32', '2', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('9', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '3', 'ADCA5196948120F29897B1BD9090A364', '21');
-INSERT INTO `comment` VALUES ('10', '这是我的评论', '2017-06-19 19:07:04', '1', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('11', '写的不错哦', '2017-06-13 19:07:32', '2', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('12', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '3', 'ADCA5196948120F29897B1BD9090A364', '21');
-INSERT INTO `comment` VALUES ('13', '这是我的评论', '2017-06-19 19:07:04', '1', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('14', '写的不错哦', '2017-06-13 19:07:32', '2', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('15', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '3', 'ADCA5196948120F29897B1BD9090A364', '21');
-INSERT INTO `comment` VALUES ('16', '这是我的评论', '2017-06-19 19:07:04', '1', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('17', '写的不错哦', '2017-06-13 19:07:32', '2', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('18', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '3', 'ADCA5196948120F29897B1BD9090A364', '21');
-INSERT INTO `comment` VALUES ('19', '这是我的评论', '2017-06-19 19:07:04', '1', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('20', '[reply]qq_33663251[/reply]', '2017-06-13 19:07:32', '2', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('21', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '3', 'ADCA5196948120F29897B1BD9090A364', '21');
-INSERT INTO `comment` VALUES ('22', '这是我的评论', '2017-06-19 19:07:04', '1', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('23', '写的不错哦', '2017-06-13 19:07:32', '2', 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
-INSERT INTO `comment` VALUES ('24', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '3', 'ADCA5196948120F29897B1BD9090A364', '21');
-INSERT INTO `comment` VALUES ('25', '12阿萨德那可是打开', '2017-06-19 22:09:36', '1', 'ADCA5196948120F29897B1BD9090A364', '19');
-INSERT INTO `comment` VALUES ('26', '驱蚊器巍峨群我', '2017-06-19 22:09:52', '1', 'ADCA5196948120F29897B1BD9090A364', '19');
-INSERT INTO `comment` VALUES ('27', '哈哈哈哈哈12312', '2017-06-19 22:12:05', '1', 'ADCA5196948120F29897B1BD9090A364', '19');
-INSERT INTO `comment` VALUES ('28', '阿卡黑色的哈萨克接电话', '2017-06-19 22:12:12', '1', 'ADCA5196948120F29897B1BD9090A364', '19');
+INSERT INTO `comment` VALUES ('1', '这是我的评论', '2017-06-19 19:07:04', '1', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('2', '写的不错哦', '2017-06-13 19:07:32', '2', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('3', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '0', null, 'ADCA5196948120F29897B1BD9090A364', '21');
+INSERT INTO `comment` VALUES ('4', '这是我的评论', '2017-06-19 19:07:04', '1', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('5', '写的不错哦', '2017-06-13 19:07:32', '2', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('6', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '0', null, 'ADCA5196948120F29897B1BD9090A364', '21');
+INSERT INTO `comment` VALUES ('7', '这是我的评论', '2017-06-19 19:07:04', '1', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('8', '写的不错哦', '2017-06-13 19:07:32', '2', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('9', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '0', null, 'ADCA5196948120F29897B1BD9090A364', '21');
+INSERT INTO `comment` VALUES ('10', '这是我的评论', '2017-06-19 19:07:04', '1', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('11', '写的不错哦', '2017-06-13 19:07:32', '2', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('12', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '0', null, 'ADCA5196948120F29897B1BD9090A364', '21');
+INSERT INTO `comment` VALUES ('13', '这是我的评论', '2017-06-19 19:07:04', '1', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('14', '写的不错哦', '2017-06-13 19:07:32', '2', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('15', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '0', null, 'ADCA5196948120F29897B1BD9090A364', '21');
+INSERT INTO `comment` VALUES ('16', '这是我的评论', '2017-06-19 19:07:04', '1', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('17', '写的不错哦', '2017-06-13 19:07:32', '2', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('18', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '0', null, 'ADCA5196948120F29897B1BD9090A364', '21');
+INSERT INTO `comment` VALUES ('19', '这是我的评论', '2017-06-19 19:07:04', '1', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('20', '[reply]qq_33663251[/reply]', '2017-06-13 19:07:32', '2', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('21', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '0', null, 'ADCA5196948120F29897B1BD9090A364', '21');
+INSERT INTO `comment` VALUES ('22', '这是我的评论', '2017-06-19 19:07:04', '1', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('23', '写的不错哦', '2017-06-13 19:07:32', '2', null, 'FAB56B0377CFE75488B0ACA8AD190C4A', '21');
+INSERT INTO `comment` VALUES ('24', '自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己己评论自己自己评论自己自己评论自己自己评论自己', '2017-06-14 19:07:51', '0', null, 'ADCA5196948120F29897B1BD9090A364', '21');
+INSERT INTO `comment` VALUES ('25', '12阿萨德那可是打开', '2017-06-19 22:09:36', '1', null, 'ADCA5196948120F29897B1BD9090A364', '19');
+INSERT INTO `comment` VALUES ('26', '驱蚊器巍峨群我', '2017-06-19 22:09:52', '1', null, 'ADCA5196948120F29897B1BD9090A364', '19');
+INSERT INTO `comment` VALUES ('27', '哈哈哈哈哈12312', '2017-06-19 22:12:05', '1', null, 'ADCA5196948120F29897B1BD9090A364', '19');
+INSERT INTO `comment` VALUES ('28', '阿卡黑色的哈萨克接电话', '2017-06-19 22:12:12', '1', null, 'ADCA5196948120F29897B1BD9090A364', '19');
+INSERT INTO `comment` VALUES ('29', '12312', '2017-06-21 19:17:53', '0', null, 'ADCA5196948120F29897B1BD9090A364', '2');
+INSERT INTO `comment` VALUES ('30', '123123', '2017-06-21 19:17:58', '1', null, 'ADCA5196948120F29897B1BD9090A364', '2');
+INSERT INTO `comment` VALUES ('31', '123123123', '2017-06-21 19:18:06', '1', null, 'ADCA5196948120F29897B1BD9090A364', '2');
+INSERT INTO `comment` VALUES ('32', '自己回复自己', '2017-06-21 19:18:17', '1', '‭馬輝', 'ADCA5196948120F29897B1BD9090A364', '2');
+INSERT INTO `comment` VALUES ('33', 'hahaha', '2017-06-21 20:54:39', '1', '‭馬輝', 'ADCA5196948120F29897B1BD9090A364', '21');
 
 -- ----------------------------
 -- Table structure for permission
@@ -95,7 +101,7 @@ CREATE TABLE `permission` (
   `code` varchar(64) DEFAULT NULL,
   `desc` tinyint(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of permission
@@ -107,6 +113,10 @@ INSERT INTO `permission` VALUES ('4', '新增评论', 'comment:add', '4');
 INSERT INTO `permission` VALUES ('5', '修改评论', 'comment:update', '5');
 INSERT INTO `permission` VALUES ('6', '删除评论', 'comment:delete', '6');
 INSERT INTO `permission` VALUES ('7', '图片上传', 'picture:upload', '7');
+INSERT INTO `permission` VALUES ('8', '文章管理', 'post:manage', '8');
+INSERT INTO `permission` VALUES ('9', '用户管理', 'user:manage', '9');
+INSERT INTO `permission` VALUES ('10', '评论管理', 'comment:manage', '10');
+INSERT INTO `permission` VALUES ('11', '访客记录', 'visitor:manage', '11');
 
 -- ----------------------------
 -- Table structure for picture
@@ -157,14 +167,14 @@ CREATE TABLE `post` (
 -- ----------------------------
 -- Records of post
 -- ----------------------------
-INSERT INTO `post` VALUES ('1', '这里是测试文章一哈哈哈21这里是测试文测试文一哈哈哈21章一哈哈哈21', '2017-06-17 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000014', '2', '', '2', '1', '00000000000');
-INSERT INTO `post` VALUES ('2', '这里是测试文章二', '2017-06-16 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000005', '2', '', '2', '1', '00000000000');
+INSERT INTO `post` VALUES ('1', '这里是测试文章一哈哈哈21这里是测试文测试文一哈哈哈21章一哈哈哈21', '2017-06-17 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000017', '2', '', '2', '1', '00000000000');
+INSERT INTO `post` VALUES ('2', '这里是测试文章二', '2017-06-16 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000010', '2', '', '2', '1', '00000000003');
 INSERT INTO `post` VALUES ('3', '这里是测试文章三哈哈哈21这里是测试文测试文一哈哈哈21章一哈哈哈21', '2017-06-17 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000019', '1', '', '2', '1', '00000000000');
 INSERT INTO `post` VALUES ('4', '这里是测试文章四', '2017-06-16 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000001', '1', '', '2', '1', '00000000000');
 INSERT INTO `post` VALUES ('5', '这里是测试文章五', '2017-06-16 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000001', '1', '', '2', '1', '00000000000');
 INSERT INTO `post` VALUES ('6', '这里是测试文章六', '2017-06-16 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000007', '1', '', '2', '1', '00000000000');
-INSERT INTO `post` VALUES ('19', '12312', '2017-06-18 15:59:58', '\n“永远年轻，永远热泪盈眶”\n\n\n当你试图放弃一个你知道是正确的事情的时候,希望你能再看看这句话。\n\n——《我的奋斗》\n\n\n面对挫折、不要愤怒、不要抗议，\n\n只管埋头默默擦亮你的武器，准备下一次的战斗。\n\n我们是做事的，不是要给人家看某种表情的。\n\n——《我的奋斗》\n', '1', '2017-06-18 15:59:58', '00000000013', '1', '', '2', '1', '00000000004');
-INSERT INTO `post` VALUES ('21', '测试一下下', '2017-06-18 20:37:53', '```java\n@RequestMapping(value = \"/queryPostListByPage\",method = RequestMethod.GET)\n    @ResponseBody\n    public HashMap<String,Object> query(\n            @RequestParam(required=false,defaultValue = \"1\")Integer page,\n            @RequestParam(required=false,defaultValue = \"-1\")Integer categoryId,\n            String searchText){\n        PageRowBounds pageRowBounds=new PageRowBounds(page,5);\n        List<Post> posts=postService.queryByPage(pageRowBounds,categoryId,searchText);\n        HashMap<String,Object> map=new HashMap<String,Object>();\n        map.put(\"rows\",posts);\n        map.put(\"total\",pageRowBounds.getTotal());\n        return map;\n    }\n\n    //测试阶段，暂时不加权限\n    @RequestMapping(value = \"/newPost\", method = RequestMethod.POST)\n    @ResponseBody\n    public Map<String,Object> newPost(@RequestBody Post post, HttpSession session) throws Exception {\n        User user=(User) session.getAttribute(\"user\");\n        post.setPostTime(new Date());\n        if(post.getStatus()==null){\n            post.setStatus((byte)1);\n        }\n        post.setLastModifyTime(new Date());\n        post.setUser(user);\n        if(post.getId()!=null){\n            postService.updateByPrimaryKeySelective(post);\n        }else{\n            postService.insertSelective(post);\n        }\n        return this.ajaxSuccessResponse(String.valueOf(post.getId()));\n    }\n```\n', '0', '2017-06-18 20:37:53', '00000000080', '1', '', '2', '1', '00000000003');
+INSERT INTO `post` VALUES ('19', '12312', '2017-06-18 15:59:58', '\n“永远年轻，永远热泪盈眶”\n\n\n当你试图放弃一个你知道是正确的事情的时候,希望你能再看看这句话。\n\n——《我的奋斗》\n\n\n面对挫折、不要愤怒、不要抗议，\n\n只管埋头默默擦亮你的武器，准备下一次的战斗。\n\n我们是做事的，不是要给人家看某种表情的。\n\n——《我的奋斗》\n', '1', '2017-06-18 15:59:58', '00000000015', '1', '', '2', '1', '00000000004');
+INSERT INTO `post` VALUES ('21', '测试一下下', '2017-06-18 20:37:53', '```java\n@RequestMapping(value = \"/queryPostListByPage\",method = RequestMethod.GET)\n    @ResponseBody\n    public HashMap<String,Object> query(\n            @RequestParam(required=false,defaultValue = \"1\")Integer page,\n            @RequestParam(required=false,defaultValue = \"-1\")Integer categoryId,\n            String searchText){\n        PageRowBounds pageRowBounds=new PageRowBounds(page,5);\n        List<Post> posts=postService.queryByPage(pageRowBounds,categoryId,searchText);\n        HashMap<String,Object> map=new HashMap<String,Object>();\n        map.put(\"rows\",posts);\n        map.put(\"total\",pageRowBounds.getTotal());\n        return map;\n    }\n\n    //测试阶段，暂时不加权限\n    @RequestMapping(value = \"/newPost\", method = RequestMethod.POST)\n    @ResponseBody\n    public Map<String,Object> newPost(@RequestBody Post post, HttpSession session) throws Exception {\n        User user=(User) session.getAttribute(\"user\");\n        post.setPostTime(new Date());\n        if(post.getStatus()==null){\n            post.setStatus((byte)1);\n        }\n        post.setLastModifyTime(new Date());\n        post.setUser(user);\n        if(post.getId()!=null){\n            postService.updateByPrimaryKeySelective(post);\n        }else{\n            postService.insertSelective(post);\n        }\n        return this.ajaxSuccessResponse(String.valueOf(post.getId()));\n    }\n```\n', '0', '2017-06-18 20:37:53', '00000000085', '1', '', '2', '1', '00000000000');
 
 -- ----------------------------
 -- Table structure for role
@@ -196,7 +206,7 @@ CREATE TABLE `role_permission` (
   KEY `fk[role_permission]role_id` (`role_id`),
   CONSTRAINT `fk[role_permission]permission_id` FOREIGN KEY (`permission_id`) REFERENCES `permission` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk[role_permission]role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_permission
@@ -211,6 +221,11 @@ INSERT INTO `role_permission` VALUES ('7', '7', '1');
 INSERT INTO `role_permission` VALUES ('8', '4', '2');
 INSERT INTO `role_permission` VALUES ('9', '5', '2');
 INSERT INTO `role_permission` VALUES ('10', '6', '2');
+INSERT INTO `role_permission` VALUES ('11', '8', '1');
+INSERT INTO `role_permission` VALUES ('12', '9', '1');
+INSERT INTO `role_permission` VALUES ('13', '10', '2');
+INSERT INTO `role_permission` VALUES ('14', '11', '1');
+INSERT INTO `role_permission` VALUES ('15', '11', '2');
 
 -- ----------------------------
 -- Table structure for user
@@ -255,3 +270,19 @@ CREATE TABLE `user_role` (
 -- Records of user_role
 -- ----------------------------
 INSERT INTO `user_role` VALUES ('1', '1', 'ADCA5196948120F29897B1BD9090A364');
+
+-- ----------------------------
+-- Table structure for visitor_record
+-- ----------------------------
+DROP TABLE IF EXISTS `visitor_record`;
+CREATE TABLE `visitor_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `visit_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `out_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `nick_name` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of visitor_record
+-- ----------------------------
