@@ -6,18 +6,18 @@ import java.io.Serializable;
  * Created by mahui on 2017/5/29.
  */
 public class UserRole implements Serializable{
-    private String id;
+    private Integer id;
 
     private String openId;
 
-    private String roleId;
+    private Integer roleId;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Integer id) {
+        this.id = id ;
     }
 
     public String getOpenId() {
@@ -28,11 +28,11 @@ public class UserRole implements Serializable{
         this.openId = openId;
     }
 
-    public String getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
-        this.roleId = roleId == null ? null : roleId.trim();
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

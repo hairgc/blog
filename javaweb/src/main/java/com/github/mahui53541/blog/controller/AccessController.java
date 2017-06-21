@@ -1,15 +1,19 @@
 package com.github.mahui53541.blog.controller;
 
 import com.github.mahui53541.blog.po.User;
+import com.github.mahui53541.blog.po.VisitorRecord;
+import com.github.mahui53541.blog.service.VisitorRecordService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.session.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +23,9 @@ import java.util.Map;
  **/
 @Controller
 public class AccessController extends BaseController{
+
+    @Autowired
+    private VisitorRecordService visitorRecordService;
 
     @RequestMapping(value="/oauth2-login",method = RequestMethod.GET)
     @ResponseBody
@@ -41,6 +48,21 @@ public class AccessController extends BaseController{
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> logout() throws Exception {
+        try {
+            Session session=SecurityUtils.getSubject().getSession(false);
+            if(session!=null){
+                VisitorRecord visitorRecord= (VisitorRecord) session.getAttribute("visitorRecord");
+                if(visitorRecord!=null){
+                    visitorRecord.setOutDate(new Date());
+                    visitorRecordService.updateByPrimaryKeySelective(visitorRecord);
+                }
+            }else{
+                return this.ajaxFailureResponse("回话已过期");
+            }
+        }catch (Exception e){
+            SecurityUtils.getSubject().logout();
+            return this.ajaxSuccessResponse();
+        }
         SecurityUtils.getSubject().logout();
         return this.ajaxSuccessResponse();
     }

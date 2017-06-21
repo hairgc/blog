@@ -2,9 +2,9 @@ package com.github.mahui53541.blog.auth;
 
 import com.github.mahui53541.blog.exception.OAuth2AuthenticationException;
 import com.github.mahui53541.blog.po.User;
-import com.github.mahui53541.blog.service.PermissionService;
-import com.github.mahui53541.blog.service.RoleService;
-import com.github.mahui53541.blog.service.UserService;
+import com.github.mahui53541.blog.po.UserRole;
+import com.github.mahui53541.blog.po.VisitorRecord;
+import com.github.mahui53541.blog.service.*;
 import com.qq.connect.api.OpenID;
 import com.qq.connect.api.qzone.UserInfo;
 import com.qq.connect.javabeans.AccessToken;
@@ -34,6 +34,10 @@ public class OAuth2Realm extends AuthorizingRealm {
     private RoleService roleService;
     @Autowired
     private PermissionService permissionService;
+    @Autowired
+    private UserRoleService userRoleService;
+    @Autowired
+    private VisitorRecordService visitorRecordService;
 
     // 设置realm的名称
     @Override
@@ -72,6 +76,14 @@ public class OAuth2Realm extends AuthorizingRealm {
         Session session= SecurityUtils.getSubject().getSession();
         session.setAttribute("user",user);
         session.setAttribute("permission",permissionService.selectPermissionByOpenID(user.getOpenId()));
+
+        //记录访客
+        VisitorRecord visitorRecord=new VisitorRecord();
+        visitorRecord.setNickName(user.getNickName());
+        visitorRecord.setVisitDate(new Date());
+        visitorRecordService.insertSelective(visitorRecord);
+
+        session.setAttribute("visitorRecord",visitorRecord);
 
         SimpleAuthenticationInfo authenticationInfo =
                 new SimpleAuthenticationInfo(user, code, getName());
@@ -114,6 +126,11 @@ public class OAuth2Realm extends AuthorizingRealm {
                 user.setAvatarURL100(userInfoBean.getAvatar().getAvatarURL100());
                 user.setNickName(userInfoBean.getNickname());
                 userService.insertSelective(user);
+
+                UserRole ur=new UserRole();
+                ur.setOpenId(user.getOpenId());
+                ur.setRoleId(1);
+                userRoleService.insertSelective(ur);
             }
             return user;
         } catch (Exception e) {
