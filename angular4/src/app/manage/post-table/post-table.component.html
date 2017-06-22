@@ -1,3 +1,60 @@
-<p>
-  post-table works!
-</p>
+<p-dataTable [value]="posts" [lazy]="true" [rows]="10" [paginator]="true"
+             [rowsPerPageOptions]="[10,20,50]" [editable]="true" [responsive]="true"
+             [totalRecords]="totalRecords" (onLazyLoad)="loadPostsLazy($event)"
+             (onEditComplete)="onCellEditComplete($event)">
+  <p-header>文章管理</p-header>
+  <p-column field="id" header="ID" [hidden]="true"></p-column>
+  <p-column field="title" header="标题" [editable]="true" [style]="{'width':'250px','text-align':'center'}"></p-column>
+  <p-column field="postType" header="文章类型" [style]="setEditorStyles()" [editable]="true">
+    <ng-template let-col let-post="rowData" pTemplate="body">
+      {{post.postType===0?"原创":post.postType===1?"转载":post.postType===2?"翻译":""}}
+    </ng-template>
+    <!--可编辑-->
+    <ng-template let-col let-post="rowData" pTemplate="editor">
+      <p-dropdown  [(ngModel)]="post['postType']" [options]="postTypeOptions"
+                   (onChange)="saveDrop(post)"
+                   [autoWidth]="false" [style]="{'width':'100%'}" required="true">
+      </p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="postTime" header="发布时间" [style]="setStyles()"></p-column>
+  <p-column field="lastModifyTime" header="最近修改" [style]="setStyles()"></p-column>
+  <p-column field="enableComment" header="评论功能" [style]="setEditorStyles()" [editable]="true">
+    <ng-template let-col let-post="rowData" pTemplate="body">
+      {{post.enableComment?"已开启":"已关闭"}}
+    </ng-template>
+    <!--可编辑-->
+    <ng-template let-col let-post="rowData" pTemplate="editor">
+      <p-dropdown  [(ngModel)]="post['enableComment']" [options]="enableCommentOptions"
+                   (onChange)="saveDrop(post)"
+                   [autoWidth]="false" [style]="{'width':'100%'}" required="true">
+      </p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="status" header="文章状态" [style]="setEditorStyles()" [editable]="true">
+    <ng-template let-col let-post="rowData" pTemplate="body">
+      {{post.status===0?"草稿":post.status===1?"已发布":post.status===2?"置顶":"已删除"}}
+    </ng-template>
+
+    <!--可编辑-->
+    <ng-template let-col let-post="rowData" pTemplate="editor">
+      <p-dropdown  [(ngModel)]="post['status']" [options]="statusOptions"
+                   (onChange)="saveDrop(post)"
+                   [autoWidth]="false" [style]="{'width':'100%'}" required="true">
+      </p-dropdown>
+    </ng-template>
+  </p-column>
+  <p-column field="category" header="所属分类" [style]="setEditorStyles()" [editable]="true">
+    <ng-template let-col let-post="rowData" pTemplate="body">
+      {{post.category?.categoryName}}
+    </ng-template>
+
+    <!--可编辑-->
+    <ng-template let-col let-post="rowData" pTemplate="editor">
+      <p-dropdown  [(ngModel)]="post['category']" [options]="categoryOptions"
+                   (onChange)="saveDrop(post);"
+                   [autoWidth]="false" [style]="{'width':'100%'}" required="true">
+      </p-dropdown>
+    </ng-template>
+  </p-column>
+</p-dataTable>

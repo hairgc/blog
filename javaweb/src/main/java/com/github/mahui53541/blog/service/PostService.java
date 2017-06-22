@@ -18,7 +18,16 @@ public interface PostService extends BaseService<Post,Integer> {
      * @return
      */
      List<Post> queryByPage(RowBounds rowBounds, Integer categoryId, String searchText);
+
     /**
+     * 文章管理模块查询
+     * @param rowBounds
+     * @param userId
+     * @return
+     */
+    List<Post> queryByUserId(RowBounds rowBounds,Integer userId);
+
+     /**
      * 浏览次数加一
      * @param id
      */

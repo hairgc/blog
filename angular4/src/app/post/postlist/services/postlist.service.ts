@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions,URLSearchParams } from '@angular/http';
+import { Http, Response,URLSearchParams} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { SITE_HOST_URL } from '../../../shared/config/env.config';
@@ -26,10 +26,6 @@ export class PostlistService {
         return res.json();
       })
       .catch((error:any) => Observable.throw(error || 'Server error'));
-  }
-
-  public addPost(user:any){
-
   }
 }
 

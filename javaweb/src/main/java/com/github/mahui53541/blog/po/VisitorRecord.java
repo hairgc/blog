@@ -1,5 +1,7 @@
 package com.github.mahui53541.blog.po;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,8 +11,13 @@ import java.util.Date;
 public class VisitorRecord implements Serializable {
 
     private Integer id;
+
+    @JSONField(format = "yyyy-MM-dd HH:mm")
     private Date visitDate;
+
+    @JSONField(format = "yyyy-MM-dd HH:mm")
     private Date outDate;
+
     private String nickName;
 
     public Integer getId() {

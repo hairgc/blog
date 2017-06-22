@@ -18,6 +18,11 @@ public class PostServiceImpl extends BaseServiceImpl<Post,Integer> implements Po
     }
 
     @Override
+    public List<Post> queryByUserId(RowBounds rowBounds, Integer userId) {
+        return postMapper.queryByUserId(rowBounds,userId);
+    }
+
+    @Override
     public void readTimesPlusOne(Integer id) {
         postMapper.readTimesPlusOne(id);
     }

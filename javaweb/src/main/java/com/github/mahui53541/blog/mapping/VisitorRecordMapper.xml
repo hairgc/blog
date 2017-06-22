@@ -13,7 +13,7 @@
     </sql>
 
     <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
-        SELECT * FROM visitor_record
+        SELECT * FROM visitor_record ORDER by id DESC
     </select>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">

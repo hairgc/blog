@@ -24,6 +24,14 @@ public interface PostMapper extends BaseMapper<Post,Integer> {
     List<Post> queryByPage(@Param("rowBounds") RowBounds rowBounds,@Param("categoryId")Integer categoryId ,@Param("searchText")String searchText);
 
     /**
+     * 文章管理模块查询
+     * @param rowBounds
+     * @param userId
+     * @return
+     */
+    List<Post> queryByUserId(@Param("rowBounds") RowBounds rowBounds,@Param("userId")Integer userId);
+
+    /**
      * 浏览次数加一
      * @param id
      */

@@ -15,6 +15,10 @@
                      select="com.github.mahui53541.blog.mapper.UserMapper.selectByPrimaryKey"
                      javaType="com.github.mahui53541.blog.po.User">
         </association>
+        <association property="category" column="category_id"
+                     select="com.github.mahui53541.blog.mapper.CategoryMapper.selectByPrimaryKey"
+                     javaType="com.github.mahui53541.blog.po.Category">
+        </association>
     </resultMap>
     <resultMap id="ResultMapWithContent" type="com.github.mahui53541.blog.po.Post" extends="BaseResultMap">
         <result column="post_content" property="postContent" jdbcType="LONGVARCHAR" />
@@ -180,4 +184,11 @@
     <update id="commentTimesMinusOne" parameterType="java.lang.Integer">
         update post set comment_times=post.comment_times-1 where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <!--根据userID查询-->
+    <select id="queryByUserId" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
+        select id,title,post_time,post_type, last_modify_time, read_times,comment_times, status,enable_comment,category_id
+        from post where user_id = #{userId} order by status desc,post_time desc
+    </select>
+
 </mapper>

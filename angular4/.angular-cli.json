@@ -21,10 +21,10 @@
       "prefix": "app",
       "styles": [
         "styles.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
         "../node_modules/ngx-toastr/toastr.css",
-        "../node_modules/@swimlane/ngx-datatable/release/index.css",
-        "../node_modules/@swimlane/ngx-datatable/release/themes/material.css",
-        "../node_modules/@swimlane/ngx-datatable/release/assets/icons.css"
+        "../node_modules/primeng/resources/primeng.min.css",
+        "../node_modules/primeng/resources/themes/omega/theme.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

@@ -12,12 +12,12 @@ export const manageRoutes = [
     canActivate: [ManageGuard],
     canActivateChild: [ ManageGuard ],
     children: [
-      { path: '',redirectTo:'visitortable/page/1',pathMatch:'full'},
-      { path: 'visitortable/page/:page', component: VisitorTableComponent },
-      { path: 'posttable/page/:page', component: PostTableComponent },
-      { path: 'commenttable/page/:page', component: CommentTableComponent },
-      { path: 'usertable/page/:page', component: UserTableComponent },
-      { path: '**', redirectTo:'visitortable/page/1' }
+      { path: '',redirectTo:'visitortable',pathMatch:'full'},
+      { path: 'visitortable', component: VisitorTableComponent },
+      { path: 'posttable', component: PostTableComponent },
+      { path: 'commenttable', component: CommentTableComponent },
+      { path: 'usertable', component: UserTableComponent },
+      { path: '**', redirectTo:'visitortable' }
     ]
   }
 ];

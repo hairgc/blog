@@ -1,21 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule} from "@angular/router";
+import { RouterModule } from "@angular/router";
+import { DataTableModule,DropdownModule,SharedModule as PrimengSharedModule } from 'primeng/primeng';
 
+import { SharedModule} from '../shared/shared.module';
 import { ManageMainComponent } from './manage-main/manage-main.component';
-
 import { PostTableComponent } from './post-table/post-table.component';
 import { UserTableComponent } from './user-table/user-table.component';
 import { CommentTableComponent } from './comment-table/comment-table.component';
 import { VisitorTableComponent } from './visitor-table/visitor-table.component';
 import { ManageGuard } from "./manage.guard";
-
+import { VisitorService } from "./visitor-table/services/visitor.service";
 import {manageRoutes} from "./manage.routes";
+import {PostTableService} from "./post-table/services/post-table.service";
+import { CategoryTableComponent } from './category-table/category-table.component';
+import {CategoryTableService} from "./category-table/services/category-table.service";
+
 
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
+    DataTableModule,
+    DropdownModule,
+    PrimengSharedModule,
     RouterModule.forChild(manageRoutes)
   ],
   declarations: [
@@ -23,10 +32,14 @@ import {manageRoutes} from "./manage.routes";
     PostTableComponent,
     UserTableComponent,
     CommentTableComponent,
-    VisitorTableComponent
+    VisitorTableComponent,
+    CategoryTableComponent
   ],
   providers:[
-    ManageGuard
+    ManageGuard,
+    VisitorService,
+    PostTableService,
+    CategoryTableService
   ]
 })
 export class ManageModule { }

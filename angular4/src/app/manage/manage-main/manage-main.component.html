@@ -5,10 +5,10 @@
     </div>
     <div class="col-sm-3">
       <div class="list-group">
-        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('visitor:manage')}" routerLink="visitortable/page/1" class="list-group-item "><span class="badge">1000000</span>访客记录</a>
-        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('post:manage')}" routerLink="posttable/page/1" class="list-group-item"><span class="badge">10000</span>文章管理</a>
-        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('comment:manage')}" routerLink="commenttable/page/1" class="list-group-item"><span class="badge">1000000</span>评论管理</a>
-        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('user:manage')}" routerLink="usertable/page/1" class="list-group-item"><span class="badge">1000000</span>用户管理</a>
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('visitor:manage')}" routerLink="visitortable" class="list-group-item ">访客记录</a>
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('post:manage')}" routerLink="posttable" class="list-group-item">文章管理</a>
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('comment:manage')}" routerLink="commenttable" class="list-group-item">评论管理</a>
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('user:manage')}" routerLink="usertable" class="list-group-item">用户管理</a>
       </div>
     </div>
   </div>
