@@ -101,6 +101,7 @@
         <property name="filterChainDefinitions">
             <value>
                 / = anon
+                /siteStat=anon
                 /info = anon
                 /logout = anon
                 /post/** = anon
