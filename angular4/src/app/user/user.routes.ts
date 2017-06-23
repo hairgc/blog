@@ -1,4 +1,5 @@
 import { WritePostComponent } from '../post/write-post/write-post.component';
+import { UserGuard } from "./user.guard";
 
 export const userRoutes = [
   {
@@ -8,6 +9,11 @@ export const userRoutes = [
   },
   {
     path: 'write',
+    canActivate: [UserGuard],
+    component: WritePostComponent
+  },{
+    path: 'editpost/:postId',
+    canActivate: [UserGuard],
     component: WritePostComponent
   }
 ];

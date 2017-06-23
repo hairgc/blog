@@ -11,15 +11,47 @@ import {Post} from "../../model/post.model";
 export class WritePostService {
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  public writePostURL = 'blog/post/newPost';
-
+  public writePostURL = 'blog/post/write';
+  public getEditPostURL = "blog/post/getEditPost/";
+  public editPostURL = "blog/post/edit";
   constructor(public http:Http) { }
 
-  public newPost(post:Post):Observable<any>{
+  /**
+   * 保存或发布
+   * @param post
+   * @returns {Observable<R>}
+   */
+  public writePost(post:Post):Observable<any>{
     return this.http
           .post(this.writePostURL,JSON.stringify(post), {headers: this.headers})
           .map((res: Response) => {
             return res.json();
           });
+  }
+
+  /**
+   * 获取编辑文章
+   * @param id
+   * @returns {Observable<R>}
+   */
+  public getEditPost(id:number):Observable<Post>{
+    return 	this.http
+      .get(this.getEditPostURL+id)
+      .map((res: Response) => {
+        return res.json();
+      });
+  }
+
+  /**
+   * 提交编辑文章
+   * @param post
+   * @returns {Observable<R>}
+   */
+  public editPost(post:Post):Observable<any>{
+    return this.http
+      .post(this.editPostURL,JSON.stringify(post), {headers: this.headers})
+      .map((res: Response) => {
+        return res.json();
+      });
   }
 }

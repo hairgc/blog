@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from "@angular/router";
 import { DataTableModule,DropdownModule,SharedModule as PrimengSharedModule } from 'primeng/primeng';
+import { ButtonModule } from 'primeng/primeng';
 
 import { SharedModule} from '../shared/shared.module';
 import { ManageMainComponent } from './manage-main/manage-main.component';
@@ -25,6 +26,7 @@ import {CategoryTableService} from "./category-table/services/category-table.ser
     DataTableModule,
     DropdownModule,
     PrimengSharedModule,
+    ButtonModule,
     RouterModule.forChild(manageRoutes)
   ],
   declarations: [

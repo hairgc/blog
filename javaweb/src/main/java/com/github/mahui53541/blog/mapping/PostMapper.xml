@@ -25,7 +25,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,title,post_time,post_type, last_modify_time, read_times,comment_times, status,enable_comment,user_id
+        id,title,post_time,post_type, last_modify_time, read_times,comment_times, status,enable_comment,user_id,category_id
     </sql>
 
     <sql id="Blob_Column_List">
@@ -129,6 +129,9 @@
             </if>
             <if test="postTime!= null">
                 post_time=#{postTime},
+            </if>
+            <if test="postContent!= null">
+                post_content=#{postContent},
             </if>
             <if test="postType!= null">
                 post_type=#{postType},

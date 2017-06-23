@@ -40,10 +40,10 @@ public class PostController extends BaseController {
         return map;
     }
 
-    @RequestMapping(value = "/newPost", method = RequestMethod.POST)
+    @RequestMapping(value = "/write", method = RequestMethod.POST)
     @ResponseBody
     @RequiresPermissions("post:add")
-    public Map<String,Object> newPost(@RequestBody Post post, HttpSession session) throws Exception {
+    public Map<String,Object> writePost(@RequestBody Post post, HttpSession session) throws Exception {
         User user=(User) session.getAttribute("user");
         post.setPostTime(new Date());
         if(post.getStatus()==null){
@@ -59,11 +59,28 @@ public class PostController extends BaseController {
         return this.ajaxSuccessResponse(String.valueOf(post.getId()));
     }
 
+    /**
+     * 浏览文章详情
+     * @param postId
+     * @return
+     */
     @RequestMapping(value = "/postdetail/{postId}", method = RequestMethod.GET)
     @ResponseBody
     public Post getPostById(@PathVariable("postId")Integer postId) {
         //浏览数加一
         postService.readTimesPlusOne(postId);
+        return postService.selectByPrimaryKey(postId);
+    }
+
+    /**
+     * 获取所要编辑的文章
+     * @param postId
+     * @return
+     */
+    @RequestMapping(value = "/getEditPost/{postId}", method = RequestMethod.GET)
+    @ResponseBody
+    @RequiresPermissions("post:update")
+    public Post getEditPostById(@PathVariable("postId")Integer postId) {
         return postService.selectByPrimaryKey(postId);
     }
 
@@ -86,5 +103,47 @@ public class PostController extends BaseController {
         map.put("rows",posts);
         map.put("total",pageRowBounds.getTotal());
         return map;
+    }
+
+    /**
+     * 文章属性修改（不修改内容、标题、评论数等）
+     * @param post
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/attributeModification", method = RequestMethod.POST)
+    @ResponseBody
+    @RequiresPermissions("post:update")
+    public Map<String,Object> attributeModification(@RequestBody Post post) throws Exception {
+        post.setLastModifyTime(new Date());
+        //将不修改的属性设置为空
+        post.setReadTimes(null);
+        post.setPostTime(null);
+        post.setUser(null);
+        post.setCommentTimes(null);
+        post.setPostContent(null);
+        post.setTitle(null);
+        postService.updateByPrimaryKeySelective(post);
+        return this.ajaxSuccessResponse();
+    }
+
+    /**
+     * 文章编辑
+     * @param post
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @ResponseBody
+    @RequiresPermissions("post:update")
+    public Map<String,Object> editPost(@RequestBody Post post) throws Exception {
+        post.setLastModifyTime(new Date());
+        //将不修改的属性设置为空
+        post.setReadTimes(null);
+        post.setPostTime(null);
+        post.setUser(null);
+        post.setCommentTimes(null);
+        postService.updateByPrimaryKeySelective(post);
+        return this.ajaxSuccessResponse();
     }
 }

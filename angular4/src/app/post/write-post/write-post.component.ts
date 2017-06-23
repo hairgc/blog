@@ -1,6 +1,6 @@
 import {Component, OnInit, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import {ModalDirective} from "ngx-bootstrap";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterState, RouterStateSnapshot} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 
 import {Post} from "../model/post.model";
@@ -22,17 +22,46 @@ export class WritePostComponent implements OnInit,AfterViewInit {
   public canSave:boolean=true;
   public firstSubmit:boolean=true;
   public editor:any;
+  public editable:boolean=false;//是否修改
   public categories:Array<Category>;
-  constructor(public elementRef: ElementRef,
-              public categoryService:CategoryService,
+  constructor(public categoryService:CategoryService,
               public writePostService:WritePostService,
               public router: Router,
+              public activatedRoute: ActivatedRoute,
               public toastr: ToastrService) { }
 
   @ViewChild('lgModal') public lgModal:ModalDirective;
 
   ngOnInit() {
     this.queryCategory();
+
+    let routerState: RouterState = this.router.routerState;
+    let routerStateSnapshot: RouterStateSnapshot = routerState.snapshot;
+    //如果是从编辑这个URL进入，则查询文章，否则什么都不做
+    if (routerStateSnapshot.url.indexOf("/user/editpost") != -1) {
+      this.editable=true;
+      this.activatedRoute.params.subscribe(
+        params =>{
+          this.getEditPost(params["postId"]);
+        }
+      );
+    }else{
+      this.editable=false;
+      this.post.postContent=`“永远年轻，永远热泪盈眶”
+
+当你试图放弃一个你知道是正确的事情的时候,希望你能再看看这句话。
+
+——《我的奋斗》
+
+
+面对挫折、不要愤怒、不要抗议，
+
+只管埋头默默擦亮你的武器，准备下一次的战斗。
+
+我们是做事的，不是要给人家看某种表情的。
+
+——《我的奋斗》`
+    }
   }
   ngAfterViewInit(): void {
     let that=this;
@@ -74,8 +103,6 @@ export class WritePostComponent implements OnInit,AfterViewInit {
         that.post.postContent=that.editor.getMarkdown();
       }
     });
-
-
   }
   public save(){
     this.firstSubmit=false;
@@ -83,7 +110,7 @@ export class WritePostComponent implements OnInit,AfterViewInit {
       this.lgModal.show();
     }else {
       this.post.status=0;
-      this.writePostService.newPost(this.post)
+      this.writePostService.writePost(this.post)
         .subscribe(
           res=>{
             if(res&&res.success){
@@ -93,7 +120,7 @@ export class WritePostComponent implements OnInit,AfterViewInit {
               this.toastr.error(res.msg,"系统提示");
             }
           },
-          error=>{},
+          error=>{this.toastr.error(error.json()["msg"]?error.json()["msg"]:"未知错误",'系统提示');},
           ()=>{}
         );
     }
@@ -105,7 +132,7 @@ export class WritePostComponent implements OnInit,AfterViewInit {
       this.lgModal.show();
     }else {
       this.post.status=1;
-      this.writePostService.newPost(this.post)
+      this.writePostService.writePost(this.post)
         .subscribe(
           res=>{
             if(res&&res.success){
@@ -114,10 +141,38 @@ export class WritePostComponent implements OnInit,AfterViewInit {
               this.toastr.error(res.msg,"系统提示");
             }
           },
-          error=>{},
+          error=>{this.toastr.error(error.json()["msg"]?error.json()["msg"]:"未知错误",'系统提示');},
           ()=>{}
         );
     }
+  }
+
+  public saveEdit(){
+    this.firstSubmit=false;
+    this.writePostService.editPost(this.post)
+      .subscribe(
+        res=>{
+          if(res&&res.success){
+            this.toastr.success("保存成功","系统提示");
+          }else{
+            this.toastr.error(res.msg,"系统提示");
+          }
+        },
+        error=>{this.toastr.error(error.json()["msg"]?error.json()["msg"]:"未知错误",'系统提示');},
+        ()=>{}
+      );
+  }
+
+  //查询所要修改的文章
+  public getEditPost(id:number){
+    this.writePostService
+      .getEditPost(id)
+      .subscribe(
+        data => {
+          this.post = data;
+        },
+        error => this.toastr.error(error.json()["msg"]?error.json()["msg"]:"未知错误",'系统提示')
+      );
   }
 
   public queryCategory(){
@@ -125,7 +180,7 @@ export class WritePostComponent implements OnInit,AfterViewInit {
       .queryCategory()
       .subscribe(
         data => this.categories = data,
-        error => console.error(error)
+        error => this.toastr.error(error.json()["msg"]?error.json()["msg"]:"未知错误",'系统提示')
       )
   }
 

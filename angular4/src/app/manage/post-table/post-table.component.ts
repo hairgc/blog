@@ -3,6 +3,7 @@ import {Post} from "../../post/model/post.model";
 import {LazyLoadEvent, SelectItem} from "primeng/primeng";
 import {PostTableService} from "./services/post-table.service";
 import {CategoryTableService} from "app/manage/category-table/services/category-table.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-post-table',
@@ -17,8 +18,13 @@ export class PostTableComponent implements OnInit {
   public enableCommentOptions:SelectItem[];
   public statusOptions:SelectItem[];
   public categoryOptions:SelectItem[];
+  //记录分页信息
+  public pageNum:number;
+  public rowNum:number;
+
   constructor(public postTableService:PostTableService,
-              public categoryTableService:CategoryTableService) {
+              public categoryTableService:CategoryTableService,
+              public toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -59,8 +65,9 @@ export class PostTableComponent implements OnInit {
     //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
 
     //imitate db connection over a network
-
-    this.queryPosts(1+event.first/event.rows,event.rows);
+    this.pageNum=1+event.first/event.rows;
+    this.rowNum=event.rows
+    this.queryPosts(this.pageNum,this.rowNum);
   }
 
   queryPosts(pageNum:number,rowNum:number){
@@ -69,17 +76,28 @@ export class PostTableComponent implements OnInit {
         this.posts=res.rows;
         this.totalRecords=res.total;
       },
-      error=>{},
+      error=>{
+        this.toastr.error(error.json()["msg"]?error.json()["msg"]:"未知错误",'系统提示');
+      },
       ()=>{}
     )
   }
 
-  onCellEditComplete(event){
-    console.log(event)
-  }
-
   saveDrop(event){
-    console.log(event)
+    this.postTableService.attributeModification(event).subscribe(
+      res=>{
+        if(res&&res.success){
+          //修改成功什么也不做
+        }else{
+          this.toastr.error(res.msg,"系统提示");
+          this.queryPosts(this.pageNum,this.rowNum);
+        }
+      },
+      error=>{
+        this.toastr.error(error.json()["msg"]?error.json()["msg"]:"未知错误",'系统提示');
+      },
+      ()=>{}
+    )
   }
   setStyles(){
     let styles={

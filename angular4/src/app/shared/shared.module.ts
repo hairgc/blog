@@ -1,21 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserInfoComponent } from "../user/user-info/user-info.component";
 import { TranslateModule } from "@ngx-translate/core";
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
+import {ModalModule} from "ngx-bootstrap";
+
+import { UserInfoComponent } from "../user/user-info/user-info.component";
+import { WritePostComponent } from "../post/write-post/write-post.component";
+import { WritePostService } from "../post/write-post/service/write-post.service";
+
 
 @NgModule({
   imports: [
     CommonModule,
     TranslateModule,
-    FormsModule
+    FormsModule,
+    ModalModule.forRoot()
   ],
   declarations: [
-    UserInfoComponent
+    UserInfoComponent,
+    WritePostComponent
+  ],
+  providers:[
+    WritePostService
   ],
   exports:[
     UserInfoComponent,
     TranslateModule,
+    WritePostComponent,
     FormsModule
   ]
 })

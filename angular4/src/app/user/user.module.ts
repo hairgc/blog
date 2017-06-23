@@ -1,30 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from "@angular/router";
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-import { ModalModule } from 'ngx-bootstrap';
 
 import { CategoryService } from "../home/category/services/category.service";
-import { WritePostComponent } from '../post/write-post/write-post.component';
+import { SharedModule } from "../shared/shared.module";
 import { userRoutes } from './user.routes';
-import {WritePostService} from "../post/write-post/service/write-post.service";
+import {UserGuard} from "./user.guard";
+
 
 
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-    ModalModule.forRoot(),
+    SharedModule,
     RouterModule.forChild(userRoutes)
   ],
-  declarations: [
-    WritePostComponent
-  ],
+  declarations: [],
   providers:[
     CategoryService,
-    WritePostService
+    UserGuard
   ]
 })
 export class UserModule { }

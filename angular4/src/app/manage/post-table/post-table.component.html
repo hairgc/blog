@@ -1,10 +1,9 @@
 <p-dataTable [value]="posts" [lazy]="true" [rows]="10" [paginator]="true"
              [rowsPerPageOptions]="[10,20,50]" [editable]="true" [responsive]="true"
-             [totalRecords]="totalRecords" (onLazyLoad)="loadPostsLazy($event)"
-             (onEditComplete)="onCellEditComplete($event)">
+             [totalRecords]="totalRecords" (onLazyLoad)="loadPostsLazy($event)">
   <p-header>文章管理</p-header>
   <p-column field="id" header="ID" [hidden]="true"></p-column>
-  <p-column field="title" header="标题" [editable]="true" [style]="{'width':'250px','text-align':'center'}"></p-column>
+  <p-column field="title" header="标题" [style]="{'width':'250px','text-align':'center'}"></p-column>
   <p-column field="postType" header="文章类型" [style]="setEditorStyles()" [editable]="true">
     <ng-template let-col let-post="rowData" pTemplate="body">
       {{post.postType===0?"原创":post.postType===1?"转载":post.postType===2?"翻译":""}}
@@ -55,6 +54,17 @@
                    (onChange)="saveDrop(post);"
                    [autoWidth]="false" [style]="{'width':'100%'}" required="true">
       </p-dropdown>
+    </ng-template>
+  </p-column>
+
+  <!--编辑按钮-->
+  <p-column styleClass="col-button" [style]="setStyles()">
+    <ng-template pTemplate="header">
+      编辑
+    </ng-template>
+    <ng-template let-post="rowData" pTemplate="body">
+      <button type="button" pButton icon="fa-pencil" class="ui-button-success"
+              [routerLink]="['/user/editpost',post.id]"></button>
     </ng-template>
   </p-column>
 </p-dataTable>
