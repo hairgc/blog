@@ -10,8 +10,12 @@
     "post": {
       "publish": "发布文章",
       "sticky":"置顶",
-      "readTimes":"阅读次数",
-      "commentTimes":"评论次数"
+      "readTimes":"阅读",
+      "commentTimes":"评论",
+      "postIn":"发表于",
+      "original":"原创",
+      "reprinted":"转载",
+      "translation":"翻译"
     },
     "user":{
       "authorinfo":"作者信息",
@@ -34,5 +38,6 @@
     "firstPage": "首页",
     "lastPage": "末页",
     "previousPage": "上一页",
-    "nextPage": "下一页"
+    "nextPage": "下一页",
+    "edit":"编辑"
 }

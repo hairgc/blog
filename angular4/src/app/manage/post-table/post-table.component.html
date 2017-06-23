@@ -60,7 +60,7 @@
   <!--编辑按钮-->
   <p-column styleClass="col-button" [style]="setStyles()">
     <ng-template pTemplate="header">
-      编辑
+      {{'edit'|translate}}
     </ng-template>
     <ng-template let-post="rowData" pTemplate="body">
       <button type="button" pButton icon="fa-pencil" class="ui-button-success"

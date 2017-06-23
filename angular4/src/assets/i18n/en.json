@@ -11,7 +11,11 @@
       "publish":"publish",
       "sticky":"Sticky",
       "readTimes":"read",
-      "commentTimes":"comment"
+      "commentTimes":"comment",
+      "postIn":"published on",
+      "original":"Original",
+      "reprinted":"Reprinted",
+      "translation":"Translation"
     },
     "user":{
       "authorinfo":"Author Info",
@@ -34,5 +38,6 @@
     "firstPage":"First",
     "lastPage":"Last",
     "previousPage":"Previous",
-    "nextPage":"Next"
+    "nextPage":"Next",
+    "edit":"edit"
 }

@@ -3,6 +3,8 @@ import {ActivatedRoute} from "@angular/router";
 
 import {Post} from "../model/post.model";
 import {PostDetailService} from "../post-detail-main/service/post-detail.service";
+import {LoginService} from "../../user/login/login.service";
+import {User} from "../../user/model/user.model";
 
 
 @Component({
@@ -13,6 +15,8 @@ import {PostDetailService} from "../post-detail-main/service/post-detail.service
 export class PostDetailComponent implements OnInit {
 
   public post: Post = new Post();//获取父组件传递的值
+  public hasLogin:boolean=false;
+  public currentUser:User=new User();
   public editormdView:any;
 
   @Input()
@@ -32,9 +36,11 @@ export class PostDetailComponent implements OnInit {
     return this.post;
   }
   constructor(public postDetailService:PostDetailService,
+              public loginService:LoginService,
               public activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
-
+    this.hasLogin=this.loginService.hasLogin;
+    this.currentUser=this.loginService.user;
   }
 }

@@ -40,10 +40,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     this.hasLogin=this.loginService.hasLogin;
-    if(this.hasLogin){
-      this.currentUser=JSON.parse(window.localStorage.getItem("currentUser"));
-    }
-
+    this.currentUser=this.loginService.user;
   }
 
   public getCommentList(postId: number,pageNum:number){

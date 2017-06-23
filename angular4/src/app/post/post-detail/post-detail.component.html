@@ -2,12 +2,23 @@
   <div class="row">
     <div class="col-sm-12">
       <h3 style="line-height:1.3">
-        <span *ngIf="post.postType===0" class="label label-success">原创</span>
-        <span *ngIf="post.postType===1" class="label label-danger">转载</span>
-        <span *ngIf="post.postType===2" class="label label-warning">翻译</span>
+        <span *ngIf="post.postType===0" class="label label-success">{{'post.original'|translate}}</span>
+        <span *ngIf="post.postType===1" class="label label-danger">{{'post.reprinted'|translate}}</span>
+        <span *ngIf="post.postType===2" class="label label-warning">{{'post.translation'|translate}}</span>
         {{ post.title }}
       </h3>
-      <p>{{ post.user.nickName }} 发表于 {{ post.postTime | date:'yyyy-MM-dd HH:mm:ss'}}&#12288;&#12288;&#12288;&#12288;阅读：{{ post.readTimes }} &#12288;&#12288;&#12288;&#12288;评论：{{ post.commentTimes }}</p>
+      <div class="row info">
+        <div class="col-sm-6 col-md-5">
+          {{ post.user.nickName }} {{'post.postIn'|translate}} {{ post.postTime | date:'yyyy-MM-dd HH:mm:ss'}}
+        </div>
+        <div class="col-sm-5 col-md-6">
+          {{'post.readTimes'|translate}}:&nbsp;{{post.readTimes}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {{'post.commentTimes'|translate}}:&nbsp;{{ post.commentTimes }}
+        </div>
+        <div *ngIf="hasLogin && currentUser && post.user && currentUser.id===post.user.id" class="col-sm-1 col-md-1">
+          <button [routerLink]="['/user/editpost',post.id]" type="button" class="btn btn-warning btn-xs">{{'edit'|translate}}</button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">

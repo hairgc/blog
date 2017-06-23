@@ -31,7 +31,7 @@ export class PostlistComponent implements OnInit {
 
     this.activeRoute.queryParams.subscribe(params=>{
       this.categoryId=params.categoryId?params.categoryId:-1;
-      this.loadData(this.searchText,params.page?params.page:1);
+      this.loadData(this.searchText,1);
     })
 
 
@@ -55,7 +55,8 @@ export class PostlistComponent implements OnInit {
   }
 
   public pageChanged(event:any):void {
-    this.router.navigate(['/posts/page'],{queryParams:{categoryId:this.categoryId,page:event.page}});
+    //this.router.navigate(['/posts/page'],{queryParams:{categoryId:this.categoryId,page:event.page}});
+    this.loadData(this.searchText,event.page)
   }
 
   public searchChanged($event):void{

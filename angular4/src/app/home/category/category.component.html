@@ -5,7 +5,7 @@
     </div>
     <div class="list-group">
       <a class="list-group-item" *ngFor="let category of categories; let index=index"
-         routerLinkActive="list-group-item-success" routerLink="/posts/page" [queryParams]="{categoryId:category.id,page:1}"
+         routerLinkActive="list-group-item-success" routerLink="/posts/page" [queryParams]="{categoryId:category.id}"
          >
         {{category.categoryName}}
         <span class="badge">{{category.postSize}}</span>
