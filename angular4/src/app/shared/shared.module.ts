@@ -7,7 +7,7 @@ import { ModalModule } from "ngx-bootstrap";
 import { UserInfoComponent } from "../user/user-info/user-info.component";
 import { WritePostComponent } from "../post/write-post/write-post.component";
 import { WritePostService } from "../post/write-post/service/write-post.service";
-import { SitestatComponent } from "../sitestat/sitestat.component";
+import { SiteStatComponent } from "../sitestat/sitestat.component";
 import { SiteStatService } from "../sitestat/services/sitestat.service";
 
 @NgModule({
@@ -20,7 +20,7 @@ import { SiteStatService } from "../sitestat/services/sitestat.service";
   declarations: [
     UserInfoComponent,
     WritePostComponent,
-    SitestatComponent
+    SiteStatComponent
   ],
   providers:[
     WritePostService,
@@ -30,7 +30,7 @@ import { SiteStatService } from "../sitestat/services/sitestat.service";
     UserInfoComponent,
     TranslateModule,
     WritePostComponent,
-    SitestatComponent,
+    SiteStatComponent,
     FormsModule
   ]
 })

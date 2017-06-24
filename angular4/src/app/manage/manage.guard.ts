@@ -23,6 +23,8 @@ export class ManageGuard implements CanActivate {
       return this.loginService.permission.includes("visitor:manage")
     }else if(state.url.startsWith("/manage/posttable")){
       return this.loginService.permission.includes("post:manage")
+    }else if(state.url.startsWith("/manage/categorytable")){
+      return this.loginService.permission.includes("category:manage")
     }else if(state.url.startsWith("/manage/commenttable")){
       return this.loginService.permission.includes("comment:manage")
     }else if(state.url.startsWith("/manage/usertable")){

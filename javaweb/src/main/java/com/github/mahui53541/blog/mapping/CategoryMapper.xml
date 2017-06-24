@@ -13,7 +13,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,category_name,post_size, desc
+        id,category_name,post_size, `desc`
     </sql>
     <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
         SELECT * FROM category
@@ -36,7 +36,7 @@
                 post_size,
             </if>
             <if test="desc!= null">
-                desc,
+                `desc`,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -62,7 +62,7 @@
                 post_size=#{postSize},
             </if>
             <if test="desc!= null">
-                desc=#{desc},
+                `desc`=#{desc},
             </if>
         </set>
         where id = #{id}

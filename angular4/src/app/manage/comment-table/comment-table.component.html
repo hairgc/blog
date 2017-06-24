@@ -1,3 +1,27 @@
-<p>
-  comment-table works!
-</p>
+<div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+  <p-dropdown [autoWidth]="false" [style]="{'width':'100px'}" [options]="categoryOptions"
+              (onChange)="reloadPost($event)" [(ngModel)]="categoryId" placeholder="选择文章分类"></p-dropdown>
+  <p-dropdown #pd [autoWidth]="false" [style]="{'width':'200px'}" [options]="postOptions"
+              [(ngModel)]="postId" (onChange)="dt.reset();" placeholder="选择文章"></p-dropdown>
+</div>
+<p-dataTable #dt [value]="comments" [paginator]="true" [responsive]="true" [editable]="true"
+             [lazy]="true" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,50]"
+             [totalRecords]="totalRecords" (onLazyLoad)="loadCommentsLazy($event)">
+  <p-header>文章评论管理</p-header>
+  <p-column field="id" header="ID" [hidden]="true"></p-column>
+  <p-column field="content" header="评论内容" [style]="{'width':'250px','text-align':'center'}"></p-column>
+  <p-column field="commentTime" header="评论时间" [style]="setStyles()"></p-column>
+  <p-column field="reName" header="回复于" [style]="setStyles()"></p-column>
+  <p-column field="status" header="评论状态" [style]="setEditorStyles()" [editable]="true">
+    <ng-template let-col let-comment="rowData" pTemplate="body">
+      {{comment.status===0?"已删除":comment.status===1?"正常":"优质评论"}}
+    </ng-template>
+    <!--可编辑-->
+    <ng-template let-col let-comment="rowData" pTemplate="editor">
+      <p-dropdown  [(ngModel)]="comment['status']" [options]="statusOptions"
+                   (onChange)="saveDrop(comment)"
+                   [autoWidth]="false" [style]="{'width':'100%'}" required="true">
+      </p-dropdown>
+    </ng-template>
+  </p-column>
+</p-dataTable>

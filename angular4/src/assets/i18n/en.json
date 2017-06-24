@@ -39,5 +39,7 @@
     "lastPage":"Last",
     "previousPage":"Previous",
     "nextPage":"Next",
-    "edit":"edit"
+    "add":"Add",
+    "delete":"Delete",
+    "edit":"Edit"
 }

@@ -27,6 +27,13 @@ public interface PostService extends BaseService<Post,Integer> {
      */
     List<Post> queryByUserId(RowBounds rowBounds,Integer userId);
 
+    /**
+     * 评论管理管理模块查询不分页
+     * @param categoryId
+     * @return
+     */
+    List<Post> queryByCategoryId(Integer categoryId);
+
      /**
      * 浏览次数加一
      * @param id
@@ -44,4 +51,16 @@ public interface PostService extends BaseService<Post,Integer> {
      * @param id
      */
     void commentTimesMinusOne(Integer id);
+
+    /**
+     * 查询文章数
+     * @return
+     */
+    int countAll();
+
+    /**
+     * 浏览数
+     * @return
+     */
+    int countReadTimes();
 }

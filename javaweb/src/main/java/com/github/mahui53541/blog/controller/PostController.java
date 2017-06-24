@@ -26,6 +26,13 @@ public class PostController extends BaseController {
     @Autowired
     private PostService postService;
 
+    /**
+     * 文章列表
+     * @param page
+     * @param categoryId
+     * @param searchText
+     * @return
+     */
     @RequestMapping(value = "/queryPostListByPage",method = RequestMethod.GET)
     @ResponseBody
     public HashMap<String,Object> query(
@@ -40,6 +47,18 @@ public class PostController extends BaseController {
         return map;
     }
 
+    @RequestMapping(value = "/querySelect/{categoryId}",method = RequestMethod.GET)
+    @ResponseBody
+    public List<Post> querySelect(@PathVariable Integer categoryId){
+        return postService.queryByCategoryId(categoryId);
+    }
+    /**
+     * 写文章
+     * @param post
+     * @param session
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/write", method = RequestMethod.POST)
     @ResponseBody
     @RequiresPermissions("post:add")

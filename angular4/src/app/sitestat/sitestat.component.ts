@@ -6,7 +6,7 @@ import {SiteStatService} from "./services/sitestat.service";
   templateUrl: './sitestat.component.html',
   styleUrls: ['./sitestat.component.css']
 })
-export class SitestatComponent implements OnInit {
+export class SiteStatComponent implements OnInit {
 
   public currentTime: Date = new Date();
 
@@ -25,6 +25,9 @@ export class SitestatComponent implements OnInit {
     res=>{
       if(res && !res.msg){
         this.onlineUsers=res.onlineUsers;
+        this.commentNum=res.commentNum;
+        this.readNum=res.readNum;
+        this.postNum=res.postNum;
       }
     },
     error=>{

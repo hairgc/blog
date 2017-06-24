@@ -2,6 +2,8 @@ package com.github.mahui53541.blog.controller;
 
 import com.github.mahui53541.blog.po.User;
 import com.github.mahui53541.blog.po.VisitorRecord;
+import com.github.mahui53541.blog.service.CommentService;
+import com.github.mahui53541.blog.service.PostService;
 import com.github.mahui53541.blog.service.VisitorRecordService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.LockedAccountException;
@@ -27,6 +29,10 @@ public class AccessController extends BaseController{
 
     @Autowired
     private VisitorRecordService visitorRecordService;
+    @Autowired
+    private PostService postService;
+    @Autowired
+    private CommentService commentService;
     @Autowired
     private SessionDAO sessionDAO;
 
@@ -93,6 +99,9 @@ public class AccessController extends BaseController{
     public HashMap<String,Object> siteStat()throws Exception{
         HashMap<String,Object> result=new HashMap<String,Object>();
         result.put("onlineUsers",sessionDAO.getActiveSessions().size());
+        result.put("postNum",postService.countAll());
+        result.put("readNum",postService.countReadTimes());
+        result.put("commentNum",commentService.countAll());
         return result;
     }
 }

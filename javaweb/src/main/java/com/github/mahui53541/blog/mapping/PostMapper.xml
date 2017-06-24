@@ -172,9 +172,28 @@
         order by status desc,post_time desc
     </select>
 
+    <!--根据categoryID查询不分页-->
+    <select id="queryByCategoryId" resultMap="BaseResultMap" databaseId="mysql">
+        select id,title from post where status!=0 and status!=3
+        <if test="categoryId !=null and categoryId>0">
+            and category_id=#{categoryId,jdbcType=INTEGER}
+        </if>
+        order by status desc,post_time desc
+    </select>
+
     <!--根据categoryID查询个数-->
     <select id="countByCategoryId" resultType="java.lang.Integer" parameterType="java.lang.Integer" databaseId="mysql">
         select count(*) from post where status!=0 and status!=3 and category_id = #{categoryId}
+    </select>
+
+    <!--查询文章总数-->
+    <select id="countAll" resultType="java.lang.Integer" databaseId="mysql">
+        select count(*) from post where status!=0 and status!=3
+    </select>
+
+    <!--查询总的浏览次数-->
+    <select id="countReadTimes" resultType="java.lang.Integer" databaseId="mysql">
+        select sum(read_times) from post where status!=0 and status!=3
     </select>
 
     <update id="readTimesPlusOne" parameterType="java.lang.Integer">
@@ -194,4 +213,9 @@
         from post where user_id = #{userId} order by status desc,post_time desc
     </select>
 
+    <!--评论根据postID查询-->
+    <select id="queryByCommentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" databaseId="mysql">
+        select id,title
+        from post where id = #{id} order by status desc,post_time desc
+    </select>
 </mapper>

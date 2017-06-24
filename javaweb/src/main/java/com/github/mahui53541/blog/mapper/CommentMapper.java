@@ -15,10 +15,24 @@ import java.util.List;
  */
 public interface CommentMapper extends BaseMapper<Comment,Integer>{
     /**
-     * 获取文章的评论（分页获取）
+     * 文章详情页获取文章的评论（分页获取）
      * @param rowBounds
      * @param postId
      * @return
      */
     List<Comment> selectByPostId(@Param("rowBounds") RowBounds rowBounds, @Param("postId")Integer postId );
+
+    /**
+     * 评论管理页获取文章的评论（分页获取）
+     * @param rowBounds
+     * @param postId
+     * @return
+     */
+    List<Comment> selectAllByPostId(@Param("rowBounds") RowBounds rowBounds, @Param("postId")Integer postId );
+
+    /**
+     * 查询评论数
+     * @return
+     */
+    int countAll();
 }

@@ -7,6 +7,10 @@
         <result column="comment_time" jdbcType="TIMESTAMP" property="commentTime" />
         <result column="status" jdbcType="TINYINT" property="status" />
         <result column="re_name" jdbcType="VARCHAR" property="reName"/>
+        <association property="post" column="post_id"
+                     select="com.github.mahui53541.blog.mapper.PostMapper.queryByCommentId"
+                     javaType="com.github.mahui53541.blog.po.Post">
+        </association>
         <association property="user" column="open_id"
                      select="com.github.mahui53541.blog.mapper.UserMapper.selectByOpenID"
                      javaType="com.github.mahui53541.blog.po.User">
@@ -15,6 +19,9 @@
 
     <sql id="Base_Column_List">
         id,content,comment_time, status,re_name,open_id
+    </sql>
+    <sql id="Post_Column_List">
+        id,content,comment_time, status,re_name,post_id
     </sql>
     <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
         SELECT * FROM comment
@@ -84,11 +91,28 @@
         where id = #{id}
     </update>
 
+    <!--文章详情查询评论-->
     <select id="selectByPostId" resultMap="BaseResultMap" databaseId="mysql">
         select <include refid="Base_Column_List" /> from comment where status!=0
         <if test="postId !=null and postId>0">
             and post_id=#{postId,jdbcType=INTEGER}
         </if>
         order by status desc,comment_time desc
+    </select>
+
+    <!--评论管理查询评论-->
+    <select id="selectAllByPostId" resultMap="BaseResultMap" databaseId="mysql">
+        select <include refid="Post_Column_List" /> from comment
+        <where>
+            <if test="postId !=null and postId>0">
+                post_id=#{postId,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by status desc,comment_time desc
+    </select>
+
+    <!--查询评论总数-->
+    <select id="countAll" resultType="java.lang.Integer" databaseId="mysql">
+        select count(*) from comment where status!=0
     </select>
 </mapper>

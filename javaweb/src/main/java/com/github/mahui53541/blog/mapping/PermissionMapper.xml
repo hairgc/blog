@@ -9,7 +9,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,code, name,desc
+        id,code, `name`, `desc`
     </sql>
 
     <select id="findAll" databaseId="mysql" resultMap="BaseResultMap">
@@ -25,16 +25,16 @@
     </delete>
 
     <insert id="insertSelective" parameterType="Permission" useGeneratedKeys="true" keyProperty="id" databaseId="mysql">
-        insert into role
+        insert into permission
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="code!= null">
                 code,
             </if>
             <if test="name!= null">
-                name,
+                `name`,
             </if>
             <if test="desc!= null">
-                desc,
+                `desc`,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -42,25 +42,25 @@
                 code,
             </if>
             <if test="name!= null">
-                name,
+                `name`,
             </if>
             <if test="desc!= null">
-                desc,
+                `desc`,
             </if>
         </trim>
     </insert>
 
     <update id="updateByPrimaryKeySelective" parameterType="Permission">
-        update user
+        update permission
         <set>
             <if test="code!= null">
                 code=#{code},
             </if>
             <if test="name!= null">
-                name=#{name},
+                `name`=#{name},
             </if>
             <if test="desc!= null">
-                desc=#{desc},
+                `desc`=#{desc},
             </if>
         </set>
         where id = #{id}

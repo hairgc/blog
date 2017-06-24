@@ -32,6 +32,13 @@ public interface PostMapper extends BaseMapper<Post,Integer> {
     List<Post> queryByUserId(@Param("rowBounds") RowBounds rowBounds,@Param("userId")Integer userId);
 
     /**
+     * 评论管理管理模块查询不分页
+     * @param categoryId
+     * @return
+     */
+    List<Post> queryByCategoryId(@Param("categoryId")Integer categoryId);
+
+    /**
      * 浏览次数加一
      * @param id
      */
@@ -49,4 +56,22 @@ public interface PostMapper extends BaseMapper<Post,Integer> {
      */
     void commentTimesMinusOne(@Param("id") Integer id);
 
+    /**
+     * 查询文章数
+     * @return
+     */
+    int countAll();
+
+    /**
+     * 浏览数
+     * @return
+     */
+    int countReadTimes();
+
+    /**
+     * 评论查询post
+     * @param id
+     * @return
+     */
+    Post queryByCommentId(Integer id);
 }

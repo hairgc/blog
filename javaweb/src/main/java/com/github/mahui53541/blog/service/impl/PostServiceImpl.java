@@ -23,6 +23,11 @@ public class PostServiceImpl extends BaseServiceImpl<Post,Integer> implements Po
     }
 
     @Override
+    public List<Post> queryByCategoryId(Integer categoryId) {
+        return postMapper.queryByCategoryId(categoryId);
+    }
+
+    @Override
     public void readTimesPlusOne(Integer id) {
         postMapper.readTimesPlusOne(id);
     }
@@ -35,5 +40,15 @@ public class PostServiceImpl extends BaseServiceImpl<Post,Integer> implements Po
     @Override
     public void commentTimesMinusOne(Integer id) {
         postMapper.commentTimesMinusOne(id);
+    }
+
+    @Override
+    public int countAll() {
+        return postMapper.countAll();
+    }
+
+    @Override
+    public int countReadTimes() {
+        return postMapper.countReadTimes();
     }
 }

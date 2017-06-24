@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -42,20 +42,15 @@ public class CommentController extends BaseController {
     @ResponseBody
     @RequiresPermissions("comment:add")
     public Map<String, Object> newComment(@RequestBody Comment comment)  {
-        Session session= SecurityUtils.getSubject().getSession(false);
-
-        if(session!=null){
-            User user=(User)session.getAttribute("user");
-            comment.setUser(user);
-        }
-        comment.setCommentTime(new Date());
-        comment.setStatus(1);
-        commentService.insertSelective(comment);
-        //文章对应的评论数加一
-        postService.commentTimesPlusOne(comment.getPost().getId());
+        commentService.newComment(comment);
         return this.ajaxSuccessResponse();
     }
 
+    /**
+     * 删除自己的评论
+     * @param comment
+     * @return
+     */
     @RequestMapping(value = "/deleteComment", method = RequestMethod.POST)
     @ResponseBody
     @RequiresPermissions("comment:delete")
@@ -64,10 +59,7 @@ public class CommentController extends BaseController {
         if(session!=null){
             User user=(User)session.getAttribute("user");
             if(comment.getUser()!=null && user.getId()==comment.getUser().getId()){
-                //文章对应的评论数减一
-                comment.setStatus(0);
-                commentService.updateByPrimaryKeySelective(comment);
-                postService.commentTimesMinusOne(comment.getPost().getId());
+                commentService.deleteComment(comment);
                 return this.ajaxSuccessResponse();
             }else{
                 return this.ajaxFailureResponse("只能删除自己的评论哦！");
@@ -75,5 +67,39 @@ public class CommentController extends BaseController {
         }else{
             return this.ajaxFailureResponse("用户不存在，删除失败！");
         }
+    }
+
+    /**
+     * 分页查询
+     * @param pageNum
+     * @param rowNum
+     * @return
+     */
+    @RequestMapping(value = "/queryByPage",method = RequestMethod.GET)
+    @ResponseBody
+    @RequiresPermissions("category:manage")
+    public HashMap<String,Object> queryByPage(
+            @RequestParam(required=false,defaultValue = "1")Integer pageNum,
+            @RequestParam(required=false,defaultValue = "10")Integer rowNum,
+            Integer postId){
+        PageRowBounds pageRowBounds=new PageRowBounds(pageNum,rowNum);
+        List<Comment> comments=commentService.selectAllByPostId(pageRowBounds,postId);
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        map.put("rows",comments);
+        map.put("total",pageRowBounds.getTotal());
+        return map;
+    }
+
+    /**
+     * 修改评论评论
+     * @param comment
+     * @return
+     */
+    @RequestMapping(value = "/editComment", method = RequestMethod.POST)
+    @ResponseBody
+    @RequiresPermissions("comment:update")
+    public Map<String, Object> editComment(@RequestBody Comment comment)  {
+        commentService.editComment(comment);
+        return ajaxSuccessResponse();
     }
 }
