@@ -26,3 +26,4 @@ hs_err_pid*
 /javaweb/gradle/
 /javaweb/src/main/resources/qqconnectconfig.properties
 /javaweb/src/main/java/com/github/mahui53541/blog/util/FileUpload.java
+/javaweb/src/main/resources/mysql-db.properties
