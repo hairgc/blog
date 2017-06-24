@@ -126,7 +126,6 @@ public class OAuth2Realm extends AuthorizingRealm {
                 user.setAvatarURL100(userInfoBean.getAvatar().getAvatarURL100());
                 user.setNickName(userInfoBean.getNickname());
                 userService.insertSelective(user);
-
                 UserRole ur=new UserRole();
                 ur.setOpenId(user.getOpenId());
                 ur.setRoleId(1);

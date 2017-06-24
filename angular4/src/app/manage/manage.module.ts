@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from "@angular/router";
 import {
+  CalendarModule,
   DataTableModule, DialogModule, DropdownModule, InputTextModule,
   SharedModule as PrimengSharedModule
 } from 'primeng/primeng';
@@ -20,6 +21,8 @@ import { PostTableService } from "./post-table/services/post-table.service";
 import { CategoryTableComponent } from './category-table/category-table.component';
 import { CategoryTableService } from "./category-table/services/category-table.service";
 import {CommentTableService} from "./comment-table/services/comment-table.service";
+import {UserTableService} from "./user-table/services/user-table.service";
+import { DateIsBefore } from "../utils/isbefore.pipe";
 
 
 
@@ -33,6 +36,7 @@ import {CommentTableService} from "./comment-table/services/comment-table.servic
     ButtonModule,
     DialogModule,
     InputTextModule,
+    CalendarModule,
     RouterModule.forChild(manageRoutes)
   ],
   declarations: [
@@ -41,14 +45,16 @@ import {CommentTableService} from "./comment-table/services/comment-table.servic
     UserTableComponent,
     CommentTableComponent,
     VisitorTableComponent,
-    CategoryTableComponent
+    CategoryTableComponent,
+    DateIsBefore
   ],
   providers:[
     ManageGuard,
     VisitorService,
     PostTableService,
     CategoryTableService,
-    CommentTableService
+    CommentTableService,
+    UserTableService
   ]
 })
 export class ManageModule { }

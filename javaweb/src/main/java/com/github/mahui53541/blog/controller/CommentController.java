@@ -3,7 +3,6 @@ package com.github.mahui53541.blog.controller;
 import com.github.mahui53541.blog.po.Comment;
 import com.github.mahui53541.blog.po.User;
 import com.github.mahui53541.blog.service.CommentService;
-import com.github.mahui53541.blog.service.PostService;
 import com.github.pagehelper.PageRowBounds;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -25,8 +24,7 @@ public class CommentController extends BaseController {
 
     @Autowired
     private CommentService commentService;
-    @Autowired
-    private PostService postService;
+
     @RequestMapping(value = "/{postId}/{pageNum}", method = RequestMethod.GET)
     @ResponseBody
     public HashMap<String,Object> getCommentByPostIdAndPage(@PathVariable("postId") Integer postId, @PathVariable("pageNum") Integer pageNum)

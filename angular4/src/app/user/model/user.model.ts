@@ -5,4 +5,6 @@ export class User {
   avatarURL50:string;
   avatarURL100:string;
   nickName: string;
+  status:number;
+  disabledTime:Date;
 }

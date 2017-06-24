@@ -1,6 +1,6 @@
 package com.github.mahui53541.blog.po;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.alibaba.fastjson.annotation.JSONField;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -42,7 +42,7 @@ public class User implements Serializable{
     private Byte status;
 
     //禁言到期
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	@JSONField(format = "yyyy-MM-dd HH:mm")
     private Date disabledTime;
 
     //用户拥有的文章
