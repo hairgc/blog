@@ -14,25 +14,23 @@
       </div>
     </p-footer>
   </p-dataTable>
-
-
-  <p-dialog header="分类详情" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
-    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="category">
-      <div class="ui-grid-row">
-        <div class="ui-grid-col-4"><label for="categoryName">分类描述</label></div>
-        <div class="ui-grid-col-8"><input pInputText id="categoryName" [(ngModel)]="category.categoryName" /></div>
-      </div>
-      <div class="ui-grid-row" style="margin-top: 20px">
-        <div class="ui-grid-col-4"><label for="desc">显示顺序</label></div>
-        <div class="ui-grid-col-8"><input type="number" pInputText id="desc" [(ngModel)]="category.desc" /></div>
-      </div>
-    </div>
-    <p-footer>
-      <div class="ui-dialog-buttonpane ui-helper-clearfix">
-        <button type="button" pButton icon="fa-close" (click)="delete()" label="{{'delete'|translate}}"></button>
-        <button type="button" pButton icon="fa-check" (click)="save()" label="{{'submit'|translate}}"></button>
-      </div>
-    </p-footer>
-  </p-dialog>
 </div>
 
+<p-dialog header="分类详情" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="false">
+  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="category">
+    <div class="ui-grid-row">
+      <div class="ui-grid-col-4"><label for="categoryName">分类描述</label></div>
+      <div class="ui-grid-col-8"><input pInputText id="categoryName" [(ngModel)]="category.categoryName" /></div>
+    </div>
+    <div class="ui-grid-row" style="margin-top: 20px">
+      <div class="ui-grid-col-4"><label for="desc">显示顺序</label></div>
+      <div class="ui-grid-col-8"><input type="number" pInputText id="desc" [(ngModel)]="category.desc" /></div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="ui-dialog-buttonpane ui-helper-clearfix">
+      <button type="button" pButton icon="fa-close" (click)="delete()" label="{{'delete'|translate}}"></button>
+      <button type="button" pButton icon="fa-check" (click)="save()" label="{{'submit'|translate}}"></button>
+    </div>
+  </p-footer>
+</p-dialog>

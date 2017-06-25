@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2017-06-21 22:16:15
+Date: 2017-06-25 15:52:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -167,14 +167,14 @@ CREATE TABLE `post` (
 -- ----------------------------
 -- Records of post
 -- ----------------------------
-INSERT INTO `post` VALUES ('1', '这里是测试文章一哈哈哈21这里是测试文测试文一哈哈哈21章一哈哈哈21', '2017-06-17 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000017', '2', '', '2', '1', '00000000000');
-INSERT INTO `post` VALUES ('2', '这里是测试文章二', '2017-06-16 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000010', '2', '', '2', '1', '00000000003');
-INSERT INTO `post` VALUES ('3', '这里是测试文章三哈哈哈21这里是测试文测试文一哈哈哈21章一哈哈哈21', '2017-06-17 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000019', '1', '', '2', '1', '00000000000');
+INSERT INTO `post` VALUES ('1', '这里是测试文章一哈哈哈21这里是测试文测试文一哈哈哈21章一哈哈哈21', '2017-06-17 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000031', '2', '', '2', '1', '00000000000');
+INSERT INTO `post` VALUES ('2', '这里是测试文章二', '2017-06-16 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000021', '2', '', '2', '1', '00000000003');
+INSERT INTO `post` VALUES ('3', '这里是测试文章三哈哈哈21这里是测试文测试文一哈哈哈21章一哈哈哈21', '2017-06-17 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000027', '1', '', '2', '1', '00000000000');
 INSERT INTO `post` VALUES ('4', '这里是测试文章四', '2017-06-16 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000001', '1', '', '2', '1', '00000000000');
 INSERT INTO `post` VALUES ('5', '这里是测试文章五', '2017-06-16 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000001', '1', '', '2', '1', '00000000000');
 INSERT INTO `post` VALUES ('6', '这里是测试文章六', '2017-06-16 19:57:14', '内容', '1', '2017-06-17 19:57:28', '00000000007', '1', '', '2', '1', '00000000000');
-INSERT INTO `post` VALUES ('19', '12312', '2017-06-18 15:59:58', '\n“永远年轻，永远热泪盈眶”\n\n\n当你试图放弃一个你知道是正确的事情的时候,希望你能再看看这句话。\n\n——《我的奋斗》\n\n\n面对挫折、不要愤怒、不要抗议，\n\n只管埋头默默擦亮你的武器，准备下一次的战斗。\n\n我们是做事的，不是要给人家看某种表情的。\n\n——《我的奋斗》\n', '1', '2017-06-18 15:59:58', '00000000015', '1', '', '2', '1', '00000000004');
-INSERT INTO `post` VALUES ('21', '测试一下下', '2017-06-18 20:37:53', '```java\n@RequestMapping(value = \"/queryPostListByPage\",method = RequestMethod.GET)\n    @ResponseBody\n    public HashMap<String,Object> query(\n            @RequestParam(required=false,defaultValue = \"1\")Integer page,\n            @RequestParam(required=false,defaultValue = \"-1\")Integer categoryId,\n            String searchText){\n        PageRowBounds pageRowBounds=new PageRowBounds(page,5);\n        List<Post> posts=postService.queryByPage(pageRowBounds,categoryId,searchText);\n        HashMap<String,Object> map=new HashMap<String,Object>();\n        map.put(\"rows\",posts);\n        map.put(\"total\",pageRowBounds.getTotal());\n        return map;\n    }\n\n    //测试阶段，暂时不加权限\n    @RequestMapping(value = \"/newPost\", method = RequestMethod.POST)\n    @ResponseBody\n    public Map<String,Object> newPost(@RequestBody Post post, HttpSession session) throws Exception {\n        User user=(User) session.getAttribute(\"user\");\n        post.setPostTime(new Date());\n        if(post.getStatus()==null){\n            post.setStatus((byte)1);\n        }\n        post.setLastModifyTime(new Date());\n        post.setUser(user);\n        if(post.getId()!=null){\n            postService.updateByPrimaryKeySelective(post);\n        }else{\n            postService.insertSelective(post);\n        }\n        return this.ajaxSuccessResponse(String.valueOf(post.getId()));\n    }\n```\n', '0', '2017-06-18 20:37:53', '00000000085', '1', '', '2', '1', '00000000000');
+INSERT INTO `post` VALUES ('19', '12312', '2017-06-18 15:59:58', '\n“永远年轻，永远热泪盈眶”\n\n\n当你试图放弃一个你知道是正确的事情的时候,希望你能再看看这句话。\n\n——《我的奋斗》\n\n\n面对挫折、不要愤怒、不要抗议，\n\n只管埋头默默擦亮你的武器，准备下一次的战斗。\n\n我们是做事的，不是要给人家看某种表情的。\n\n——《我的奋斗》\n', '1', '2017-06-18 15:59:58', '00000000017', '1', '', '2', '1', '00000000004');
+INSERT INTO `post` VALUES ('21', '测试一下下', '2017-06-18 20:37:53', '```java\n@RequestMapping(value = \"/queryPostListByPage\",method = RequestMethod.GET)\n    @ResponseBody\n    public HashMap<String,Object> query(\n            @RequestParam(required=false,defaultValue = \"1\")Integer page,\n            @RequestParam(required=false,defaultValue = \"-1\")Integer categoryId,\n            String searchText){\n        PageRowBounds pageRowBounds=new PageRowBounds(page,5);\n        List<Post> posts=postService.queryByPage(pageRowBounds,categoryId,searchText);\n        HashMap<String,Object> map=new HashMap<String,Object>();\n        map.put(\"rows\",posts);\n        map.put(\"total\",pageRowBounds.getTotal());\n        return map;\n    }\n\n    //测试阶段，暂时不加权限\n    @RequestMapping(value = \"/newPost\", method = RequestMethod.POST)\n    @ResponseBody\n    public Map<String,Object> newPost(@RequestBody Post post, HttpSession session) throws Exception {\n        User user=(User) session.getAttribute(\"user\");\n        post.setPostTime(new Date());\n        if(post.getStatus()==null){\n            post.setStatus((byte)1);\n        }\n        post.setLastModifyTime(new Date());\n        post.setUser(user);\n        if(post.getId()!=null){\n            postService.updateByPrimaryKeySelective(post);\n        }else{\n            postService.insertSelective(post);\n        }\n        return this.ajaxSuccessResponse(String.valueOf(post.getId()));\n    }\n```\n', '0', '2017-06-18 20:37:53', '00000000096', '1', '', '2', '1', '00000000000');
 
 -- ----------------------------
 -- Table structure for role
@@ -281,8 +281,10 @@ CREATE TABLE `visitor_record` (
   `out_date` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `nick_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of visitor_record
 -- ----------------------------
+INSERT INTO `visitor_record` VALUES ('1', '2017-06-21 22:33:11', '2017-06-21 22:33:23', '‭馬輝');
+INSERT INTO `visitor_record` VALUES ('2', '2017-06-25 11:05:08', null, '‭馬輝');

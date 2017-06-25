@@ -1,5 +1,5 @@
 # MaHuiBlog
-这是一个微型博客系统（还在做）
+这是一个微型博客系统（还在做，基本完成）
 
 - 前端基于Angular 4 + ngx-bootstrap(angular4文件夹下,不要在意这些命名)
 
@@ -42,6 +42,14 @@ IntelliJ IDEA(不要问为什么，用了你就知道，如果是学生可以根
 - 第六步：将javaweb/src/main/resources下的qqconnectconfig.properties配置文件填写自己申请的key
 
 - 第七步：运行项目，浏览器访问http://localhost。
+
+## 效果演示
+
+![](doc/img/first.gif)
+
+![](doc/img/second.gif)
+
+![](doc/img/third.gif)
 
 ## 开源许可证
  MIT
