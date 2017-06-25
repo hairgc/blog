@@ -2,13 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 			            http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 			            http://www.springframework.org/schema/context
 			            http://www.springframework.org/schema/context/spring-context-4.3.xsd
 			            http://www.springframework.org/schema/tx
-                       http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+                       http://www.springframework.org/schema/tx/spring-tx-4.3.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<!-- 扫描com.github.mahui53541.atm包下面的java文件，有Spring的相关注解的类，则把这些类注册为Spring的bean -->
     <!--<context:component-scan base-package="com.github.mahui53541.atm"/>-->
@@ -26,7 +26,38 @@
 	<!--导入shiro配置文件-->
 	<import resource="spring-shiro-config.xml" />
 
-	<!-- 启用支持annotation注解方式事务管理 -->
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- 注解方式配置事务 -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+
+	<!-- 拦截器方式配置事务 -->
+	<tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+			<tx:method name="insert*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="edit*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="remove*" propagation="REQUIRED" />
+
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="find*" propagation="SUPPORTS" />
+			<tx:method name="load*" propagation="SUPPORTS" />
+			<tx:method name="search*" propagation="SUPPORTS" />
+			<tx:method name="query*" propagation="SUPPORTS" />
+			<tx:method name="count*" propagation="SUPPORTS" />
+			<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut id="transactionPointcut" expression="execution(* com.github.mahui53541.blog.service..*Impl.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
+	</aop:config>
 
 </beans>
