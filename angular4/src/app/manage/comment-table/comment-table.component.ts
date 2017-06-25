@@ -4,10 +4,14 @@ import {CommentTableService} from "./services/comment-table.service";
 import {ToastrService} from "ngx-toastr";
 import {LazyLoadEvent, SelectItem} from "primeng/primeng";
 import {CategoryTableService} from "../category-table/services/category-table.service";
+import {flyIn} from "../../animations/fly-in";
 @Component({
   selector: 'app-comment-table',
   templateUrl: './comment-table.component.html',
-  styleUrls: ['./comment-table.component.css']
+  styleUrls: ['./comment-table.component.css'],
+  animations: [
+    flyIn
+  ]
 })
 export class CommentTableComponent implements OnInit {
 

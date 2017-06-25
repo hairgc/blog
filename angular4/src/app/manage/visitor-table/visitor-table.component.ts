@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {VisitorService} from "./services/visitor.service";
 import {Visitor} from "./model/visitor.model";
 import {LazyLoadEvent} from "primeng/primeng";
+import {flyIn} from "../../animations/fly-in";
 
 @Component({
   selector: 'app-visitor-table',
   templateUrl: './visitor-table.component.html',
-  styleUrls: ['./visitor-table.component.css']
+  styleUrls: ['./visitor-table.component.css'],
+  animations: [
+    flyIn
+  ]
 })
 export class VisitorTableComponent implements OnInit {
 

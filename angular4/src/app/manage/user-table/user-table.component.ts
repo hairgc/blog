@@ -3,11 +3,15 @@ import {User} from "../../user/model/user.model";
 import {LazyLoadEvent} from "primeng/primeng";
 import {UserTableService} from "./services/user-table.service";
 import {ToastrService} from "ngx-toastr";
+import {flyIn} from "../../animations/fly-in";
 
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',
-  styleUrls: ['./user-table.component.css']
+  styleUrls: ['./user-table.component.css'],
+  animations: [
+    flyIn
+  ]
 })
 export class UserTableComponent implements OnInit {
 
