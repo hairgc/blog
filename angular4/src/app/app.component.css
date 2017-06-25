@@ -47,13 +47,16 @@
   min-height: 500px;
 }
 
-.footer {
+.myfooter {
   text-align: left;
-  padding: 20px 20px;
-  background: #263238;
-  color: #fff;
+  padding: 15px;
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.myfooter > p{
+  color: #B3B8C4;
+  text-align: center;
 }

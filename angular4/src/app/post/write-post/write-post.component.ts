@@ -67,7 +67,7 @@ export class WritePostComponent implements OnInit,AfterViewInit {
     let that=this;
     that.editor = editormd("editormd", {
       path : "../assets/editormd/lib/", // Autoload modules mode, codemirror, marked... dependents libs path
-      height : 500,
+      height :700,
       delay:500,
       //height:$(window)-200,
       flowChart : true,             // 开启流程图支持，默认关闭

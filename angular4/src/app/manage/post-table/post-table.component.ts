@@ -4,11 +4,15 @@ import {LazyLoadEvent, SelectItem} from "primeng/primeng";
 import {PostTableService} from "./services/post-table.service";
 import {CategoryTableService} from "app/manage/category-table/services/category-table.service";
 import {ToastrService} from "ngx-toastr";
+import {flyIn} from "../../animations/fly-in";
 
 @Component({
   selector: 'app-post-table',
   templateUrl: './post-table.component.html',
-  styleUrls: ['./post-table.component.css']
+  styleUrls: ['./post-table.component.css'],
+  animations: [
+    flyIn
+  ]
 })
 export class PostTableComponent implements OnInit {
 

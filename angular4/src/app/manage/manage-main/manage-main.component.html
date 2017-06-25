@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container"  [@flyIn]="'in'">
   <div class="row">
     <div class="col-sm-9">
       <router-outlet></router-outlet>
@@ -24,6 +24,10 @@
         <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('user:manage')}"
            routerLink="usertable" class="list-group-item">
           <i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp; 用户管理
+        </a>
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('post:add')}"
+           routerLink="/user/write" class="list-group-item">
+          <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; 新增文章
         </a>
       </div>
     </div>

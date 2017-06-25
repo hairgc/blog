@@ -3,11 +3,15 @@ import {Category} from "../../home/category/model/category.model";
 import {CategoryTableService} from "./services/category-table.service";
 import {ToastrService} from "ngx-toastr";
 import {LazyLoadEvent} from "primeng/primeng";
+import {flyIn} from "../../animations/fly-in";
 
 @Component({
   selector: 'app-category-table',
   templateUrl: './category-table.component.html',
-  styleUrls: ['./category-table.component.css']
+  styleUrls: ['./category-table.component.css'],
+  animations: [
+    flyIn
+  ]
 })
 export class CategoryTableComponent implements OnInit {
 
