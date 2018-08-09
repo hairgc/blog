@@ -1,11 +1,9 @@
 # MaHuiBlog
-这是一个微型博客系统（还在做，基本完成）
+这是一个微型博客系统
 
-- 前端基于Angular 4 + ngx-bootstrap(angular4文件夹下,不要在意这些命名)
+- 前端基于Angular 6 + ngx-bootstrap(angular4文件夹下,不要在意这些命名)
 
 - 后端(在javaweb夹下)采用SSM框架，数据库使用MySql，权限控制使用shiro，加入QQ第三方登录
-
-- 有很多一部分借鉴于大漠老湿的【NiceFish（美人鱼）】http://git.oschina.net/mumu-osc/NiceFish/
 
 # IDE
 
