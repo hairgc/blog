@@ -1,7 +1,7 @@
 # MaHuiBlog
 这是一个微型博客系统
 
-- 前端基于Angular 6 + ngx-bootstrap(angular4文件夹下,不要在意这些命名)
+- 前端基于Angular 6 + ngx-bootstrap
 
 - 后端(在javaweb夹下)采用SSM框架，数据库使用MySql，权限控制使用shiro，加入QQ第三方登录
 
