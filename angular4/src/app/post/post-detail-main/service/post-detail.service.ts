@@ -18,7 +18,7 @@ export class PostDetailService {
         return 	this.http
         			.get(this.postDetailURL+id)
                 	.map((res: Response) => {
-                		return res.json();
+                		return res'';
                 	});
     }
 }

@@ -23,7 +23,7 @@ export class PostlistService {
     return this.http
       .get(url,{search:params})
       .map((res:Response) => {
-        return res.json();
+        return res'';
       })
       .catch((error:any) => Observable.throw(error || 'Server error'));
   }

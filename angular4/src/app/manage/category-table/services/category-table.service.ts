@@ -18,7 +18,7 @@ export class CategoryTableService {
   public queryCategory():Observable<Array<Category>>{
     return 	this.http
       .get(this.categoryListURL)
-      .map((res: Response) => res.json())
+      .map((res: Response) => res'')
       .catch((error:any) => Observable.throw(error || 'Server error'));
   }
 
@@ -29,7 +29,7 @@ export class CategoryTableService {
     params.set('rowNum',String(rowNum));
 
     return this.http.get(this.categoryTableURL,{search:params})
-      .map((res:Response) => res.json())
+      .map((res:Response) => res'')
       .catch((error:any) => Observable.throw(error || 'Server error'));
   }
 
@@ -37,7 +37,7 @@ export class CategoryTableService {
     return this.http
       .post(this.newCategoryURL,JSON.stringify(category), {headers: this.headers})
       .map((res: Response) => {
-        return res.json();
+        return res'';
       });
   }
 
@@ -45,7 +45,7 @@ export class CategoryTableService {
     return this.http
       .post(this.editCategoryURL,JSON.stringify(category), {headers: this.headers})
       .map((res: Response) => {
-        return res.json();
+        return res'';
       });
   }
 
@@ -53,7 +53,7 @@ export class CategoryTableService {
     return this.http
       .post(this.deleteCategoryURL+categoryId, {headers: this.headers})
       .map((res: Response) => {
-        return res.json();
+        return res'';
       });
   }
 }

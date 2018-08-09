@@ -1,0 +1,55 @@
+<div class="post-detail-container">
+  <app-add-comment *ngIf="enableComment" [reName]="replayData" [postId]="postId" (onComment)="reload()"></app-add-comment>
+  <div  *ngIf="!enableComment" style="text-align: center">
+    <h4>**博主已经关闭了评论功能**</h4>
+  </div>
+  <div>
+    <h3>查看评论</h3>
+    <hr>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div *ngFor="let comment of comments" class="comment-item-container">
+        <div class="row">
+          <div class="col-xs-2 col-sm-1 col-md-1">
+            <img [src]="comment.user?.avatarURL50" alt="头像" class="img-circle">
+          </div>
+          <div class="col-xs-10 col-sm-11 col-md-11">
+            <div class="row">
+              <div class="col-xs-9 col-sm-10 col-md-10 commenter">
+                <b>{{comment.user?.nickName}}</b>
+                <span *ngIf="currentUser && comment.user && currentUser.id===comment.user.id" class="label label-success">
+                  {{'comment.author'|translate}}
+                </span>
+                &nbsp;&nbsp;
+                {{comment.commentTime | date:'yyyy-MM-dd HH:mm:ss'}}
+              </div>
+              <div *ngIf="hasLogin && enableComment" class="col-xs-3 col-sm-2 col-md-2">
+                <a (click)="deleteComment(comment)" *ngIf="currentUser && comment.user && currentUser.id===comment.user.id"
+                   href="javascript:void(0);">
+                  <i class="fa fa-trash-o" title="{{'comment.delete'|translate}}"></i>
+                </a>&nbsp;
+                <a (click)="replay(comment.user.nickName)" href="javascript:void(0);">
+                  <i class="fa fa-reply" title="{{'comment.replay'|translate}}"></i>
+                </a>
+              </div>
+            </div>
+            <h5 style="line-height: 1.3">
+              <span *ngIf="comment.reName && comment.reName.length>0" class="replay">
+                <b>@{{comment.reName}}&nbsp;</b>
+              </span>
+              {{comment.content}}
+            </h5>
+          </div>
+        </div>
+      </div>
+      <div class="foot-btn">
+        <a *ngIf="showLoad" href="javascript:void(0);" (click)="loadMore()">{{'comment.loadmore'| translate}}</a>
+        <ul class="fa-ul" [class.hidden]="!showLoading">
+          <li><i class="fa-li fa fa-spinner fa-spin"></i>{{'comment.loading'| translate}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+

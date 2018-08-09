@@ -20,7 +20,7 @@ export class PostTableService {
     params.set('rowNum',String(rowNum));
 
     return this.http.get(this.dataUrl+"/"+currentUser['id'],{search:params})
-      .map((res:Response) => res.json())
+      .map((res:Response) => res'')
       .catch((error:any) => Observable.throw(error || 'Server error'));
   }
 
@@ -28,7 +28,7 @@ export class PostTableService {
     return this.http
       .post(this.toEditURL,JSON.stringify(post), {headers: this.headers})
       .map((res: Response) => {
-        return res.json();
+        return res'';
       });
   }
 }

@@ -16,7 +16,7 @@ export class VisitorService {
     return this.http
       .get(url,{search:params})
       .map((res:Response) => {
-        let result=res.json();
+        let result=res'';
         return result;
       })
       .catch((error:any) => Observable.throw(error || 'Server error'));

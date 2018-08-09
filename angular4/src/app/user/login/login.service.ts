@@ -33,7 +33,7 @@ export class LoginService {
     return this.http
       .get(this.userInfoURL)
       .map((res: Response) => {
-        let result = res.json();
+        let result = res'';
         return result;
       });
   }

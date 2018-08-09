@@ -1,0 +1,81 @@
+<!--<textarea id="post_editor" class="form-control" rows="20" placeholder="内容，最少140字，最多2万字。图片每张最大500K，每篇文章最多50张图。"></textarea>-->
+<div class="container-fluid">
+  <div class="col-sm-12 col-md-12 col-lg-12">
+    <form #postForm="ngForm" novalidate role="form" class="form-horizontal">
+      <div class="form-group col-sm-9 col-md-9 col-lg-10">
+        <input type="text" class="form-control" placeholder="标题，2到32个字符" required minlength="2" maxlength="32"
+               #title="ngModel" [(ngModel)]="post.title" name="title">
+        <div *ngIf="!firstSubmit && !title.valid" class="alert alert-warning">标题必须是2到32个字符</div>
+      </div>
+      <div class="form-group col-sm-3 col-md-3 col-lg-2" style="padding:auto">
+        <button *ngIf="!editable" type="button" (click)="save()" [disabled]="!canSave || !title.valid" class="btn btn-success">
+          <span class="fa fa-save" aria-hidden="true"></span>
+          保存
+        </button>
+        <button *ngIf="!editable" type="button" (click)="publish()" [disabled]="!title.valid" class="btn btn-success">
+          <span class="fa fa-share" aria-hidden="true"></span>
+          发布
+        </button>
+        <button *ngIf="editable" type="button" (click)="saveEdit()" [disabled]="!title.valid" class="btn btn-success">
+          <span class="fa fa-save" aria-hidden="true"></span>
+          保存
+        </button>
+      </div>
+      <div id="editormd" class="form-group">
+        <textarea style="display:none;" name="content">
+{{post.postContent}}
+</textarea>
+      </div>
+      <!--模态框-->
+      <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title pull-left">文章设置</h4>
+              <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">文章类型</label>
+                <div class="col-sm-10">
+                  <select class="form-control" [(ngModel)]="post.postType" name="postType">
+                    <option value="0">原创</option>
+                    <option value="1">转载</option>
+                    <option value="2">翻译</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">开启评论</label>
+                <div class="col-sm-10">
+                  <select class="form-control" [(ngModel)]="post.enableComment" name="enableComment">
+                    <option value=true>开启</option>
+                    <option value=false>关闭</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">文章分类</label>
+                <div class="col-sm-10">
+                  <select class="form-control" [(ngModel)]="post.category.id" name="category">
+                    <option *ngFor="let category of categories; let index=index" value="{{category.id}}">{{category.categoryName}}</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" aria-label="Close" (click)="lgModal.hide()">确定</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+

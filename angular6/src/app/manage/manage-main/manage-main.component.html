@@ -1,0 +1,35 @@
+<div class="container"  [@flyIn]="'in'">
+  <div class="row">
+    <div class="col-sm-9">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-sm-3">
+      <div class="list-group">
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('visitor:manage')}"
+           routerLink="visitortable" class="list-group-item ">
+          <i class="fa fa-history fa-fw" aria-hidden="true"></i>&nbsp; 访客记录
+        </a>
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('post:manage')}"
+           routerLink="posttable" class="list-group-item">
+          <i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>&nbsp; 文章管理
+        </a>
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('category:manage')}"
+           routerLink="categorytable" class="list-group-item">
+          <i class="fa fa-pie-chart fa-fw" aria-hidden="true"></i>&nbsp; 分类管理
+        </a>
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('comment:manage')}"
+           routerLink="commenttable" class="list-group-item">
+          <i class="fa fa-commenting-o fa-fw" aria-hidden="true"></i>&nbsp; 评论管理
+        </a>
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('user:manage')}"
+           routerLink="usertable" class="list-group-item">
+          <i class="fa fa-users fa-fw" aria-hidden="true"></i>&nbsp; 用户管理
+        </a>
+        <a routerLinkActive="list-group-item-success" [ngClass]="{ 'disabled': !permission.includes('post:add')}"
+           routerLink="/user/write" class="list-group-item">
+          <i class="fa fa-pencil fa-fw" aria-hidden="true"></i>&nbsp; 新增文章
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

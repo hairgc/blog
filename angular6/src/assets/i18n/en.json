@@ -1,0 +1,46 @@
+{
+  "app": {
+    "welcome": "Welcome",
+    "logout": "Logout",
+    "login": "Login",
+    "articles": "Articles",
+    "explore": "Explore",
+    "console": "Console"
+  },
+  "post": {
+    "publish": "publish",
+    "sticky": "Sticky",
+    "readTimes": "read",
+    "commentTimes": "comment",
+    "postIn": "published on",
+    "original": "Original",
+    "reprinted": "Reprinted",
+    "translation": "Translation"
+  },
+  "user": {
+    "authorinfo": "Author Info",
+    "nickName": "NickName"
+  },
+  "userLogin": {
+    "userLogin": "User Login"
+  },
+  "comment": {
+    "loading": "Loading ...",
+    "loadmore": "Load More",
+    "delete": "delete",
+    "replay": "replay",
+    "cancelReplay": "cancel",
+    "submit": "Submit",
+    "author": "author"
+  },
+  "search": "search",
+  "submit": "Submit",
+  "firstPage": "First",
+  "lastPage": "Last",
+  "previousPage": "Previous",
+  "nextPage": "Next",
+  "add": "Add",
+  "delete": "Delete",
+  "edit": "Edit",
+  "operate":"Operate"
+}

@@ -25,7 +25,7 @@ export class WritePostService {
     return this.http
           .post(this.writePostURL,JSON.stringify(post), {headers: this.headers})
           .map((res: Response) => {
-            return res.json();
+            return res'';
           });
   }
 
@@ -38,7 +38,7 @@ export class WritePostService {
     return 	this.http
       .get(this.getEditPostURL+id)
       .map((res: Response) => {
-        return res.json();
+        return res'';
       });
   }
 
@@ -51,7 +51,7 @@ export class WritePostService {
     return this.http
       .post(this.editPostURL,JSON.stringify(post), {headers: this.headers})
       .map((res: Response) => {
-        return res.json();
+        return res'';
       });
   }
 }

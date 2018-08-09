@@ -1,0 +1,44 @@
+<div class="user-table-container" [@flyIn]="'in'">
+  <p-dataTable [value]="users" [paginator]="true" [responsive]="true" [editable]="true"
+               [lazy]="true" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,50]"
+               [totalRecords]="totalRecords" (onLazyLoad)="loadUsersLazy($event)">
+    <p-header>用户管理</p-header>
+    <p-column field="id" header="ID" [hidden]="true"></p-column>
+    <p-column field="nickName" header="昵称">
+      <ng-template let-col let-user="rowData" pTemplate="body">
+        <img src="{{user.avatarURL30}}" class="img-circle">&nbsp;<span>{{user.nickName}}</span>
+      </ng-template>
+    </p-column>
+    <p-column field="gender" header="性别" [style]="setStyles()"></p-column>
+    <p-column field="status" header="账户状态" [style]="setStyles()">
+      <ng-template let-col let-user="rowData" pTemplate="body">
+        {{user.status===1 && user.disabledTime && !(user.disabledTime|dateIsBefore)?"禁言中":"正常"}}
+      </ng-template>
+    </p-column>
+    <p-column field="disabledTime" header="禁言到期" [style]="setEditorStyles()" [editable]="true">
+      <ng-template let-col let-user="rowData" pTemplate="body">
+        {{user.status===1 && user.disabledTime && !(user.disabledTime|dateIsBefore)?(user.disabledTime|date:'yyyy-MM-dd HH:mm'):"--"}}
+      </ng-template>
+
+      <ng-template let-col let-user="rowData" pTemplate="editor">
+        <p-calendar *ngIf="user.status===1 && user.disabledTime && !(user.disabledTime|dateIsBefore)" [minDate]="minDate"
+                    [locale]="en" [showTime]="true" dateFormat="yy-mm-dd" [(ngModel)]="user.disabledTime"
+                    (onSelect)="setDisabledDate(user)"></p-calendar>
+      </ng-template>
+    </p-column>
+
+    <!--编辑按钮-->
+    <p-column styleClass="col-button" [style]="setStyles()">
+      <ng-template pTemplate="header">
+        {{'operate'|translate}}
+      </ng-template>
+      <ng-template let-user="rowData" pTemplate="body">
+        <button *ngIf="(user.status===0) || (user.status===1 && (user.disabledTime|dateIsBefore))" type="button" pButton
+                icon="fa-ban" class="ui-button-danger" label="禁言" (click)="disableUser(user)"></button>
+        <button *ngIf="user.status===1 && user.disabledTime && !(user.disabledTime|dateIsBefore)" type="button" pButton
+                icon="fa-smile-o" class="ui-button-warning" label="解禁" (click)="enableUser(user)"></button>
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+
+</div>

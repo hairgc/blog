@@ -15,7 +15,7 @@ export class CategoryService {
   public queryCategory():Observable<Array<Category>>{
     return 	this.http
       .get(this.categoryListURL)
-      .map((res: Response) => res.json())
+      .map((res: Response) => res'')
       .catch((error:any) => Observable.throw(error || 'Server error'));
   }
 }

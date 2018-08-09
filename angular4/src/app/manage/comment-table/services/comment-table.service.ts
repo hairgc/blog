@@ -21,7 +21,7 @@ export class CommentTableService {
       params.set("postId",String(postId));
     }
     return this.http.get(this.commentTableURL,{search:params})
-      .map((res:Response) => res.json())
+      .map((res:Response) => res'')
       .catch((error:any) => Observable.throw(error || 'Server error'));
   }
 
@@ -29,14 +29,14 @@ export class CommentTableService {
     return this.http
       .post(this.editCommentURL,JSON.stringify(comment), {headers: this.headers})
       .map((res: Response) => {
-        return res.json();
+        return res'';
       });
   }
 
   //获取文章下拉列表
   public querySelectPost(categoryId: number){
     return this.http.get(this.querySelectURL+categoryId)
-      .map((res:Response) => res.json())
+      .map((res:Response) => res'')
       .catch((error:any) => Observable.throw(error || 'Server error'));
   }
 }

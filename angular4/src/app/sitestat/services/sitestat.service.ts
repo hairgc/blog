@@ -14,7 +14,7 @@ export class SiteStatService {
     return this.http
       .get(this.siteStatURL)
       .map((res:Response) => {
-        return res.json();
+        return res'';
       })
       .catch((error:any) => Observable.throw(error || 'Server error'));
   }

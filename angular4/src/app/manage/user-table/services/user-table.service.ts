@@ -17,7 +17,7 @@ export class UserTableService {
     params.set('rowNum',String(rowNum));
 
     return this.http.get(this.userTableURL,{search:params})
-      .map((res:Response) => res.json())
+      .map((res:Response) => res'')
       .catch((error:any) => Observable.throw(error || 'Server error'));
   }
 
@@ -25,7 +25,7 @@ export class UserTableService {
     return this.http
       .post(this.editUserURL,JSON.stringify(user), {headers: this.headers})
       .map((res: Response) => {
-        return res.json();
+        return res'';
       });
   }
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers} from '@angular/http';
+import { HttpClient, HttpHeaders} from '@angular/comment/http';
 
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -18,7 +18,7 @@ export class CommentService {
   public getCommentList(postId: number,pageNum:number):Observable<Comment[]>{
       return this.http.get(this.commentListURL+"/"+postId+"/"+pageNum)
           .map((res: Response) => {
-            let result=res.json();
+            let result=res'';
             return result;
           });
   }
@@ -26,7 +26,7 @@ export class CommentService {
       return this.http
         .post(this.newCommentURL,JSON.stringify(comment), {headers: this.headers})
         .map((res: Response) => {
-          let result = res.json();
+          let result = res'';
           return result;
         });
   }
@@ -34,7 +34,7 @@ export class CommentService {
     return this.http
       .post(this.deleteCommentURL,JSON.stringify(comment), {headers: this.headers})
       .map((res: Response) => {
-        let result = res.json();
+        let result = res'';
         return result;
       });
   }
