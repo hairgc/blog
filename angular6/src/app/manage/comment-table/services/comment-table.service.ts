@@ -30,6 +30,6 @@ export class CommentTableService {
 
   //获取文章下拉列表
   public querySelectPost(categoryId: number){
-    return this.http.get(this.querySelectURL+categoryId)
+    return this.http.get<any>(this.querySelectURL+categoryId)
   }
 }

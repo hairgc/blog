@@ -16,7 +16,7 @@ export class UserTableService {
       .set('pageNum',String(pageNum))
       .set('rowNum',String(rowNum));
 
-    return this.http.get(this.userTableURL,{params})
+    return this.http.get<any>(this.userTableURL,{params})
   }
 
   public editUser(user:User):Observable<any>{

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Post} from "../../post/model/post.model";
 import {LazyLoadEvent, SelectItem} from "primeng/primeng";
 import {PostTableService} from "./services/post-table.service";
-import {CategoryTableService} from "app/manage/category-table/services/category-table.service";
+import {CategoryTableService} from "../../manage/category-table/services/category-table.service";
 import {ToastrService} from "ngx-toastr";
 import {flyIn} from "../../animations/fly-in";
 

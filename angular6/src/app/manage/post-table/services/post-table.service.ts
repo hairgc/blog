@@ -18,7 +18,7 @@ export class PostTableService {
       .set('pageNum',String(pageNum))
       .set('rowNum',String(rowNum));
 
-    return this.http.get(this.dataUrl+"/"+currentUser['id'],{params})
+    return this.http.get<any>(this.dataUrl+"/"+currentUser['id'],{params})
   }
 
   public attributeModification(post:Post):Observable<any>{

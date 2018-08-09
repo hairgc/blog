@@ -3,7 +3,7 @@ import {PostTableComponent} from "./post-table/post-table.component";
 import {UserTableComponent} from "./user-table/user-table.component";
 import {CommentTableComponent} from "./comment-table/comment-table.component";
 import {ManageGuard} from "./manage.guard";
-import {VisitorTableComponent} from "app/manage/visitor-table/visitor-table.component";
+import {VisitorTableComponent} from "../manage/visitor-table/visitor-table.component";
 import {CategoryTableComponent} from "./category-table/category-table.component";
 
 export const manageRoutes = [
